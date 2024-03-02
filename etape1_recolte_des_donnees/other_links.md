@@ -35,6 +35,15 @@ https://www.insee.fr/fr/statistiques/6467002
 Recherche "habillement textile" :
 https://www.insee.fr/fr/recherche?q=habillement+textile&debut=0
 
+## ADEME :
+
+Base Carbone® V23.1 :
+https://base-empreinte.ademe.fr/
+
+## OTHER :
+
+https://www.traceforgood.com/fr/blog/methodologie-affichage-environnemental-textile
+
 # Méthode PEF (Product Environmental Footprint) :
 
 Utilisez les données collectées pour évaluer chaque indicateur du PEF. Par exemple :
