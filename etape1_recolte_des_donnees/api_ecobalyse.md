@@ -36,7 +36,9 @@ https://ecobalyse.beta.gouv.fr/#/api
 (à compléter)
 
 ### Requettes (comment atteindre la donnée) :
-(à compléter)
+wget https://ecobalyse.beta.gouv.fr/api
+cat api | jq .
+
 
 ### Exemple de données :
 (à compléter)
