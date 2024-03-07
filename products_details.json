@@ -1,383 +1,627 @@
 {
-    "textiles": [
-      {
-        "type": "chemise",
-        "exemples": [
-          {
-            "name": "Popeline de coton léger pour chemises d'été",
-            "mass": [0.12, 0.18],
-            "materials": {"coton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en popeline de coton léger pour une texture respirante."
-          },
-          {
-            "name": "Oxford de coton moyen pour chemises décontractées",
-            "mass": [0.20, 0.25],
-            "materials": {"coton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en oxford de coton avec un motif de chevrons distinctif."
-          },
-          {
-            "name": "Chambray de coton léger à moyen pour chemises polyvalentes",
-            "mass": [0.18, 0.25],
-            "materials": {"coton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en chambray de coton pour une texture légère et polyvalente."
-          }
-        ]
+  "chemise": [
+    {
+      "name": "Popeline de coton léger pour chemises d'été",
+      "mass": [
+        0.12,
+        0.18
+      ],
+      "materials": {
+        "coton": 100
       },
-      {
-        "type": "jeans",
-        "exemples": [
-          {
-            "name": "Jean en denim léger pour l'été",
-            "mass": [0.4, 0.6],
-            "materials": {"coton": 98, "pu": 2},
-            "fabricProcess": "weaving",
-            "fabrication": "Denim tissé avec un fil de coton léger et un peu d'élasthanne pour plus de confort et de flexibilité."
-          },
-          {
-            "name": "Jean en denim moyen pour une utilisation polyvalente",
-            "mass": [0.6, 0.8],
-            "materials": {"coton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Denim tissé avec un fil de coton pour une sensation robuste et durable, idéal pour un usage quotidien."
-          },
-          {
-            "name": "Jean en denim épais pour l'hiver",
-            "mass": [0.8, 1.0],
-            "materials": {"coton": 95, "pet": 5},
-            "fabricProcess": "weaving",
-            "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
-          },
-          {
-            "name": "Jean en denim épais pour l'hiver (recyclage mécanique)",
-            "mass": [0.8, 1.0],
-            "materials": {"coton": 95, "pet-rm": 5},
-            "fabricProcess": "weaving",
-            "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
-          },
-          {
-            "name": "Jean en denim épais pour l'hiver (recyclage chimique partiel)",
-            "mass": [0.8, 1.0],
-            "materials": {"coton": 95, "pet-rcp": 5},
-            "fabricProcess": "weaving",
-            "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
-          },
-          {
-            "name": "Jean en denim épais pour l'hiver (recyclage chimique complet)",
-            "mass": [0.8, 1.0],
-            "materials": {"coton": 95, "pet-rcc": 5},
-            "fabricProcess": "weaving",
-            "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
-          }
-        ]
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en popeline de coton léger pour une texture respirante."
+    },
+    {
+      "name": "Oxford de coton moyen pour chemises décontractées",
+      "mass": [
+        0.20,
+        0.25
+      ],
+      "materials": {
+        "coton": 100
       },
-      {
-        "type": "jupes",
-        "exemples": [
-          {
-            "name": "Jupe en coton légère pour l'été",
-            "mass": [0.2, 0.4],
-            "materials": {"coton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en coton léger pour une sensation fraîche et confortable pendant les mois d'été."
-          },
-          {
-            "name": "Jupe en denim délavé pour un look décontracté",
-            "mass": [0.4, 0.6],
-            "materials": {"coton": 98, "pu": 2},
-            "fabricProcess": "weaving",
-            "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Le délavage donne un aspect décontracté et usé."
-          },
-          {
-            "name": "Jupe plissée en polyester pour une allure élégante",
-            "mass": [0.3, 0.5],
-            "materials": {"pet": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-          },
-          {
-            "name": "Jupe plissée en polyester pour une allure élégante (recyclage mécanique)",
-            "mass": [0.3, 0.5],
-            "materials": {"pet-rm": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-          },
-          {
-            "name": "Jupe plissée en polyester pour une allure élégante (recyclage chimique partiel)",
-            "mass": [0.3, 0.5],
-            "materials": {"pet-rcp": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-          },
-          {
-            "name": "Jupe plissée en polyester pour une allure élégante (recyclage chimique complet)",
-            "mass": [0.3, 0.5],
-            "materials": {"pet-rcc": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-          },
-          {
-            "name": "Robe d'été en mousseline de soie",
-            "mass": [0.3, 0.5],
-            "materials": {"soie": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Mousseline de soie légère et aérienne pour une robe estivale élégante et confortable."
-          },
-          {
-            "name": "Robe en jersey extensible pour un confort toute la journée",
-            "mass": [0.4, 0.6],
-            "materials": {"coton": 95, "pu": 5},
-            "fabricProcess": "weaving",
-            "fabrication": "Jersey de coton mélangé avec de l'élasthanne pour une robe douce, extensible et confortable pour une utilisation quotidienne."
-          },
-          {
-            "name": "Robe en velours côtelé pour les soirées d'automne",
-            "mass": [0.5, 0.8],
-            "materials": {"coton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Velours côtelé doux et luxueux pour une robe chaude et élégante, parfaite pour les soirées d'automne."
-          }
-        ]
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en oxford de coton avec un motif de chevrons distinctif."
+    },
+    {
+      "name": "Chambray de coton léger à moyen pour chemises polyvalentes",
+      "mass": [
+        0.18,
+        0.25
+      ],
+      "materials": {
+        "coton": 100
       },
-      {
-        "type": "manteau",
-        "exemples": [
-          {
-            "name": "Laine de mouton bouclée pour manteaux d'hiver",
-            "mass": [1.0, 1.5],
-            "materials": {"laine-mouton": 70, "pet": 30},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
-          },
-          {
-            "name": "Laine recyclée bouclée pour manteaux d'hiver",
-            "mass": [1.0, 1.5],
-            "materials": {"laine-r": 70, "pet": 30},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
-          },
-          {
-            "name": "Laine de mouton bouclée pour manteaux d'hiver (polyester recyclé (recyclage mécanique))",
-            "mass": [1.0, 1.5],
-            "materials": {"laine-mouton": 70, "pet-rm": 30},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
-          },
-          {
-            "name": "Laine recyclée bouclée pour manteaux d'hiver (polyester recyclé (recyclage mécanique))",
-            "mass": [1.0, 1.5],
-            "materials": {"laine-r": 70, "pet-rm": 30},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
-          },
-          {
-            "name": "Laine de mouton bouclée pour manteaux d'hiver (polyester recyclé (recyclage chimique partiel))",
-            "mass": [1.0, 1.5],
-            "materials": {"laine-mouton": 70, "pet-rcp": 30},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
-          },
-          {
-            "name": "Laine recyclée bouclée pour manteaux d'hiver (polyester recyclé (recyclage chimique partiel))",
-            "mass": [1.0, 1.5],
-            "materials": {"laine-r": 70, "pet-rcp": 30},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
-          },
-          {
-            "name": "Laine de mouton bouclée pour manteaux d'hiver polyester recyclé (recyclage chimique complet)",
-            "mass": [1.0, 1.5],
-            "materials": {"laine-mouton": 70, "pet-rcc": 30},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
-          },
-          {
-            "name": "Laine recyclée bouclée pour manteaux d'hiver polyester recyclé (recyclage chimique complet)",
-            "mass": [1.0, 1.5],
-            "materials": {"laine-r": 70, "pet-rcc": 30},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
-          },
-          {
-            "name": "Tweed de laine de mouton pour manteaux classiques",
-            "mass": [0.8, 1.2],
-            "materials": {"laine-mouton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en tweed de laine de mouton pour un motif rustique et texturé."
-          },
-          {
-            "name": "Tweed de laine recyclée pour manteaux classiques",
-            "mass": [0.8, 1.2],
-            "materials": {"laine-r": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en tweed de laine recyclée pour un motif rustique et texturé."
-          },
-          {
-            "name": "Duvet synthétique pour manteaux matelassés",
-            "mass": [0.5, 1.0],
-            "materials": {"pet": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
-          },
-          {
-            "name": "Duvet synthétique pour manteaux matelassés (recyclage mécanique)",
-            "mass": [0.5, 1.0],
-            "materials": {"pet-rm": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
-          },
-          {
-            "name": "Duvet synthétique pour manteaux matelassés (recyclage chimique partiel)",
-            "mass": [0.5, 1.0],
-            "materials": {"pet-rcp": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
-          },
-          {
-            "name": "Duvet synthétique pour manteaux matelassés (recyclage chimique complet)",
-            "mass": [0.5, 1.0],
-            "materials": {"pet-rcc": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
-          },
-          {
-            "name": "Veste en jean pour un look décontracté",
-            "mass": [0.8, 1.2],
-            "materials": {"coton": 98, "pu": 2},
-            "fabricProcess": "weaving",
-            "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Parfait pour une ambiance décontractée."
-          }
-        ]
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en chambray de coton pour une texture légère et polyvalente."
+    }
+  ],
+  "jean": [
+    {
+      "name": "Jean en denim léger pour l'été",
+      "mass": [
+        0.4,
+        0.6
+      ],
+      "materials": {
+        "coton": 98,
+        "pu": 2
       },
-      {
-        "type": "pantalon",
-        "exemples": [
-          {
-            "name": "Toile de coton légère pour pantalons d'été",
-            "mass": [0.15, 0.25],
-            "materials": {"coton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en toile de coton léger pour un confort respirant."
-          },
-          {
-            "name": "Twill de coton moyen pour pantalons polyvalents",
-            "mass": [0.25, 0.35],
-            "materials": {"coton": 98, "pu": 2},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en twill de coton avec un peu de stretch pour la polyvalence."
-          },
-          {
-            "name": "Velours côtelé pour pantalons d'automne/hiver",
-            "mass": [0.30, 0.40],
-            "materials": {"coton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en velours côtelé pour une texture chaude et confortable."
-          },
-          {
-            "name": "Short en coton léger pour l'été",
-            "mass": [0.2, 0.3],
-            "materials": {"coton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Tissage en coton léger pour un short confortable et respirant, parfait pour les journées chaudes."
-          },
-          {
-            "name": "Short en denim délavé pour un look décontracté",
-            "mass": [0.3, 0.4],
-            "materials": {"coton": 98, "pu": 2},
-            "fabricProcess": "weaving",
-            "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Le délavage donne un aspect décontracté et usé."
-          },
-          {
-            "name": "Short cargo en toile robuste pour une utilisation en extérieur",
-            "mass": [0.4, 0.6],
-            "materials": {"coton": 90, "pet": 10},
-            "fabricProcess": "weaving",
-            "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
-          },
-          {
-            "name": "Short cargo en toile robuste pour une utilisation en extérieur (recyclage mécanique)",
-            "mass": [0.4, 0.6],
-            "materials": {"coton": 90, "pet-rm": 10},
-            "fabricProcess": "weaving",
-            "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
-          },
-          {
-            "name": "Short cargo en toile robuste pour une utilisation en extérieur (recyclage chimique partiel)",
-            "mass": [0.4, 0.6],
-            "materials": {"coton": 90, "pet-rcp": 10},
-            "fabricProcess": "weaving",
-            "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
-          },
-          {
-            "name": "Short cargo en toile robuste pour une utilisation en extérieur (recyclage chimique complet)",
-            "mass": [0.4, 0.6],
-            "materials": {"coton": 90, "pet-rcc": 10},
-            "fabricProcess": "weaving",
-            "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
-          }
-        ]
+      "fabricProcess": "weaving",
+      "fabrication": "Denim tissé avec un fil de coton léger et un peu d'élasthanne pour plus de confort et de flexibilité."
+    },
+    {
+      "name": "Jean en denim moyen pour une utilisation polyvalente",
+      "mass": [
+        0.6,
+        0.8
+      ],
+      "materials": {
+        "coton": 100
       },
-      {
-        "type": "pull",
-        "exemples": [
-          {
-            "name": "Pull en laine mérinos pour un confort supérieur",
-            "mass": [0.4, 0.6],
-            "materials": {"laine-merinos": 100},
-            "fabricProcess": "knitting-integral",
-            "fabrication": "Tricot en laine mérinos de haute qualité pour une chaleur douce et un toucher luxueux."
-          },
-          {
-            "name": "Pull en coton léger pour une superposition élégante",
-            "mass": [0.3, 0.5],
-            "materials": {"coton": 100},
-            "fabricProcess": "knitting-integral",
-            "fabrication": "Tricot en coton léger et respirant, parfait pour être porté seul ou sous une veste légère."
-          },
-          {
-            "name": "Pull en cachemire pour une sensation de luxe",
-            "mass": [0.5, 0.8],
-            "materials": {"cachemire": 100},
-            "fabricProcess": "knitting-integral",
-            "fabrication": "Tricot en cachemire de haute qualité pour une douceur incomparable et une chaleur luxueuse."
-          }
-        ]
+      "fabricProcess": "weaving",
+      "fabrication": "Denim tissé avec un fil de coton pour une sensation robuste et durable, idéal pour un usage quotidien."
+    },
+    {
+      "name": "Jean en denim épais pour l'hiver",
+      "mass": [
+        0.8,
+        1.0
+      ],
+      "materials": {
+        "coton": 95,
+        "pet": 5
       },
-      {
-        "type": "tshirt",
-        "exemples": [
-          {
-            "name": "T-shirt en coton léger pour l'été",
-            "mass": [0.2, 0.3],
-            "materials": {"coton": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Maille en coton légère et respirante pour un confort optimal pendant les journées chaudes."
-          },
-          {
-            "name": "T-shirt en jersey de coton extensible pour un ajustement parfait",
-            "mass": [0.3, 0.4],
-            "materials": {"coton": 95, "pu": 5},
-            "fabricProcess": "weaving",
-            "fabrication": "Jersey de coton mélangé avec de l'élasthanne pour un tissu extensible et une liberté de mouvement maximale."
-          },
-          {
-            "name": "T-shirt en lin (filasse) pour une sensation de fraîcheur",
-            "mass": [0.2, 0.4],
-            "materials": {"lin-filasse": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Maille en lin (filasse) légère et aérée pour une sensation de fraîcheur et de légèreté, idéale pour les climats chauds."
-          },
-          {
-            "name": "T-shirt en lin (étoupe) pour une sensation de fraîcheur",
-            "mass": [0.2, 0.4],
-            "materials": {"lin-etoupe": 100},
-            "fabricProcess": "weaving",
-            "fabrication": "Maille en lin (étoupe) légère et aérée pour une sensation de fraîcheur et de légèreté, idéale pour les climats chauds."
-          }
-        ]
-      }      
-    ]
-  }
-  
+      "fabricProcess": "weaving",
+      "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
+    },
+    {
+      "name": "Jean en denim épais pour l'hiver (recyclage mécanique)",
+      "mass": [
+        0.8,
+        1.0
+      ],
+      "materials": {
+        "coton": 95,
+        "pet-rm": 5
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
+    },
+    {
+      "name": "Jean en denim épais pour l'hiver (recyclage chimique partiel)",
+      "mass": [
+        0.8,
+        1.0
+      ],
+      "materials": {
+        "coton": 95,
+        "pet-rcp": 5
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
+    },
+    {
+      "name": "Jean en denim épais pour l'hiver (recyclage chimique complet)",
+      "mass": [
+        0.8,
+        1.0
+      ],
+      "materials": {
+        "coton": 95,
+        "pet-rcc": 5
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
+    }
+  ],
+  "jupe": [
+    {
+      "name": "Jupe en coton légère pour l'été",
+      "mass": [
+        0.2,
+        0.4
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en coton léger pour une sensation fraîche et confortable pendant les mois d'été."
+    },
+    {
+      "name": "Jupe en denim délavé pour un look décontracté",
+      "mass": [
+        0.4,
+        0.6
+      ],
+      "materials": {
+        "coton": 98,
+        "pu": 2
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Le délavage donne un aspect décontracté et usé."
+    },
+    {
+      "name": "Jupe plissée en polyester pour une allure élégante",
+      "mass": [
+        0.3,
+        0.5
+      ],
+      "materials": {
+        "pet": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
+    },
+    {
+      "name": "Jupe plissée en polyester pour une allure élégante (recyclage mécanique)",
+      "mass": [
+        0.3,
+        0.5
+      ],
+      "materials": {
+        "pet-rm": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
+    },
+    {
+      "name": "Jupe plissée en polyester pour une allure élégante (recyclage chimique partiel)",
+      "mass": [
+        0.3,
+        0.5
+      ],
+      "materials": {
+        "pet-rcp": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
+    },
+    {
+      "name": "Jupe plissée en polyester pour une allure élégante (recyclage chimique complet)",
+      "mass": [
+        0.3,
+        0.5
+      ],
+      "materials": {
+        "pet-rcc": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
+    },
+    {
+      "name": "Robe d'été en mousseline de soie",
+      "mass": [
+        0.3,
+        0.5
+      ],
+      "materials": {
+        "soie": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Mousseline de soie légère et aérienne pour une robe estivale élégante et confortable."
+    },
+    {
+      "name": "Robe en jersey extensible pour un confort toute la journée",
+      "mass": [
+        0.4,
+        0.6
+      ],
+      "materials": {
+        "coton": 95,
+        "pu": 5
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jersey de coton mélangé avec de l'élasthanne pour une robe douce, extensible et confortable pour une utilisation quotidienne."
+    },
+    {
+      "name": "Robe en velours côtelé pour les soirées d'automne",
+      "mass": [
+        0.5,
+        0.8
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Velours côtelé doux et luxueux pour une robe chaude et élégante, parfaite pour les soirées d'automne."
+    }
+  ],
+  "manteau": [
+    {
+      "name": "Laine de mouton bouclée pour manteaux d'hiver",
+      "mass": [
+        1.0,
+        1.5
+      ],
+      "materials": {
+        "laine-mouton": 70,
+        "pet": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
+    },
+    {
+      "name": "Laine recyclée bouclée pour manteaux d'hiver",
+      "mass": [
+        1.0,
+        1.5
+      ],
+      "materials": {
+        "laine-r": 70,
+        "pet": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
+    },
+    {
+      "name": "Laine de mouton bouclée pour manteaux d'hiver (polyester recyclé (recyclage mécanique))",
+      "mass": [
+        1.0,
+        1.5
+      ],
+      "materials": {
+        "laine-mouton": 70,
+        "pet-rm": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
+    },
+    {
+      "name": "Laine recyclée bouclée pour manteaux d'hiver (polyester recyclé (recyclage mécanique))",
+      "mass": [
+        1.0,
+        1.5
+      ],
+      "materials": {
+        "laine-r": 70,
+        "pet-rm": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
+    },
+    {
+      "name": "Laine de mouton bouclée pour manteaux d'hiver (polyester recyclé (recyclage chimique partiel))",
+      "mass": [
+        1.0,
+        1.5
+      ],
+      "materials": {
+        "laine-mouton": 70,
+        "pet-rcp": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
+    },
+    {
+      "name": "Laine recyclée bouclée pour manteaux d'hiver (polyester recyclé (recyclage chimique partiel))",
+      "mass": [
+        1.0,
+        1.5
+      ],
+      "materials": {
+        "laine-r": 70,
+        "pet-rcp": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
+    },
+    {
+      "name": "Laine de mouton bouclée pour manteaux d'hiver polyester recyclé (recyclage chimique complet)",
+      "mass": [
+        1.0,
+        1.5
+      ],
+      "materials": {
+        "laine-mouton": 70,
+        "pet-rcc": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
+    },
+    {
+      "name": "Laine recyclée bouclée pour manteaux d'hiver polyester recyclé (recyclage chimique complet)",
+      "mass": [
+        1.0,
+        1.5
+      ],
+      "materials": {
+        "laine-r": 70,
+        "pet-rcc": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
+    },
+    {
+      "name": "Tweed de laine de mouton pour manteaux classiques",
+      "mass": [
+        0.8,
+        1.2
+      ],
+      "materials": {
+        "laine-mouton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en tweed de laine de mouton pour un motif rustique et texturé."
+    },
+    {
+      "name": "Tweed de laine recyclée pour manteaux classiques",
+      "mass": [
+        0.8,
+        1.2
+      ],
+      "materials": {
+        "laine-r": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en tweed de laine recyclée pour un motif rustique et texturé."
+    },
+    {
+      "name": "Duvet synthétique pour manteaux matelassés",
+      "mass": [
+        0.5,
+        1.0
+      ],
+      "materials": {
+        "pet": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
+    },
+    {
+      "name": "Duvet synthétique pour manteaux matelassés (recyclage mécanique)",
+      "mass": [
+        0.5,
+        1.0
+      ],
+      "materials": {
+        "pet-rm": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
+    },
+    {
+      "name": "Duvet synthétique pour manteaux matelassés (recyclage chimique partiel)",
+      "mass": [
+        0.5,
+        1.0
+      ],
+      "materials": {
+        "pet-rcp": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
+    },
+    {
+      "name": "Duvet synthétique pour manteaux matelassés (recyclage chimique complet)",
+      "mass": [
+        0.5,
+        1.0
+      ],
+      "materials": {
+        "pet-rcc": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
+    },
+    {
+      "name": "Veste en jean pour un look décontracté",
+      "mass": [
+        0.8,
+        1.2
+      ],
+      "materials": {
+        "coton": 98,
+        "pu": 2
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Parfait pour une ambiance décontractée."
+    }
+  ],
+  "pantalon": [
+    {
+      "name": "Toile de coton légère pour pantalons d'été",
+      "mass": [
+        0.15,
+        0.25
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en toile de coton léger pour un confort respirant."
+    },
+    {
+      "name": "Twill de coton moyen pour pantalons polyvalents",
+      "mass": [
+        0.25,
+        0.35
+      ],
+      "materials": {
+        "coton": 98,
+        "pu": 2
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en twill de coton avec un peu de stretch pour la polyvalence."
+    },
+    {
+      "name": "Velours côtelé pour pantalons d'automne/hiver",
+      "mass": [
+        0.30,
+        0.40
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en velours côtelé pour une texture chaude et confortable."
+    },
+    {
+      "name": "Short en coton léger pour l'été",
+      "mass": [
+        0.2,
+        0.3
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en coton léger pour un short confortable et respirant, parfait pour les journées chaudes."
+    },
+    {
+      "name": "Short en denim délavé pour un look décontracté",
+      "mass": [
+        0.3,
+        0.4
+      ],
+      "materials": {
+        "coton": 98,
+        "pu": 2
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Le délavage donne un aspect décontracté et usé."
+    },
+    {
+      "name": "Short cargo en toile robuste pour une utilisation en extérieur",
+      "mass": [
+        0.4,
+        0.6
+      ],
+      "materials": {
+        "coton": 90,
+        "pet": 10
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
+    },
+    {
+      "name": "Short cargo en toile robuste pour une utilisation en extérieur (recyclage mécanique)",
+      "mass": [
+        0.4,
+        0.6
+      ],
+      "materials": {
+        "coton": 90,
+        "pet-rm": 10
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
+    },
+    {
+      "name": "Short cargo en toile robuste pour une utilisation en extérieur (recyclage chimique partiel)",
+      "mass": [
+        0.4,
+        0.6
+      ],
+      "materials": {
+        "coton": 90,
+        "pet-rcp": 10
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
+    },
+    {
+      "name": "Short cargo en toile robuste pour une utilisation en extérieur (recyclage chimique complet)",
+      "mass": [
+        0.4,
+        0.6
+      ],
+      "materials": {
+        "coton": 90,
+        "pet-rcc": 10
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
+    }
+  ],
+  "pull": [
+    {
+      "name": "Pull en laine mérinos pour un confort supérieur",
+      "mass": [
+        0.4,
+        0.6
+      ],
+      "materials": {
+        "laine-merinos": 100
+      },
+      "fabricProcess": "knitting-integral",
+      "fabrication": "Tricot en laine mérinos de haute qualité pour une chaleur douce et un toucher luxueux."
+    },
+    {
+      "name": "Pull en coton léger pour une superposition élégante",
+      "mass": [
+        0.3,
+        0.5
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "knitting-integral",
+      "fabrication": "Tricot en coton léger et respirant, parfait pour être porté seul ou sous une veste légère."
+    },
+    {
+      "name": "Pull en cachemire pour une sensation de luxe",
+      "mass": [
+        0.5,
+        0.8
+      ],
+      "materials": {
+        "cachemire": 100
+      },
+      "fabricProcess": "knitting-integral",
+      "fabrication": "Tricot en cachemire de haute qualité pour une douceur incomparable et une chaleur luxueuse."
+    }
+  ],
+  "tshirt": [
+    {
+      "name": "T-shirt en coton léger pour l'été",
+      "mass": [
+        0.2,
+        0.3
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Maille en coton légère et respirante pour un confort optimal pendant les journées chaudes."
+    },
+    {
+      "name": "T-shirt en jersey de coton extensible pour un ajustement parfait",
+      "mass": [
+        0.3,
+        0.4
+      ],
+      "materials": {
+        "coton": 95,
+        "pu": 5
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jersey de coton mélangé avec de l'élasthanne pour un tissu extensible et une liberté de mouvement maximale."
+    },
+    {
+      "name": "T-shirt en lin (filasse) pour une sensation de fraîcheur",
+      "mass": [
+        0.2,
+        0.4
+      ],
+      "materials": {
+        "lin-filasse": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Maille en lin (filasse) légère et aérée pour une sensation de fraîcheur et de légèreté, idéale pour les climats chauds."
+    },
+    {
+      "name": "T-shirt en lin (étoupe) pour une sensation de fraîcheur",
+      "mass": [
+        0.2,
+        0.4
+      ],
+      "materials": {
+        "lin-etoupe": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Maille en lin (étoupe) légère et aérée pour une sensation de fraîcheur et de légèreté, idéale pour les climats chauds."
+    }
+  ]
+}
