@@ -1,14 +1,14 @@
 [tool.poetry]
-name = "api"
+name = "ecobalyse"
 version = "0.1.0"
 description = ""
-authors = ["guaiguai"]
+authors = ["Yajing <yajinghou33@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-ipykernel = "^6.29.3"
 pandas = "^2.2.1"
+ipykernel = "^6.29.3"
 
 
 [build-system]
