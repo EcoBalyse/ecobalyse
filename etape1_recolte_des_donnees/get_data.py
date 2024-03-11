@@ -13,7 +13,7 @@ import json
 
 import sqlite3
 
-con = sqlite3.connect("test.db")
+con = sqlite3.connect("data/test.db")
 
 # %%
 
@@ -24,17 +24,17 @@ headers = {
 response = requests.get('https://ecobalyse.beta.gouv.fr/api/textile/countries', headers=headers, timeout=10)
 lst_countries = ast.literal_eval(response.text)
 df_countries = pd.DataFrame(lst_countries)
-df_countries.to_csv("countries.csv", index=False)
+df_countries.to_csv("data/countries.csv", index=False)
 
 response = requests.get('https://ecobalyse.beta.gouv.fr/api/textile/materials', headers=headers, timeout=10)
 lst_materials = ast.literal_eval(response.text)
 df_materials = pd.DataFrame(lst_materials)
-df_materials.to_csv("materials.csv", index=False)
+df_materials.to_csv("data/materials.csv", index=False)
 
 # response = requests.get('https://ecobalyse.beta.gouv.fr/api/textile/products', headers=headers, timeout=10)
 # lst_products = ast.literal_eval(response.text)
 # df_products = pd.DataFrame(lst_products)
-# df_products.to_csv("products.csv", index=False)
+# df_products.to_csv("data/products.csv", index=False)
 
 # Charger le fichier JSON
 with open('products_details.json') as f:
@@ -48,14 +48,14 @@ headers = {
 df = pd.DataFrame()
 
 for textile_type, exemples in data.items():
-    print(f"Type : {textile_type}")
+    # print(f"Type : {textile_type}")
 
     for exemple in exemples:
         mass_min, mass_max = exemple['mass']
         mass = mass_min
         while mass < mass_max:
             mass = round(mass, 2)
-            print(f"Mass : {mass}")
+            # print(f"Mass : {mass}")
 
             for spinning_country in df_countries.iloc[[4, 10]]["code"]:
                 for fabric_country in df_countries.iloc[[4, 10]]["code"]:
@@ -66,7 +66,7 @@ for textile_type, exemples in data.items():
                                 for material, percentage in exemple['materials'].items():
                                     tab_materials.append({"id": material, "share": percentage/100, "country": material_country})
 
-                                print(f"Materials : {tab_materials}")
+                                # print(f"Materials : {tab_materials}")
 
                                 json_data = {
                                     'mass': mass,
@@ -95,7 +95,7 @@ for textile_type, exemples in data.items():
                     
             mass += 0.01  # Augmente le poids par pas de 0.01 kg
 
-df.to_csv("test.csv", index=False)
+df.to_csv("data/test.csv", index=False)
 
 # %%
 df.to_sql("impacts", con, if_exists="append")
