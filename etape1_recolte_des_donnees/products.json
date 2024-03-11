@@ -1,1 +1,30 @@
-[{"id":"chemise","name":"Chemise"},{"id":"jean","name":"Jean"},{"id":"jupe","name":"Jupe / Robe"},{"id":"manteau","name":"Manteau / Veste"},{"id":"pantalon","name":"Pantalon / Short"},{"id":"pull","name":"Pull / Couche intermédiaire"},{"id":"tshirt","name":"T-shirt / Polo"}]
+[
+    {
+        "id": "chemise",
+        "name": "Chemise"
+    },
+    {
+        "id": "jean",
+        "name": "Jean"
+    },
+    {
+        "id": "jupe",
+        "name": "Jupe / Robe"
+    },
+    {
+        "id": "manteau",
+        "name": "Manteau / Veste"
+    },
+    {
+        "id": "pantalon",
+        "name": "Pantalon / Short"
+    },
+    {
+        "id": "pull",
+        "name": "Pull / Couche intermédiaire"
+    },
+    {
+        "id": "tshirt",
+        "name": "T-shirt / Polo"
+    }
+]
