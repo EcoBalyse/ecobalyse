@@ -1,0 +1,27 @@
+[
+    {
+      "id": "knitting-integral",
+      "name": "Tricotage intégral / whole garment"
+    },
+    {
+      "id": "knitting-straight",
+      "name": "Tricotage rectiligne, inventaire désagrégé"
+    },
+    {
+      "id": "weaving",
+      "name": "Tissage"
+    },
+    {
+      "id": "knitting-circular",
+      "name": "Tricotage circulaire, inventaire désagrégé"
+    },
+    {
+      "id": "knitting-fully-fashioned",
+      "name": "Tricotage fully-fashioned / seamless"
+    },
+    {
+      "id": "knitting-mix",
+      "name": "Tricotage moyen (mix de métiers circulaire & rectiligne)"
+    }
+  ]
+  
