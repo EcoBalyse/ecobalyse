@@ -6,14 +6,9 @@ Created on Wed Mar 06 21:28:47 2024.
 
 # %%
 import requests
-import pandas as pd
-import ast
 import os
 import json
-
-import sqlite3
-
-con = sqlite3.connect("data/test.db")
+import pandas as pd
 
 # %%
 
@@ -21,23 +16,11 @@ headers = {
     'accept': 'application/json',
 }
 
-response = requests.get('https://ecobalyse.beta.gouv.fr/api/textile/countries', headers=headers, timeout=10)
-lst_countries = ast.literal_eval(response.text)
-df_countries = pd.DataFrame(lst_countries)
-df_countries.to_csv("data/countries.csv", index=False)
-
-response = requests.get('https://ecobalyse.beta.gouv.fr/api/textile/materials', headers=headers, timeout=10)
-lst_materials = ast.literal_eval(response.text)
-df_materials = pd.DataFrame(lst_materials)
-df_materials.to_csv("data/materials.csv", index=False)
-
-# response = requests.get('https://ecobalyse.beta.gouv.fr/api/textile/products', headers=headers, timeout=10)
-# lst_products = ast.literal_eval(response.text)
-# df_products = pd.DataFrame(lst_products)
-# df_products.to_csv("data/products.csv", index=False)
+df_countries = pd.read_json('json/countries.json')
+df_materials = pd.read_json("json/materials.json")
 
 # Charger le fichier JSON
-with open('products_details.json') as f:
+with open('json/products_details.json') as f:
     data = json.load(f)
 
 headers = {
@@ -45,17 +28,17 @@ headers = {
     'content-type': 'application/json',
 }
 
-df = pd.DataFrame()
+concatenated_df = pd.DataFrame()
 
 for textile_type, exemples in data.items():
-    # print(f"Type : {textile_type}")
+    print(f"Type : {textile_type}")
 
     for exemple in exemples:
-        mass_min, mass_max = exemple['mass']
+        mass_min, mass_max, increment = exemple['mass']
         mass = mass_min
         while mass < mass_max:
             mass = round(mass, 2)
-            # print(f"Mass : {mass}")
+            print(f"Mass : {mass}")
 
             for spinning_country in df_countries.iloc[[4, 10]]["code"]:
                 for fabric_country in df_countries.iloc[[4, 10]]["code"]:
@@ -66,7 +49,7 @@ for textile_type, exemples in data.items():
                                 for material, percentage in exemple['materials'].items():
                                     tab_materials.append({"id": material, "share": percentage/100, "country": material_country})
 
-                                # print(f"Materials : {tab_materials}")
+                                print(f"Materials : {tab_materials}")
 
                                 json_data = {
                                     'mass': mass,
@@ -79,84 +62,17 @@ for textile_type, exemples in data.items():
                                     'fabricProcess': exemple['fabricProcess'],
                                 }
 
-                                response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator', headers=headers, json=json_data)
+                                response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=json_data)
 
-                                rep = ast.literal_eval(response.text)
-                                rep.update({f"impact_{key}": value for key, value in rep["impacts"].items()})
-                                _ = rep.pop("impacts")
-                                rep.update(rep["query"])
-                                _ = rep.pop("query")
-                                rep.update({f"{elt['id']}_{elt['country']}": elt["share"] for elt in rep["materials"]})
-                                _ = rep.pop("materials")
+                                if response.status_code == 200:
+                                    df = pd.DataFrame([response.json()])
 
-                                df_tmp = pd.DataFrame(rep, index=[0])
-
-                                df = pd.concat([df, df_tmp])
+                                    concatenated_df = pd.concat([concatenated_df, df])
                     
-            mass += 0.01  # Augmente le poids par pas de 0.01 kg
+            mass += increment  # Augmente le poids par pas
 
-df.to_csv("data/test.csv", index=False)
+concatenated_df.reset_index(drop=True, inplace=True)
 
-# %%
-df.to_sql("impacts", con, if_exists="append")
-
-# %%
-
-cur = con.cursor()
-pd.DataFrame(cur.execute("SELECT * FROM impacts").fetchall())
-
-# %%
-
-json_data = {
-    'mass': 0.3,
-    'materials': [
-        {
-            'id': 'coton',
-            'share': 1,
-            'country': "IT",
-        },
-    ],
-    'product': "tshirt",
-    'countrySpinning': 'FR',
-    'countryFabric': 'FR',
-    'countryDyeing': 'FR',
-    'countryMaking': "FR",
-    'fabricProcess': 'knitting-mix',
-}
-
-response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator', headers=headers, json=json_data)
-
-rep = ast.literal_eval(response.text)
-rep.update({f"impact_{key}": value for key, value in rep["impacts"].items()})
-_ = rep.pop("impacts")
-rep.update(rep["query"])
-_ = rep.pop("query")
-rep.update({f"{elt['id']}_{elt['country']}": elt["share"] for elt in rep["materials"]})
-_ = rep.pop("materials")
-
-df_tmp = pd.DataFrame(rep, index=[0])
-
-# %%
-target_name = "impacts"
-target_cols = pd.read_sql_query(f"select * from {target_name} limit 1;", con).columns.tolist()
-your_cols = df_tmp.columns.tolist()
-
-if set(your_cols) - set(target_cols) == set():
-    print("Les colonnes matchs")
-else:
-    lst_cols = list(set(your_cols) - set(target_cols))
-    print("Les colonnes ne matchent pas")
-    print(lst_cols)
-    for col in lst_cols:
-        cur.execute(f"ALTER TABLE impacts ADD {col} VARCHAR;")
-
-df_tmp.to_sql("impacts", con, if_exists="append")
-
-# %%
-
-df_tmp.to_sql("impacts", con, if_exists="append")
-
-# %%
-
-cur = con.cursor()
-pd.DataFrame(cur.execute("SELECT * FROM impacts").fetchall())
+# Enregistrement du DataFrame fusionné dans un fichier JSON
+output_file = "data/ecobalyse.json"
+concatenated_df.to_json(output_file, orient="records", indent=4)
