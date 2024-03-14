@@ -40,39 +40,40 @@ for textile_type, exemples in data.items():
             mass = round(mass, 2)
             print(f"Mass : {mass}")
 
-            for spinning_country in df_countries.iloc[[4, 10]]["code"]:
-                for fabric_country in df_countries.iloc[[4, 10]]["code"]:
-                    for dyeing_country in df_countries.iloc[[4, 10]]["code"]:
-                        for making_country in df_countries.iloc[[4, 10]]["code"]:
-                            for material_country in df_countries.iloc[[4, 10]]["code"]:
-                                tab_materials = []
-                                for material, percentage in exemple['materials'].items():
-                                    tab_materials.append({"id": material, "share": percentage/100, "country": material_country})
+            # df_countries.iloc[[4, 10]]["code"]
 
-                                print(f"Materials : {tab_materials}")
+            for fabric_country in df_countries["code"]:
+                for material_country in df_countries["code"]:
+                    tab_materials = []
+                    for material, percentage in exemple['materials'].items():
+                        tab_materials.append({"id": material, "share": percentage/100, "country": material_country})
 
-                                json_data = {
-                                    'mass': mass,
-                                    'materials': tab_materials,
-                                    'product': textile_type,
-                                    'countrySpinning': spinning_country,
-                                    'countryFabric': fabric_country,
-                                    'countryDyeing': dyeing_country,
-                                    'countryMaking': making_country,
-                                    'fabricProcess': exemple['fabricProcess'],
-                                }
+                    print(f"Materials : {tab_materials}")
 
-                                response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=json_data)
+                    json_data = {
+                        'mass': mass,
+                        'materials': tab_materials,
+                        'product': textile_type,
+                        'countrySpinning': fabric_country,
+                        'countryFabric': fabric_country,
+                        'countryDyeing': fabric_country,
+                        'countryMaking': fabric_country,
+                        'fabricProcess': exemple['fabricProcess'],
+                    }
 
-                                if response.status_code == 200:
-                                    df = pd.DataFrame([response.json()])
+                    response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=json_data)
 
-                                    concatenated_df = pd.concat([concatenated_df, df])
+                    if response.status_code == 200:
+                        df = pd.DataFrame([response.json()])
+
+                        concatenated_df = pd.concat([concatenated_df, df], ignore_index=True)
                     
             mass += increment  # Augmente le poids par pas
 
-concatenated_df.reset_index(drop=True, inplace=True)
+    concatenated_df.reset_index(drop=True, inplace=True)
 
-# Enregistrement du DataFrame fusionné dans un fichier JSON
-output_file = "data/ecobalyse.json"
-concatenated_df.to_json(output_file, orient="records", indent=4)
+    # Enregistrement du DataFrame fusionné dans un fichier JSON
+    output_file = "data/{textile_type}.json"
+    concatenated_df.to_json(output_file, orient="records", indent=4)
+
+    concatenated_df = pd.DataFrame()
