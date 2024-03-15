@@ -30,7 +30,7 @@ def ragent():
 
 def main():
     verbose = False
-    
+
     # Declare Available arguments
     parser = argparse.ArgumentParser(
         description='EcoBalyse : get_data')
@@ -54,7 +54,6 @@ def main():
     }
 
     df_countries = pd.read_json('json/countries.json')
-    df_materials = pd.read_json("json/materials.json")
 
     # Charger le fichier JSON
     with open('json/products_details.json') as f:
@@ -117,7 +116,7 @@ def main():
             output_file = f"data/{textile_type}.json"
             concatenated_df.to_json(output_file, orient="records", indent=4)
 
-            concatenated_df = pd.DataFrame()
+            break
 
 if __name__ == '__main__':
     try:
