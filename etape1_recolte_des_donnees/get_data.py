@@ -106,8 +106,6 @@ def main():
                             
                     mass += increment  # Augmente le poids par pas
 
-            concatenated_df.reset_index(drop=True, inplace=True)
-
             # Enregistrement du DataFrame fusionné dans un fichier JSON
             output_file = f"data/{textile_type}.json"
             concatenated_df.to_json(output_file, orient="records", indent=4)
