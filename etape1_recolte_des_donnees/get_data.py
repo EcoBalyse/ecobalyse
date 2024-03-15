@@ -48,21 +48,11 @@ def main():
         print("Textile type is needed !")
         exit()
 
-    headers = {
-        'User-Agent': ragent(),
-        'accept': 'application/json',
-    }
-
     df_countries = pd.read_json('json/countries.json')
 
     # Charger le fichier JSON
     with open('json/products_details.json') as f:
         data = json.load(f)
-
-    headers = {
-        'accept': 'application/json',
-        'content-type': 'application/json',
-    }
 
     concatenated_df = pd.DataFrame()
 
@@ -99,6 +89,12 @@ def main():
                                 'countryDyeing': fabric_country,
                                 'countryMaking': fabric_country,
                                 'fabricProcess': exemple['fabricProcess'],
+                            }
+
+                            headers = {
+                                'User-Agent': ragent(),
+                                'accept': 'application/json',
+                                'content-type': 'application/json',
                             }
 
                             response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=json_data)
