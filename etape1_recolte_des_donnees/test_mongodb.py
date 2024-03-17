@@ -16,5 +16,5 @@ ecobalyse = client["ecobalyse"]
 print(client.list_database_names())
 
 print(ecobalyse.list_collection_names())
-pprint(ecobalyse["impacts"].find_one({}, {"product_id":1}))
+pprint(ecobalyse["impacts"].distinct("product_id"))
 

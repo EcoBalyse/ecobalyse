@@ -1,5 +1,6 @@
 # Autre
 data/
+mongodb_ecobalyse/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
