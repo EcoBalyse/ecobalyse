@@ -1,0 +1,9 @@
+version: "3.3"
+services:
+  mongodb:
+    image : mongo:5.0
+    container_name: mongo_ecobalyse
+    volumes:
+    - ./mongodb_ecobalyse:/data/db
+    ports:
+    - 27017:27017
