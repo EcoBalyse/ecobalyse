@@ -1,0 +1,38 @@
+version: "3.3"
+
+services:
+  database:
+    container_name: mongo_ecobalyse
+    image: mongo:5.0
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_DATABASE=auth
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    networks: 
+      - mongo-compose-network
+    ports:
+      - '27017:27017'
+    volumes: 
+      - ./mongodb_ecobalyse:/data/db
+
+  mongoexpress:
+    container_name: mongo-express
+    image: mongo-express:0.54
+    depends_on:
+      - database
+    networks: 
+      - mongo-compose-network
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo_ecobalyse
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=pass
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=pass
+    ports:
+      - '8081:8081'
+    volumes: 
+      - ./mongodb_ecobalyse:/data/db
+
+networks:
+  mongo-compose-network:
