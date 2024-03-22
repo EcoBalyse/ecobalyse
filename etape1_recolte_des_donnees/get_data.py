@@ -51,7 +51,7 @@ def main():
     if args.limit:
         limit = int(args.limit)
     else:
-        limit = 8000
+        limit = 10000
 
     df_countries = pd.read_json('json/countries.json')
 
@@ -77,65 +77,62 @@ def main():
                     if verbose:
                         print(f"Mass : {mass}")
 
-                    for countrySpinning in df_countries["code"]:
-                        for countryFabric in df_countries["code"]:
-                            for countryDyeing in df_countries["code"]:
-                                for countryMaking in df_countries["code"]:
-                                    qualities = [0, 0.67, 1.45]
-                                    reparabilities = [0, 1, 1.15]
-                                    
-                                    # Changed quality and reparability product
-                                    for quality, reparability in zip(qualities, reparabilities):
-                                        tab_materials = []
-                                        for material, percentage in exemple['materials'].items():
-                                            tab_materials.append({"id": material, "share": percentage/100})
+                    for fabric_country  in df_countries["code"]:
+                        qualities = [0, 0.67, 1.45]
+                        reparabilities = [0, 1, 1.15]
+                        
+                        # Changed quality and reparability product
+                        for quality, reparability in zip(qualities, reparabilities):
+                            tab_materials = []
+                            for material, percentage in exemple['materials'].items():
+                                tab_materials.append({"id": material, "share": percentage/100})
 
-                                        if verbose:
-                                            print(f"Materials : {tab_materials}")
+                            if verbose:
+                                print(f"Materials : {tab_materials}")
 
-                                        json_data = {
-                                            'mass': mass,
-                                            'materials': tab_materials,
-                                            'product': textile_type,
-                                            'countrySpinning': countrySpinning,
-                                            'countryFabric': countryFabric,
-                                            'countryDyeing': countryDyeing,
-                                            'countryMaking': countryMaking,
-                                            'fabricProcess': exemple['fabricProcess'],
-                                        }
+                            json_data = {
+                                'mass': mass,
+                                'materials': tab_materials,
+                                'product': textile_type,
+                                'countrySpinning': fabric_country ,
+                                'countryFabric': fabric_country ,
+                                'countryDyeing': fabric_country ,
+                                'countryMaking': fabric_country ,
+                                'fabricProcess': exemple['fabricProcess'],
+                            }
 
-                                        if quality > 0:
-                                            json_data['quality'] = round(quality, 2)
+                            if quality > 0:
+                                json_data['quality'] = round(quality, 2)
 
-                                        if reparability > 0:
-                                            json_data['reparability'] = round(reparability, 2)
+                            if reparability > 0:
+                                json_data['reparability'] = round(reparability, 2)
 
-                                        headers = {
-                                            'User-Agent': ragent(),
-                                            'accept': 'application/json',
-                                            'content-type': 'application/json',
-                                        }
+                            headers = {
+                                'User-Agent': ragent(),
+                                'accept': 'application/json',
+                                'content-type': 'application/json',
+                            }
 
-                                        try:
-                                            response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=json_data)
-                                        except:
-                                            pass
+                            try:
+                                response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=json_data)
+                            except:
+                                pass
 
-                                        if response.status_code == 200:
-                                            df = pd.DataFrame([response.json()])
+                            if response.status_code == 200:
+                                df = pd.DataFrame([response.json()])
 
-                                            concatenated_df = pd.concat([concatenated_df, df], ignore_index=True)
+                                concatenated_df = pd.concat([concatenated_df, df], ignore_index=True)
 
-                                            count += 1
+                                count += 1
 
-                                            if count > limit:
-                                                # Enregistrement du DataFrame fusionné dans un fichier JSON
-                                                output_file = f"data/{textile_type}_{count_file}.json"
-                                                concatenated_df.to_json(output_file, orient="records", indent=4)
+                                if count > limit:
+                                    # Enregistrement du DataFrame fusionné dans un fichier JSON
+                                    output_file = f"data/{textile_type}_{count_file}.json"
+                                    concatenated_df.to_json(output_file, orient="records", indent=4)
 
-                                                count = 0
-                                                count_file += 1
-                                                concatenated_df = pd.DataFrame()
+                                    count = 0
+                                    count_file += 1
+                                    concatenated_df = pd.DataFrame()
 
                             
                     mass += increment  # Augmente le poids par pas
