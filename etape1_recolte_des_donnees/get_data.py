@@ -69,13 +69,15 @@ def main():
                     if verbose:
                         print(f"Mass : {mass}")
 
-                    # df_countries.iloc[[4, 10]]["code"]
-
                     for fabric_country in df_countries["code"]:
-                        for material_country in df_countries["code"]:
+                        qualities = [0, 0.67, 1.45]
+                        reparabilities = [0, 1, 1.15]
+                        
+                        # Changed quality and reparability product
+                        for quality, reparability in zip(qualities, reparabilities):
                             tab_materials = []
                             for material, percentage in exemple['materials'].items():
-                                tab_materials.append({"id": material, "share": percentage/100, "country": material_country})
+                                tab_materials.append({"id": material, "share": percentage/100})
 
                             if verbose:
                                 print(f"Materials : {tab_materials}")
@@ -91,13 +93,22 @@ def main():
                                 'fabricProcess': exemple['fabricProcess'],
                             }
 
+                            if quality > 0:
+                                json_data['quality'] = round(quality, 2)
+
+                            if reparability > 0:
+                                json_data['reparability'] = round(reparability, 2)
+
                             headers = {
                                 'User-Agent': ragent(),
                                 'accept': 'application/json',
                                 'content-type': 'application/json',
                             }
 
-                            response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=json_data)
+                            try:
+                                response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=json_data)
+                            except:
+                                pass
 
                             if response.status_code == 200:
                                 df = pd.DataFrame([response.json()])
