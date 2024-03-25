@@ -31,7 +31,7 @@
       "mass": [
         0.9,
         1.1,
-        0.05
+        0.1
       ],
       "materials": {
         "jute-kenaf": 100
@@ -40,37 +40,11 @@
       "fabrication": ""
     },
     {
-      "name": "Popeline de coton léger pour chemises d'été",
-      "mass": [
-        0.12,
-        0.18,
-        0.02
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en popeline de coton léger pour une texture respirante."
-    },
-    {
-      "name": "Oxford de coton moyen pour chemises décontractées",
-      "mass": [
-        0.20,
-        0.25,
-        0.01
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en oxford de coton avec un motif de chevrons distinctif."
-    },
-    {
       "name": "Chambray de coton léger à moyen pour chemises polyvalentes",
       "mass": [
-        0.18,
+        0.15,
         0.25,
-        0.02
+        0.05
       ],
       "materials": {
         "coton": 100
@@ -271,58 +245,6 @@
       "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Le délavage donne un aspect décontracté et usé."
     },
     {
-      "name": "Jupe plissée en polyester pour une allure élégante",
-      "mass": [
-        0.3,
-        0.5,
-        0.1
-      ],
-      "materials": {
-        "pet": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-    },
-    {
-      "name": "Jupe plissée en polyester pour une allure élégante (recyclage mécanique)",
-      "mass": [
-        0.3,
-        0.5,
-        0.1
-      ],
-      "materials": {
-        "pet-rm": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-    },
-    {
-      "name": "Jupe plissée en polyester pour une allure élégante (recyclage chimique partiel)",
-      "mass": [
-        0.3,
-        0.5,
-        0.1
-      ],
-      "materials": {
-        "pet-rcp": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-    },
-    {
-      "name": "Jupe plissée en polyester pour une allure élégante (recyclage chimique complet)",
-      "mass": [
-        0.3,
-        0.5,
-        0.1
-      ],
-      "materials": {
-        "pet-rcc": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-    },
-    {
       "name": "Robe d'été en mousseline de soie",
       "mass": [
         0.3,
@@ -334,33 +256,6 @@
       },
       "fabricProcess": "weaving",
       "fabrication": "Mousseline de soie légère et aérienne pour une robe estivale élégante et confortable."
-    },
-    {
-      "name": "Robe en jersey extensible pour un confort toute la journée",
-      "mass": [
-        0.4,
-        0.6,
-        0.1
-      ],
-      "materials": {
-        "coton": 95,
-        "pu": 5
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Jersey de coton mélangé avec de l'élasthanne pour une robe douce, extensible et confortable pour une utilisation quotidienne."
-    },
-    {
-      "name": "Robe en velours côtelé pour les soirées d'automne",
-      "mass": [
-        0.5,
-        0.8,
-        0.1
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Velours côtelé doux et luxueux pour une robe chaude et élégante, parfaite pour les soirées d'automne."
     }
   ],
   "manteau": [
@@ -381,7 +276,7 @@
       "name": "Manteau en aramide",
       "mass": [
         0.09,
-        0.12,
+        0.11,
         0.01
       ],
       "materials": {
@@ -408,7 +303,7 @@
       "mass": [
         1.0,
         1.5,
-        0.1
+        0.25
       ],
       "materials": {
         "laine-mouton": 70,
@@ -422,7 +317,7 @@
       "mass": [
         1.0,
         1.5,
-        0.1
+        0.25
       ],
       "materials": {
         "laine-r": 70,
@@ -436,7 +331,7 @@
       "mass": [
         1.0,
         1.5,
-        0.1
+        0.25
       ],
       "materials": {
         "laine-mouton": 70,
@@ -450,7 +345,7 @@
       "mass": [
         1.0,
         1.5,
-        0.1
+        0.25
       ],
       "materials": {
         "laine-r": 70,
@@ -464,7 +359,7 @@
       "mass": [
         1.0,
         1.5,
-        0.1
+        0.25
       ],
       "materials": {
         "laine-mouton": 70,
@@ -478,7 +373,7 @@
       "mass": [
         1.0,
         1.5,
-        0.1
+        0.25
       ],
       "materials": {
         "laine-r": 70,
@@ -492,7 +387,7 @@
       "mass": [
         1.0,
         1.5,
-        0.1
+        0.25
       ],
       "materials": {
         "laine-mouton": 70,
@@ -506,7 +401,7 @@
       "mass": [
         1.0,
         1.5,
-        0.1
+        0.25
       ],
       "materials": {
         "laine-r": 70,
@@ -520,7 +415,7 @@
       "mass": [
         0.8,
         1.2,
-        0.1
+        0.2
       ],
       "materials": {
         "laine-mouton": 100
@@ -533,7 +428,7 @@
       "mass": [
         0.8,
         1.2,
-        0.1
+        0.2
       ],
       "materials": {
         "laine-r": 100
@@ -546,7 +441,7 @@
       "mass": [
         0.5,
         1.0,
-        0.1
+        0.25
       ],
       "materials": {
         "pet": 100
@@ -559,7 +454,7 @@
       "mass": [
         0.5,
         1.0,
-        0.1
+        0.25
       ],
       "materials": {
         "pet-rm": 100
@@ -572,7 +467,7 @@
       "mass": [
         0.5,
         1.0,
-        0.1
+        0.25
       ],
       "materials": {
         "pet-rcp": 100
@@ -585,7 +480,7 @@
       "mass": [
         0.5,
         1.0,
-        0.1
+        0.25
       ],
       "materials": {
         "pet-rcc": 100
@@ -598,7 +493,7 @@
       "mass": [
         0.8,
         1.2,
-        0.1
+        0.2
       ],
       "materials": {
         "coton": 98,
@@ -614,7 +509,7 @@
       "mass": [
         0.11,
         0.13,
-        0.05
+        0.01
       ],
       "materials": {
         "coton-rdp": 100
@@ -627,7 +522,7 @@
       "mass": [
         0.2,
         0.4,
-        0.05
+        0.1
       ],
       "materials": {
         "acrylique": 100
@@ -640,7 +535,7 @@
       "mass": [
         0.12,
         0.14,
-        0.05
+        0.01
       ],
       "materials": {
         "ptt": 100
@@ -676,19 +571,6 @@
       "fabrication": "Tissage en twill de coton avec un peu de stretch pour la polyvalence."
     },
     {
-      "name": "Velours côtelé pour pantalons d'automne/hiver",
-      "mass": [
-        0.3,
-        0.4,
-        0.1
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en velours côtelé pour une texture chaude et confortable."
-    },
-    {
       "name": "Short en coton léger pour l'été",
       "mass": [
         0.2,
@@ -700,20 +582,6 @@
       },
       "fabricProcess": "weaving",
       "fabrication": "Tissage en coton léger pour un short confortable et respirant, parfait pour les journées chaudes."
-    },
-    {
-      "name": "Short en denim délavé pour un look décontracté",
-      "mass": [
-        0.3,
-        0.4,
-        0.05
-      ],
-      "materials": {
-        "coton": 98,
-        "pu": 2
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Le délavage donne un aspect décontracté et usé."
     },
     {
       "name": "Short cargo en toile robuste pour une utilisation en extérieur",
@@ -778,7 +646,7 @@
       "mass": [
         0.2,
         0.4,
-        0.05
+        0.1
       ],
       "materials": {
         "acrylique-r": 100
@@ -804,7 +672,7 @@
       "mass": [
         0.13,
         0.15,
-        0.05
+        0.01
       ],
       "materials": {
         "pbt": 100
@@ -843,7 +711,7 @@
       "mass": [
         0.5,
         0.8,
-        0.1
+        0.15
       ],
       "materials": {
         "cachemire": 100
@@ -858,7 +726,7 @@
       "mass": [
         0.4,
         0.6,
-        0.05
+        0.1
       ],
       "materials": {
         "neoprene": 100

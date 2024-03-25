@@ -72,7 +72,7 @@ def main():
             for exemple in exemples:
                 mass_min, mass_max, increment = exemple['mass']
                 mass = mass_min
-                while mass <= mass_max:
+                while mass < mass_max:
                     mass = round(mass, 2)
                     if verbose:
                         print(f"Mass : {mass}")
