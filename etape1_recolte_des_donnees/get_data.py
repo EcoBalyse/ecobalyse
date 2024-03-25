@@ -59,20 +59,20 @@ def main():
     with open('json/products_details.json') as f:
         data = json.load(f)
 
-    concatenated_df = pd.DataFrame()
-
-    count = 0
-    count_file = 1
-
     for textile_type, exemples in data.items():
         if textile_type == arg_textile_type or arg_textile_type == 'all':
             if verbose:
                 print(f"Type : {textile_type}")
 
+            concatenated_df = pd.DataFrame()
+
+            count = 0
+            count_file = 1
+
             for exemple in exemples:
                 mass_min, mass_max, increment = exemple['mass']
                 mass = mass_min
-                while mass < mass_max:
+                while mass <= mass_max:
                     mass = round(mass, 2)
                     if verbose:
                         print(f"Mass : {mass}")
@@ -141,7 +141,8 @@ def main():
             output_file = f"data/{textile_type}_{count_file}.json"
             concatenated_df.to_json(output_file, orient="records", indent=4)
 
-            break
+            if arg_textile_type != 'all':
+                break
 
 if __name__ == '__main__':
     try:
