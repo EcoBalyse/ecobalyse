@@ -65,7 +65,7 @@ def main():
     count_file = 1
 
     for textile_type, exemples in data.items():
-        if textile_type == arg_textile_type:
+        if textile_type == arg_textile_type or arg_textile_type == 'all':
             if verbose:
                 print(f"Type : {textile_type}")
 

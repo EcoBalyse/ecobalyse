@@ -1,6 +1,45 @@
 {
   "chemise": [
     {
+      "name": "Chemise en PA-RC (Polyamide Recyclé)",
+      "mass": [
+        0.06,
+        0.08,
+        0.005
+      ],
+      "materials": {
+        "pa-rc": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Chemise en PLA (Polylactide)",
+      "mass": [
+        0.12,
+        0.14,
+        0.005
+      ],
+      "materials": {
+        "pla": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Chemise en jute/kenaf",
+      "mass": [
+        0.9,
+        1.1,
+        0.05
+      ],
+      "materials": {
+        "jute-kenaf": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
       "name": "Popeline de coton léger pour chemises d'été",
       "mass": [
         0.12,
@@ -41,6 +80,45 @@
     }
   ],
   "jean": [
+    {
+      "name": "Jean en viscose-R (Viscose Recyclée)",
+      "mass": [
+        0.11,
+        0.13,
+        0.005
+      ],
+      "materials": {
+        "viscose-r": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Jean en polyéthylène (PE)",
+      "mass": [
+        0.04,
+        0.06,
+        0.005
+      ],
+      "materials": {
+        "pe": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Jean en chanvre",
+      "mass": [
+        0.2,
+        0.3,
+        0.05
+      ],
+      "materials": {
+        "chanvre": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
     {
       "name": "Jean en denim léger pour l'été",
       "mass": [
@@ -126,6 +204,45 @@
     }
   ],
   "jupe": [
+    {
+      "name": "Jupe en PA-RM (Polyamide Recyclé)",
+      "mass": [
+        0.06,
+        0.08,
+        0.005
+      ],
+      "materials": {
+        "pa-rm": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Jupe en polyamide 66 (PA)",
+      "mass": [
+        0.06,
+        0.08,
+        0.005
+      ],
+      "materials": {
+        "pa": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Jupe en angora/mohair",
+      "mass": [
+        0.2,
+        0.3,
+        0.05
+      ],
+      "materials": {
+        "angora-mohair": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
     {
       "name": "Jupe en coton légère pour l'été",
       "mass": [
@@ -247,6 +364,45 @@
     }
   ],
   "manteau": [
+    {
+      "name": "Manteau en coton-RDPC (Coton Recyclé)",
+      "mass": [
+        0.11,
+        0.13,
+        0.005
+      ],
+      "materials": {
+        "coton-rdpc": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Manteau en aramide",
+      "mass": [
+        0.09,
+        0.12,
+        0.005
+      ],
+      "materials": {
+        "aramide": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Manteau en viscose",
+      "mass": [
+        0.11,
+        0.13,
+        0.005
+      ],
+      "materials": {
+        "viscose": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
     {
       "name": "Laine de mouton bouclée pour manteaux d'hiver",
       "mass": [
@@ -454,6 +610,45 @@
   ],
   "pantalon": [
     {
+      "name": "Pantalon en coton-RDP (Coton Recyclé)",
+      "mass": [
+        0.11,
+        0.13,
+        0.05
+      ],
+      "materials": {
+        "coton-rdp": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Pantalon en acrylique",
+      "mass": [
+        0.2,
+        0.4,
+        0.05
+      ],
+      "materials": {
+        "acrylique": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Pantalon en PTT (Polytriméthylène Téréphtalate)",
+      "mass": [
+        0.12,
+        0.14,
+        0.05
+      ],
+      "materials": {
+        "ptt": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
       "name": "Toile de coton légère pour pantalons d'été",
       "mass": [
         0.15,
@@ -579,6 +774,45 @@
   ],
   "pull": [
     {
+      "name": "Pull en acrylique-R (Acrylique Recyclé)",
+      "mass": [
+        0.2,
+        0.4,
+        0.05
+      ],
+      "materials": {
+        "acrylique-r": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Pull en PP-PA (Polypropylène/Polyamide)",
+      "mass": [
+        0.05,
+        0.07,
+        0.005
+      ],
+      "materials": {
+        "pp-pa": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "Pull en PBT (Polytéréphtalate de Butylène)",
+      "mass": [
+        0.13,
+        0.15,
+        0.05
+      ],
+      "materials": {
+        "pbt": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
       "name": "Pull en laine mérinos pour un confort supérieur",
       "mass": [
         0.4,
@@ -619,6 +853,32 @@
     }
   ],
   "tshirt": [
+    {
+      "name": "T-shirt en néoprène",
+      "mass": [
+        0.4,
+        0.6,
+        0.05
+      ],
+      "materials": {
+        "neoprene": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
+    {
+      "name": "T-shirt en polypropylène (PP)",
+      "mass": [
+        0.04,
+        0.06,
+        0.005
+      ],
+      "materials": {
+        "pp": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": ""
+    },
     {
       "name": "T-shirt en coton léger pour l'été",
       "mass": [
