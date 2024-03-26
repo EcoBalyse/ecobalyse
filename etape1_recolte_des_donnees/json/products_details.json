@@ -40,6 +40,32 @@
       "fabrication": ""
     },
     {
+      "name": "Popeline de coton léger pour chemises d'été",
+      "mass": [
+        0.12,
+        0.18,
+        0.03
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en popeline de coton léger pour une texture respirante."
+    },
+    {
+      "name": "Oxford de coton moyen pour chemises décontractées",
+      "mass": [
+        0.20,
+        0.25,
+        0.02
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en oxford de coton avec un motif de chevrons distinctif."
+    },
+    {
       "name": "Chambray de coton léger à moyen pour chemises polyvalentes",
       "mass": [
         0.15,
@@ -218,6 +244,58 @@
       "fabrication": ""
     },
     {
+      "name": "Jupe plissée en polyester pour une allure élégante",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "pet": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
+    },
+    {
+      "name": "Jupe plissée en polyester pour une allure élégante (recyclage mécanique)",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "pet-rm": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
+    },
+    {
+      "name": "Jupe plissée en polyester pour une allure élégante (recyclage chimique partiel)",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "pet-rcp": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
+    },
+    {
+      "name": "Jupe plissée en polyester pour une allure élégante (recyclage chimique complet)",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "pet-rcc": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
+    },
+    {
       "name": "Jupe en coton légère pour l'été",
       "mass": [
         0.2,
@@ -256,6 +334,33 @@
       },
       "fabricProcess": "weaving",
       "fabrication": "Mousseline de soie légère et aérienne pour une robe estivale élégante et confortable."
+    },
+    {
+      "name": "Robe en jersey extensible pour un confort toute la journée",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "coton": 95,
+        "pu": 5
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jersey de coton mélangé avec de l'élasthanne pour une robe douce, extensible et confortable pour une utilisation quotidienne."
+    },
+    {
+      "name": "Robe en velours côtelé pour les soirées d'automne",
+      "mass": [
+        0.5,
+        0.8,
+        0.15
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Velours côtelé doux et luxueux pour une robe chaude et élégante, parfaite pour les soirées d'automne."
     }
   ],
   "manteau": [
@@ -544,6 +649,19 @@
       "fabrication": ""
     },
     {
+      "name": "Velours côtelé pour pantalons d'automne/hiver",
+      "mass": [
+        0.3,
+        0.4,
+        0.1
+      ],
+      "materials": {
+        "coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissage en velours côtelé pour une texture chaude et confortable."
+    },
+    {
       "name": "Toile de coton légère pour pantalons d'été",
       "mass": [
         0.15,
@@ -610,6 +728,20 @@
       },
       "fabricProcess": "weaving",
       "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
+    },
+    {
+      "name": "Short en denim délavé pour un look décontracté",
+      "mass": [
+        0.3,
+        0.4,
+        0.05
+      ],
+      "materials": {
+        "coton": 98,
+        "pu": 2
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Le délavage donne un aspect décontracté et usé."
     },
     {
       "name": "Short cargo en toile robuste pour une utilisation en extérieur (recyclage chimique partiel)",
