@@ -14,3 +14,15 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+# Extraction
+
+docker build -t ecobalyse-extract .
+
+docker run --rm ecobalyse-extract
+
+# PySpark
+
+docker build -t ecobalyse-spark .
+
+docker run -it --rm ecobalyse-spark
