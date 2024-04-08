@@ -27,3 +27,5 @@ print(client.list_database_names())
 print(ecobalyse.list_collection_names())
 pprint(ecobalyse["impacts"].distinct("product_id"))
 
+# Fermer la connexion
+client.close()

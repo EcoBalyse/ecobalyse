@@ -62,3 +62,6 @@ for collection_name in collections:
     # Insert impact data into created collections
             ecobalyse[collection_name].insert_many(json_data, ordered = False)
     print(f"Données insérées dans la collection {collection_name}.")
+
+# Fermer la connexion
+client.close()

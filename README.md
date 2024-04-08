@@ -15,14 +15,26 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
+### For INDIVIDUAL ###
+
 # Extraction
 
 docker build -t ecobalyse-extract .
 
-docker run --rm ecobalyse-extract
+docker run -it --rm ecobalyse-extract
 
 # PySpark
 
 docker build -t ecobalyse-spark .
 
 docker run -it --rm ecobalyse-spark
+
+# API
+
+docker build -t ecobalyse-api .
+
+docker run -it --rm ecobalyse-api
+
+### For ALL ###
+
+docker-compose up -d
