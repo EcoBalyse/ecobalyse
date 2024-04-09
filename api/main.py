@@ -4,12 +4,11 @@ from pydantic import BaseModel
 from typing import List, Optional
 from dotenv import load_dotenv
 import os
-from pymongo import MongoClient
-from pymongo.errors import PyMongoError
+
+from mongo_queries import *
+from redis_queries import *
 
 load_dotenv()
-
-mongo_uri = f"mongodb+srv://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@cluster0.mudexs5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 API_KEY = os.getenv('API_KEY')
 API_KEY_NAME = os.getenv('API_KEY_NAME')
@@ -57,74 +56,31 @@ def get_product(api_key_header: APIKey = Depends(get_api_key)):
     """
     TODO
     """
-    global mongo_uri
-
-    try:
-        # Create a new client and connect to the server
-        client = MongoClient(mongo_uri)
-
-        # Ecobalyse database
-        ecobalyse = client["ecobalyse"]
-
-        return ecobalyse['impacts'].distinct("inputs.product.id")
-    except PyMongoError as e:
-        return {"error": str(e)}
-    finally:
-        client.close()  # Ensure proper connection closure
+    return get_product_id()
 
 @api.get("/product/{id}", name="Get Product")
 def get_product(id: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_api_key)):
     """
     TODO
     """
-    global mongo_uri
-
-    try:
-        # Create a new client and connect to the server
-        client = MongoClient(mongo_uri)
-
-        # Ecobalyse database
-        ecobalyse = client["ecobalyse"]
-
-        result_cursor = ecobalyse['impacts'].find({"inputs.product.id": id}, {'_id': 0}).limit(nb_doc)
-
-        results = [doc for doc in result_cursor]
-
-        if results:
-            return results
-        else:
-            raise HTTPException(status_code=404, detail="Document not found")
-    except PyMongoError as e:
-        return {"error": str(e)}
-    finally:
-        client.close()  # Ensure proper connection closure
+    results = get_product_list(id, nb_doc)
+    
+    if results:
+        return results
+    else:
+        raise HTTPException(status_code=404, detail="Document not found")
 
 @api.get("/product/{id}/{country}", name="Get Product for country")
 def get_product_country(id: str, country: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_api_key)):
     """
     TODO
     """
-    global mongo_uri
-
-    try:
-        # Create a new client and connect to the server
-        client = MongoClient(mongo_uri)
-
-        # Ecobalyse database
-        ecobalyse = client["ecobalyse"]
-
-        result_cursor = ecobalyse['impacts'].find({"inputs.product.id": id, "inputs.countryFabric.code": country}, {'_id': 0}).limit(nb_doc)
-
-        results = [doc for doc in result_cursor]
-
-        if results:
-            return results
-        else:
-            raise HTTPException(status_code=404, detail="Document not found")
-    except PyMongoError as e:
-        return {"error": str(e)}
-    finally:
-        client.close()  # Ensure proper connection closure
+    results = get_product_list_country(id, country, nb_doc)
+    
+    if results:
+        return results
+    else:
+        raise HTTPException(status_code=404, detail="Document not found")
 
 # Route pour créer un nouveau produit
 @api.post('/product', name="Add new product")
