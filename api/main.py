@@ -70,6 +70,30 @@ def get_product(id: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_a
     else:
         raise HTTPException(status_code=404, detail="Document not found")
 
+@api.get("/product/{id}/top_product", name="Get Product")
+def get_product(id: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_api_key)):
+    """
+    TODO
+    """
+    results = get_avg_product_list(id, 1, nb_doc)
+    
+    if results:
+        return results
+    else:
+        raise HTTPException(status_code=404, detail="Document not found")
+
+@api.get("/product/{id}/bad_product", name="Get Product")
+def get_product(id: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_api_key)):
+    """
+    TODO
+    """
+    results = get_avg_product_list(id, -1, nb_doc)
+    
+    if results:
+        return results
+    else:
+        raise HTTPException(status_code=404, detail="Document not found")
+
 @api.get("/product/{id}/{country}", name="Get Product for country")
 def get_product_country(id: str, country: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_api_key)):
     """
@@ -88,34 +112,46 @@ def create_product(product: Product, api_key_header: APIKey = Depends(get_api_ke
     """
     TODO
     """
-    global mongo_uri
 
-    headers = {
-        'accept': 'application/json',
-        'content-type': 'application/json',
-    }
+    # Calcul du hash MD5 de la structure de données
+    json_str = json.dumps(product.dict(), sort_keys=True)
+    md5_id = hashlib.md5(json_str.encode()).hexdigest()
 
-    response = None
+    if search_product_md5_id(md5_id) <= 0:
+        headers = {
+            'accept': 'application/json',
+            'content-type': 'application/json',
+        }
 
-    try:
-        response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=product.dict())
-    except:
-        HTTPException(status_code=400, detail='Failed contact ecobalyse gouv api')
+        response = None
 
-    if response and response.status_code == 200:
         try:
-            # Create a new client and connect to the server
-            client = MongoClient(mongo_uri)
+            response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=product.dict())
+        except:
+            HTTPException(status_code=400, detail='Failed contact ecobalyse gouv api')
 
-            # Ecobalyse database
-            ecobalyse = client["ecobalyse"]
+        if response and response.status_code == 200:
+            # Ajout du champ "md5_id" à la réponse JSON
+            response_json = response.json()
+            response_json['md5_id'] = md5_id
 
-            result = ecobalyse["impacts"].insert_one(product.dict())
+            if insert_product_mongo(response_json) == True:
+                return {'message': f'Product added {md5_id}'}
 
-            return {'message': f'Product added {str(result.inserted_id)}'}
-        except PyMongoError as e:
-            HTTPException(status_code=400, detail=f'Mongodb atlas error: {str(e)}')
-        finally:
-            client.close()  # Ensure proper connection closure
+        return {'message': 'Not possible'}
+    else:
+        return {'message': 'Product already exist'}
 
-    return {'message': 'Not possible'}
+# Route pour supprimer un nouveau produit
+@api.delete('/product', name="Add new product")
+def delete_product(md5_id: str, api_key_header: APIKey = Depends(get_api_key)):
+    """
+    TODO
+    """
+
+    delete_result = delete_product_mongo(md5_id)
+
+    if delete_result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Product not found")
+
+    return {"message": "Product deleted successfully"}

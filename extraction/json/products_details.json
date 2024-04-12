@@ -1,936 +1,910 @@
 {
   "chemise": [
     {
-      "name": "Chemise en PA-RC (Polyamide Recyclé)",
+      "name": "Chemise en coton biologique",
       "mass": [
-        0.06,
-        0.08,
-        0.01
+        0.1,
+        0.3,
+        0.1
       ],
       "materials": {
-        "pa-rc": 100
+        "ei-coton-organic": 95,
+        "elasthane": 5
       },
       "fabricProcess": "weaving",
-      "fabrication": ""
+      "fabrication": "Tissu en coton biologique doux et respirant, avec un soupçon d'élasthanne pour une meilleure liberté de mouvement."
     },
     {
-      "name": "Chemise en PLA (Polylactide)",
+      "name": "Chemise en chambray",
       "mass": [
-        0.12,
-        0.14,
-        0.01
+        0.2,
+        0.4,
+        0.1
       ],
       "materials": {
-        "pla": 100
+        "coton-rdpc": 100
       },
       "fabricProcess": "weaving",
-      "fabrication": ""
+      "fabrication": "Tissu chambray, un type de denim plus léger et plus doux, idéal pour un look décontracté."
     },
     {
-      "name": "Chemise en jute/kenaf",
+      "name": "Chemise en popeline de coton",
+      "mass": [
+        0.2,
+        0.4,
+        0.1
+      ],
+      "materials": {
+        "coton-rdp": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissu popeline de coton, un tissage fin et serré offrant un aspect lisse et soyeux. Parfaite pour une tenue habillée."
+    },
+    {
+      "name": "Chemise en flanelle de coton",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "ei-coton": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissu en flanelle de coton doux et chaud, idéal pour les saisons froides."
+    },
+    {
+      "name": "Chemise en jean",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "coton-rdpc": 70,
+        "ei-pa": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissu denim robuste et confortable, idéal pour un look décontracté."
+    },
+    {
+      "name": "Chemise en viscose",
+      "mass": [
+        0.2,
+        0.4,
+        0.1
+      ],
+      "materials": {
+        "ei-viscose": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissu en viscose doux et fluide, idéal pour un look élégant."
+    },
+    {
+      "name": "Chemise en laine",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "ei-laine-nouvelle-filiere": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissu en laine chaud et respirant, idéal pour les saisons froides."
+    },
+    {
+      "name": "Chemise en polyester recyclé",
+      "mass": [
+        0.25,
+        0.45,
+        0.1
+      ],
+      "materials": {
+        "ei-pet-r": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Tissu en polyester recyclé durable et respirant, idéal pour un look décontracté."
+    }
+  ],
+  "jean": [
+    {
+      "name": "Jean slim en coton biologique",
+      "mass": [
+        0.7,
+        0.9,
+        0.1
+      ],
+      "materials": {
+        "ei-coton-organic": 95,
+        "elasthane": 5
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jean slim fabriqué en coton biologique confortable et extensible, idéal pour un look ajusté."
+    },
+    {
+      "name": "Jean droit en coton recyclé",
+      "mass": [
+        0.8,
+        1.0,
+        0.1
+      ],
+      "materials": {
+        "coton-rdpc": 70,
+        "coton-rdp": 20,
+        "elasthane": 10
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jean droit fabriqué à partir d'un mélange de coton recyclé et de coton vierge, offrant un look classique et responsable."
+    },
+    {
+      "name": "Jean boyfriend en chanvre et coton",
+      "mass": [
+        0.85,
+        1.05,
+        0.1
+      ],
+      "materials": {
+        "ei-chanvre": 55,
+        "coton-rdp": 45
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jean boyfriend décontracté en mélange de chanvre et de coton, offrant une alternative durable et respirante."
+    },
+    {
+      "name": "Jean skinny en denim noir",
+      "mass": [
+        0.65,
+        0.85,
+        0.1
+      ],
+      "materials": {
+        "coton-rdpc": 90,
+        "ei-pet": 10
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jean skinny noir classique en denim extensible, pour un look ajusté et moulant."
+    },
+    {
+      "name": "Jean flare en denim brut",
       "mass": [
         0.9,
         1.1,
         0.1
       ],
       "materials": {
-        "jute-kenaf": 100
+        "coton-rdpc": 100
       },
       "fabricProcess": "weaving",
-      "fabrication": ""
+      "fabrication": "Jean flare vintage en denim brut non délavé, offrant un style unique et authentique."
     },
     {
-      "name": "Popeline de coton léger pour chemises d'été",
+      "name": "Jean large en lyocell",
       "mass": [
-        0.12,
-        0.18,
-        0.03
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en popeline de coton léger pour une texture respirante."
-    },
-    {
-      "name": "Oxford de coton moyen pour chemises décontractées",
-      "mass": [
-        0.20,
-        0.25,
-        0.02
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en oxford de coton avec un motif de chevrons distinctif."
-    },
-    {
-      "name": "Chambray de coton léger à moyen pour chemises polyvalentes",
-      "mass": [
-        0.15,
-        0.25,
-        0.05
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en chambray de coton pour une texture légère et polyvalente."
-    }
-  ],
-  "jean": [
-    {
-      "name": "Jean en viscose-R (Viscose Recyclée)",
-      "mass": [
-        0.11,
-        0.13,
-        0.01
-      ],
-      "materials": {
-        "viscose-r": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Jean en polyéthylène (PE)",
-      "mass": [
-        0.04,
-        0.06,
-        0.01
-      ],
-      "materials": {
-        "pe": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Jean en chanvre",
-      "mass": [
-        0.2,
-        0.3,
-        0.05
-      ],
-      "materials": {
-        "chanvre": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Jean en denim léger pour l'été",
-      "mass": [
-        0.4,
-        0.6,
+        0.9,
+        1.1,
         0.1
       ],
       "materials": {
-        "coton": 98,
-        "pu": 2
+        "ei-viscose-r": 100
       },
       "fabricProcess": "weaving",
-      "fabrication": "Denim tissé avec un fil de coton léger et un peu d'élasthanne pour plus de confort et de flexibilité."
+      "fabrication": "Jean large et fluide en lyocell, une matière écologique issue du bois d'eucalyptus, pour un look décontracté et élégant."
     },
     {
-      "name": "Jean en denim moyen pour une utilisation polyvalente",
+      "name": "Jean mom en coton biologique et élasthanne",
       "mass": [
-        0.6,
-        0.8,
+        0.75,
+        0.95,
         0.1
       ],
       "materials": {
-        "coton": 100
+        "ei-coton-organic": 90,
+        "elasthane": 10
       },
       "fabricProcess": "weaving",
-      "fabrication": "Denim tissé avec un fil de coton pour une sensation robuste et durable, idéal pour un usage quotidien."
+      "fabrication": "Jean mom taille haute confortable en coton biologique et élasthanne, pour un look vintage et moderne."
     },
     {
-      "name": "Jean en denim épais pour l'hiver",
+      "name": "Jean boyfriend déchiré en denim vintage",
       "mass": [
-        0.8,
-        1.0,
+        0.7,
+        0.9,
         0.1
-      ],
-      "materials": {
-        "coton": 95,
-        "pet": 5
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
-    },
-    {
-      "name": "Jean en denim épais pour l'hiver (recyclage mécanique)",
-      "mass": [
-        0.8,
-        1.0,
-        0.1
-      ],
-      "materials": {
-        "coton": 95,
-        "pet-rm": 5
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
-    },
-    {
-      "name": "Jean en denim épais pour l'hiver (recyclage chimique partiel)",
-      "mass": [
-        0.8,
-        1.0,
-        0.1
-      ],
-      "materials": {
-        "coton": 95,
-        "pet-rcp": 5
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
-    },
-    {
-      "name": "Jean en denim épais pour l'hiver (recyclage chimique complet)",
-      "mass": [
-        0.8,
-        1.0,
-        0.1
-      ],
-      "materials": {
-        "coton": 95,
-        "pet-rcc": 5
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Denim tissé avec un fil de coton majoritaire et un peu de polyester pour plus de chaleur et de résistance aux intempéries."
-    }
-  ],
-  "jupe": [
-    {
-      "name": "Jupe en PA-RM (Polyamide Recyclé)",
-      "mass": [
-        0.06,
-        0.08,
-        0.01
-      ],
-      "materials": {
-        "pa-rm": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Jupe en polyamide 66 (PA)",
-      "mass": [
-        0.06,
-        0.08,
-        0.01
-      ],
-      "materials": {
-        "pa": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Jupe en angora/mohair",
-      "mass": [
-        0.2,
-        0.3,
-        0.05
-      ],
-      "materials": {
-        "angora-mohair": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Jupe plissée en polyester pour une allure élégante",
-      "mass": [
-        0.3,
-        0.5,
-        0.1
-      ],
-      "materials": {
-        "pet": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-    },
-    {
-      "name": "Jupe plissée en polyester pour une allure élégante (recyclage mécanique)",
-      "mass": [
-        0.3,
-        0.5,
-        0.1
-      ],
-      "materials": {
-        "pet-rm": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-    },
-    {
-      "name": "Jupe plissée en polyester pour une allure élégante (recyclage chimique partiel)",
-      "mass": [
-        0.3,
-        0.5,
-        0.1
-      ],
-      "materials": {
-        "pet-rcp": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-    },
-    {
-      "name": "Jupe plissée en polyester pour une allure élégante (recyclage chimique complet)",
-      "mass": [
-        0.3,
-        0.5,
-        0.1
-      ],
-      "materials": {
-        "pet-rcc": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Polyester plissé pour créer une silhouette élégante et fluide. Parfait pour les occasions formelles ou semi-formelles."
-    },
-    {
-      "name": "Jupe en coton légère pour l'été",
-      "mass": [
-        0.2,
-        0.4,
-        0.1
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en coton léger pour une sensation fraîche et confortable pendant les mois d'été."
-    },
-    {
-      "name": "Jupe en denim délavé pour un look décontracté",
-      "mass": [
-        0.4,
-        0.6,
-        0.1
-      ],
-      "materials": {
-        "coton": 98,
-        "pu": 2
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Le délavage donne un aspect décontracté et usé."
-    },
-    {
-      "name": "Robe d'été en mousseline de soie",
-      "mass": [
-        0.3,
-        0.5,
-        0.1
-      ],
-      "materials": {
-        "soie": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Mousseline de soie légère et aérienne pour une robe estivale élégante et confortable."
-    },
-    {
-      "name": "Robe en jersey extensible pour un confort toute la journée",
-      "mass": [
-        0.4,
-        0.6,
-        0.1
-      ],
-      "materials": {
-        "coton": 95,
-        "pu": 5
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Jersey de coton mélangé avec de l'élasthanne pour une robe douce, extensible et confortable pour une utilisation quotidienne."
-    },
-    {
-      "name": "Robe en velours côtelé pour les soirées d'automne",
-      "mass": [
-        0.5,
-        0.8,
-        0.15
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Velours côtelé doux et luxueux pour une robe chaude et élégante, parfaite pour les soirées d'automne."
-    }
-  ],
-  "manteau": [
-    {
-      "name": "Manteau en coton-RDPC (Coton Recyclé)",
-      "mass": [
-        0.11,
-        0.13,
-        0.01
       ],
       "materials": {
         "coton-rdpc": 100
       },
       "fabricProcess": "weaving",
-      "fabrication": ""
+      "fabrication": "Jean boyfriend décontracté avec des déchirures et un denim vintage, pour un look rebelle et authentique."
     },
     {
-      "name": "Manteau en aramide",
+      "name": "Jean cargo en coton et nylon",
       "mass": [
-        0.09,
-        0.11,
-        0.01
+        0.95,
+        1.15,
+        0.1
       ],
       "materials": {
-        "aramide": 100
+        "coton-rdpc": 70,
+        "ei-pa": 30
       },
       "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Manteau en viscose",
-      "mass": [
-        0.11,
-        0.13,
-        0.01
-      ],
-      "materials": {
-        "viscose": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Laine de mouton bouclée pour manteaux d'hiver",
-      "mass": [
-        1.0,
-        1.5,
-        0.25
-      ],
-      "materials": {
-        "laine-mouton": 70,
-        "pet": 30
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
-    },
-    {
-      "name": "Laine recyclée bouclée pour manteaux d'hiver",
-      "mass": [
-        1.0,
-        1.5,
-        0.25
-      ],
-      "materials": {
-        "laine-r": 70,
-        "pet": 30
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
-    },
-    {
-      "name": "Laine de mouton bouclée pour manteaux d'hiver (polyester recyclé (recyclage mécanique))",
-      "mass": [
-        1.0,
-        1.5,
-        0.25
-      ],
-      "materials": {
-        "laine-mouton": 70,
-        "pet-rm": 30
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
-    },
-    {
-      "name": "Laine recyclée bouclée pour manteaux d'hiver (polyester recyclé (recyclage mécanique))",
-      "mass": [
-        1.0,
-        1.5,
-        0.25
-      ],
-      "materials": {
-        "laine-r": 70,
-        "pet-rm": 30
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
-    },
-    {
-      "name": "Laine de mouton bouclée pour manteaux d'hiver (polyester recyclé (recyclage chimique partiel))",
-      "mass": [
-        1.0,
-        1.5,
-        0.25
-      ],
-      "materials": {
-        "laine-mouton": 70,
-        "pet-rcp": 30
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
-    },
-    {
-      "name": "Laine recyclée bouclée pour manteaux d'hiver (polyester recyclé (recyclage chimique partiel))",
-      "mass": [
-        1.0,
-        1.5,
-        0.25
-      ],
-      "materials": {
-        "laine-r": 70,
-        "pet-rcp": 30
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
-    },
-    {
-      "name": "Laine de mouton bouclée pour manteaux d'hiver polyester recyclé (recyclage chimique complet)",
-      "mass": [
-        1.0,
-        1.5,
-        0.25
-      ],
-      "materials": {
-        "laine-mouton": 70,
-        "pet-rcc": 30
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en laine de mouton bouclée pour une texture dense et chaude."
-    },
-    {
-      "name": "Laine recyclée bouclée pour manteaux d'hiver polyester recyclé (recyclage chimique complet)",
-      "mass": [
-        1.0,
-        1.5,
-        0.25
-      ],
-      "materials": {
-        "laine-r": 70,
-        "pet-rcc": 30
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en laine recyclée bouclée pour une texture dense et chaude."
-    },
-    {
-      "name": "Tweed de laine de mouton pour manteaux classiques",
-      "mass": [
-        0.8,
-        1.2,
-        0.2
-      ],
-      "materials": {
-        "laine-mouton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en tweed de laine de mouton pour un motif rustique et texturé."
-    },
-    {
-      "name": "Tweed de laine recyclée pour manteaux classiques",
-      "mass": [
-        0.8,
-        1.2,
-        0.2
-      ],
-      "materials": {
-        "laine-r": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Tissage en tweed de laine recyclée pour un motif rustique et texturé."
-    },
-    {
-      "name": "Duvet synthétique pour manteaux matelassés",
-      "mass": [
-        0.5,
-        1.0,
-        0.25
-      ],
-      "materials": {
-        "pet": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
-    },
-    {
-      "name": "Duvet synthétique pour manteaux matelassés (recyclage mécanique)",
-      "mass": [
-        0.5,
-        1.0,
-        0.25
-      ],
-      "materials": {
-        "pet-rm": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
-    },
-    {
-      "name": "Duvet synthétique pour manteaux matelassés (recyclage chimique partiel)",
-      "mass": [
-        0.5,
-        1.0,
-        0.25
-      ],
-      "materials": {
-        "pet-rcp": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
-    },
-    {
-      "name": "Duvet synthétique pour manteaux matelassés (recyclage chimique complet)",
-      "mass": [
-        0.5,
-        1.0,
-        0.25
-      ],
-      "materials": {
-        "pet-rcc": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Remplissage de duvet synthétique dans des compartiments pour une isolation légère."
-    },
-    {
-      "name": "Veste en jean pour un look décontracté",
-      "mass": [
-        0.8,
-        1.2,
-        0.2
-      ],
-      "materials": {
-        "coton": 98,
-        "pu": 2
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Parfait pour une ambiance décontractée."
+      "fabrication": "Jean cargo fonctionnel en coton et nylon, pour un look utilitaire et robuste."
     }
   ],
-  "pantalon": [
+  "jupe": [
     {
-      "name": "Pantalon en coton-RDP (Coton Recyclé)",
+      "name": "Jupe midi en coton biologique",
       "mass": [
-        0.11,
-        0.13,
-        0.01
+        0.3,
+        0.5,
+        0.1
       ],
       "materials": {
-        "coton-rdp": 100
+        "ei-coton-organic": 100
       },
       "fabricProcess": "weaving",
-      "fabrication": ""
+      "fabrication": "Jupe midi fluide et confortable en coton biologique, pour un look décontracté et élégant."
     },
     {
-      "name": "Pantalon en acrylique",
+      "name": "Jupe patineuse en viscose",
+      "mass": [
+        0.25,
+        0.45,
+        0.1
+      ],
+      "materials": {
+        "ei-viscose": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jupe patineuse féminine et fluide en viscose, pour un look romantique et gracieux."
+    },
+    {
+      "name": "Jupe en jean brut",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "coton-rdpc": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jupe en jean classique et décontractée en denim brut, pour un look casual et indémodable."
+    },
+    {
+      "name": "Jupe plissée en polyester recyclé",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "ei-pet-r": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jupe plissée moderne et durable en polyester recyclé, pour un look élégant et responsable."
+    },
+    {
+      "name": "Robe longue en coton biologique",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "ei-coton-organic": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Robe longue fluide et confortable en coton biologique, idéale pour un look décontracté ou habillé selon les accessoires."
+    },
+    {
+      "name": "Robe chemise en lin et viscose",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "ei-lin": 50,
+        "ei-viscose": 50
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Robe chemise élégante et infroissable en mélange de lin et de viscose, pour un look chic et pratique."
+    },
+    {
+      "name": "Robe pull en maille côtelée",
+      "mass": [
+        0.5,
+        0.7,
+        0.1
+      ],
+      "materials": {
+        "ei-laine-par-defaut": 50,
+        "ei-coton-organic": 50
+      },
+      "fabricProcess": "knitting-integral",
+      "fabrication": "Robe pull douce et chaude en maille côtelée mélangée laine mérinos et coton biologique, pour un look cocooning et élégant."
+    },
+    {
+      "name": "Robe de cocktail en polyester recyclé",
+      "mass": [
+        0.35,
+        0.55,
+        0.1
+      ],
+      "materials": {
+        "ei-pet-r": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Robe de cocktail scintillante et responsable en polyester recyclé, pour une soirée chic et durable."
+    },
+    {
+      "name": "Robe maxi en coton biologique et chanvre",
+      "mass": [
+        0.5,
+        0.7,
+        0.1
+      ],
+      "materials": {
+        "ei-coton-organic": 70,
+        "ei-chanvre": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Robe maxi confortable et respirante en coton biologique et chanvre, pour un look décontracté et estival."
+    },
+    {
+      "name": "Robe portefeuille en satin de viscose",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "ei-viscose": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Robe portefeuille élégante et féminine en satin de viscose, pour un look chic et glamour."
+    },
+    {
+      "name": "Robe sweat en molleton recyclé",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "ei-pet-r": 60,
+        "ei-coton-organic": 40
+      },
+      "fabricProcess": "knitting-mix",
+      "fabrication": "Robe sweat confortable et décontractée en molleton recyclé, pour un look cocooning et responsable."
+    }
+  ],
+  "manteau": [
+    {
+      "name": "Manteau long en laine mérinos",
+      "mass": [
+        1.0,
+        1.4,
+        0.2
+      ],
+      "materials": {
+        "ei-laine-par-defaut": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Manteau long chaud et élégant en laine mérinos, pour un look hivernal raffiné."
+    },
+    {
+      "name": "Parka imperméable en coton ciré",
+      "mass": [
+        0.8,
+        1.0,
+        0.1
+      ],
+      "materials": {
+        "coton-rdpc": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Parka imperméable et robuste en coton ciré, pour un look casual et fonctionnel."
+    },
+    {
+      "name": "Manteau oversize en fausse fourrure",
+      "mass": [
+        0.8,
+        1.0,
+        0.1
+      ],
+      "materials": {
+        "ei-pet": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Manteau oversize doux et chaud en fausse fourrure, pour un look glamour et responsable."
+    },
+    {
+      "name": "Trench-coat en coton biologique et polyester recyclé",
+      "mass": [
+        0.7,
+        0.9,
+        0.1
+      ],
+      "materials": {
+        "ei-coton-organic": 70,
+        "ei-pet-r": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Trench-coat imperméable et élégant en coton biologique et polyester recyclé, pour un look classique et responsable."
+    },
+    {
+      "name": "Cape en laine bouclée",
+      "mass": [
+        0.7,
+        0.9,
+        0.1
+      ],
+      "materials": {
+        "ei-laine-par-defaut": 100
+      },
+      "fabricProcess": "knitting-mix",
+      "fabrication": "Cape élégante et confortable en laine bouclée, pour un look cocooning et moderne."
+    },
+    {
+      "name": "Veste en polypropylène",
       "mass": [
         0.2,
         0.4,
         0.1
       ],
       "materials": {
-        "acrylique": 100
+        "ei-pp": 100
       },
       "fabricProcess": "weaving",
-      "fabrication": ""
+      "fabrication": "Veste légère et respirante en polypropylène, idéale pour les activités sportives et décontractées."
     },
     {
-      "name": "Pantalon en PTT (Polytriméthylène Téréphtalate)",
+      "name": "Veste en toile de jute et kenaf",
       "mass": [
-        0.12,
-        0.14,
-        0.01
+        0.5,
+        0.7,
+        0.1
       ],
       "materials": {
-        "ptt": 100
+        "ei-jute-kenaf": 100
       },
       "fabricProcess": "weaving",
-      "fabrication": ""
+      "fabrication": "Veste décontractée et durable en toile de jute et kenaf, une alternative écologique et respirante aux vestes en coton."
     },
     {
-      "name": "Velours côtelé pour pantalons d'automne/hiver",
+      "name": "Veste en denim brut",
+      "mass": [
+        0.5,
+        0.7,
+        0.1
+      ],
+      "materials": {
+        "coton-rdpc": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Veste en denim brut classique et intemporelle, pour un look casual et indémodable."
+    },
+    {
+      "name": "Veste de blazer en laine recyclée",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "ei-laine-par-defaut": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Veste de blazer élégante et responsable en laine recyclée, pour un look business chic et durable."
+    },
+    {
+      "name": "Veste de survêtement en polyester recyclé",
       "mass": [
         0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "ei-pet-r": 100
+      },
+      "fabricProcess": "knitting-integral",
+      "fabrication": "Veste de survêtement confortable et décontractée en polyester recyclé, pour un look sportswear et responsable."
+    }
+  ],
+  "pantalon": [
+    {
+      "name": "Jean droit en coton biologique",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "ei-coton-organic": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Jean droit classique et confortable en coton biologique, pour un look casual et responsable."
+    },
+    {
+      "name": "Pantalon chino en lin et coton",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "ei-lin": 50,
+        "coton-rdpc": 50
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Pantalon chino élégant et infroissable en mélange de lin et de coton, pour un look chic et décontracté."
+    },
+    {
+      "name": "Jogging en molleton biologique",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "ei-coton-organic": 100
+      },
+      "fabricProcess": "knitting-mix",
+      "fabrication": "Jogging confortable et décontracté en molleton biologique, pour un look cocooning et responsable."
+    },
+    {
+      "name": "Pantalon cargo en coton et chanvre",
+      "mass": [
+        0.5,
+        0.7,
+        0.1
+      ],
+      "materials": {
+        "coton-rdpc": 70,
+        "ei-chanvre": 30
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Pantalon cargo pratique et robuste en coton et chanvre, pour un look casual et durable."
+    },
+    {
+      "name": "Short en jean brut",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "coton-rdpc": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Short en jean brut classique et intemporel, pour un look casual et indémodable."
+    },
+    {
+      "name": "Short de bain en polyester recyclé",
+      "mass": [
+        0.2,
         0.4,
         0.1
       ],
       "materials": {
-        "coton": 100
+        "ei-pet-r": 100
       },
       "fabricProcess": "weaving",
-      "fabrication": "Tissage en velours côtelé pour une texture chaude et confortable."
+      "fabrication": "Short de bain confortable et sèche-rapide en polyester recyclé, pour un look sportif et responsable."
     },
     {
-      "name": "Toile de coton légère pour pantalons d'été",
+      "name": "Short chino en lin et coton biologique",
+      "mass": [
+        0.25,
+        0.45,
+        0.1
+      ],
+      "materials": {
+        "ei-lin": 50,
+        "ei-coton-organic": 50
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Short chino élégant et infroissable en mélange de lin et de coton biologique, pour un look chic et décontracté."
+    },
+    {
+      "name": "Short en molleton léger",
+      "mass": [
+        0.2,
+        0.4,
+        0.1
+      ],
+      "materials": {
+        "ei-coton-organic": 70,
+        "ei-pet": 30
+      },
+      "fabricProcess": "knitting-mix",
+      "fabrication": "Short en molleton léger et confortable en coton biologique et polyester, pour un look décontracté et sportif."
+    },
+    {
+      "name": "Short cargo en toile de coton",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "coton-rdpc": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Short cargo pratique et fonctionnel en toile de coton, pour un look casual et baroudeur."
+    }
+  ],
+  "pull": [
+    {
+      "name": "Pull en maille torsadée",
+      "mass": [
+        0.5,
+        0.7,
+        0.1
+      ],
+      "materials": {
+        "ei-acrylique": 80,
+        "ei-laine-par-defaut": 20
+      },
+      "fabricProcess": "knitting-mix",
+      "fabrication": "Pull en maille torsadée classique et robuste en ei-acrylique et laine, pour un look chaleureux et authentique."
+    },
+    {
+      "name": "Pull col rond en laine mérinos",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "ei-laine-par-defaut": 100
+      },
+      "fabricProcess": "knitting-mix",
+      "fabrication": "Pull col rond classique et chaud en laine mérinos, un basique confortable et intemporel."
+    },
+    {
+      "name": "Pull en maille côtelée",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "ei-coton-organic": 50,
+        "ei-laine-par-defaut": 50
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Pull en maille côtelée texturée et confortable en coton biologique et laine, pour un look casual et chic."
+    },
+    {
+      "name": "Sweat à capuche en molleton",
+      "mass": [
+        0.5,
+        0.7,
+        0.1
+      ],
+      "materials": {
+        "ei-coton-organic": 80,
+        "ei-pet": 20
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Sweat à capuche décontracté et confortable en molleton biologique, pour un look sportswear et responsable."
+    },
+    {
+      "name": "Pull oversize en fausse fourrure",
+      "mass": [
+        0.8,
+        1.0,
+        0.1
+      ],
+      "materials": {
+        "ei-pet": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Pull oversize doux et chaud en fausse fourrure, pour un look glamour et responsable."
+    },
+    {
+      "name": "Pull en maille torsadée en laine d'agneau",
+      "mass": [
+        0.5,
+        0.7,
+        0.1
+      ],
+      "materials": {
+        "ei-laine-par-defaut": 100
+      },
+      "fabricProcess": "knitting-mix",
+      "fabrication": "Pull en maille torsadée classique et robuste en laine d'agneau, pour un look chaleureux et authentique."
+    },
+    {
+      "name": "Pull à rayures marinières en coton biologique",
+      "mass": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "materials": {
+        "ei-coton-organic": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Pull à rayures marinières décontracté et intemporel en coton biologique, pour un look casual et responsable."
+    }
+  ],
+  "tshirt": [
+    {
+      "name": "T-shirt classique en coton",
       "mass": [
         0.15,
         0.25,
         0.05
       ],
       "materials": {
-        "coton": 100
+        "coton-rdpc": 100
       },
       "fabricProcess": "weaving",
-      "fabrication": "Tissage en toile de coton léger pour un confort respirant."
+      "fabrication": "T-shirt classique et confortable en coton, un basique intemporel pour toutes les gardes-robes."
     },
     {
-      "name": "Twill de coton moyen pour pantalons polyvalents",
+      "name": "T-shirt col V en coton biologique",
+      "mass": [
+        0.15,
+        0.25,
+        0.05
+      ],
+      "materials": {
+        "ei-coton-organic": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "T-shirt col V élégant et responsable en coton biologique, pour un look casual et écologique."
+    },
+    {
+      "name": "T-shirt imprimé en coton mélangé",
+      "mass": [
+        0.15,
+        0.25,
+        0.05
+      ],
+      "materials": {
+        "coton-rdpc": 80,
+        "ei-pet": 20
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "T-shirt imprimé tendance et confortable en coton mélangé, idéal pour un look décontracté et personnalisé."
+    },
+    {
+      "name": "T-shirt technique en polyester recyclé",
+      "mass": [
+        0.1,
+        0.2,
+        0.05
+      ],
+      "materials": {
+        "ei-pet-r": 100
+      },
+      "fabricProcess": "knitting-mix",
+      "fabrication": "T-shirt technique respirant et sèche-rapide en polyester recyclé, pour un look sportswear et durable."
+    },
+    {
+      "name": "T-shirt oversize en lin",
+      "mass": [
+        0.2,
+        0.3,
+        0.05
+      ],
+      "materials": {
+        "ei-lin": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "T-shirt oversize décontracté et léger en lin, pour un look estival et chic."
+    },
+    {
+      "name": "T-shirt à col montant en jersey de coton",
+      "mass": [
+        0.2,
+        0.3,
+        0.05
+      ],
+      "materials": {
+        "coton-rdpc": 100
+      },
+      "fabricProcess": "knitting-mix",
+      "fabrication": "T-shirt à col montant élégant et confortable en jersey de coton, pour un look casual et chic."
+    },
+    {
+      "name": "T-shirt de sport en mesh respirant",
+      "mass": [
+        0.1,
+        0.2,
+        0.05
+      ],
+      "materials": {
+        "ei-pet": 100
+      },
+      "fabricProcess": "knitting-mix",
+      "fabrication": "T-shirt de sport respirant et léger en mesh, pour un look sportswear et performant."
+    },
+    {
+      "name": "T-shirt à manches longues en laine mérinos",
+      "mass": [
+        0.3,
+        0.5,
+        0.1
+      ],
+      "materials": {
+        "ei-laine-par-defaut": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "T-shirt à manches longues chaud et confortable en laine mérinos, idéal pour les saisons fraîches."
+    },
+    {
+      "name": "T-shirt tie-dye en coton biologique",
+      "mass": [
+        0.2,
+        0.3,
+        0.05
+      ],
+      "materials": {
+        "ei-coton-organic": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "T-shirt tie-dye unique et original en coton biologique, pour un look décontracté et bohème."
+    },
+    {
+      "name": "Polo classique en coton piqué",
       "mass": [
         0.25,
         0.35,
         0.05
       ],
       "materials": {
-        "coton": 98,
-        "pu": 2
+        "ei-coton": 100
       },
       "fabricProcess": "weaving",
-      "fabrication": "Tissage en twill de coton avec un peu de stretch pour la polyvalence."
+      "fabrication": "Polo classique et intemporel en coton piqué, avec un col et des manches boutonnées. Un basique polyvalent pour toutes les occasions."
     },
     {
-      "name": "Short en coton léger pour l'été",
+      "name": "Polo slim fit en coton biologique",
+      "mass": [
+        0.20,
+        0.30,
+        0.05
+      ],
+      "materials": {
+        "ei-coton-organic": 100
+      },
+      "fabricProcess": "weaving",
+      "fabrication": "Polo ajusté et moderne en coton biologique, pour un look casual et responsable."
+    },
+    {
+      "name": "Polo en lin mélangé respirant",
       "mass": [
         0.2,
         0.3,
         0.05
       ],
       "materials": {
-        "coton": 100
+        "ei-lin": 70,
+        "coton-rdpc": 30
       },
       "fabricProcess": "weaving",
-      "fabrication": "Tissage en coton léger pour un short confortable et respirant, parfait pour les journées chaudes."
+      "fabrication": "Polo respirant et infroissable en lin mélangé, idéal pour les journées chaudes."
     },
     {
-      "name": "Short cargo en toile robuste pour une utilisation en extérieur",
+      "name": "Polo de sport en polyester recyclé",
       "mass": [
-        0.4,
-        0.6,
-        0.1
-      ],
-      "materials": {
-        "coton": 90,
-        "pet": 10
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
-    },
-    {
-      "name": "Short cargo en toile robuste pour une utilisation en extérieur (recyclage mécanique)",
-      "mass": [
-        0.4,
-        0.6,
-        0.1
-      ],
-      "materials": {
-        "coton": 90,
-        "pet-rm": 10
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
-    },
-    {
-      "name": "Short en denim délavé pour un look décontracté",
-      "mass": [
+        0.1,
         0.3,
-        0.4,
-        0.05
-      ],
-      "materials": {
-        "coton": 98,
-        "pu": 2
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Denim tissé avec un mélange de coton et d'élasthanne pour plus de confort et de souplesse. Le délavage donne un aspect décontracté et usé."
-    },
-    {
-      "name": "Short cargo en toile robuste pour une utilisation en extérieur (recyclage chimique partiel)",
-      "mass": [
-        0.4,
-        0.6,
         0.1
       ],
       "materials": {
-        "coton": 90,
-        "pet-rcp": 10
+        "ei-pet-r": 100
       },
-      "fabricProcess": "weaving",
-      "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
-    },
-    {
-      "name": "Short cargo en toile robuste pour une utilisation en extérieur (recyclage chimique complet)",
-      "mass": [
-        0.4,
-        0.6,
-        0.1
-      ],
-      "materials": {
-        "coton": 90,
-        "pet-rcc": 10
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Toile solide en coton et polyester avec de multiples poches pour un short fonctionnel et résistant."
-    }
-  ],
-  "pull": [
-    {
-      "name": "Pull en acrylique-R (Acrylique Recyclé)",
-      "mass": [
-        0.2,
-        0.4,
-        0.1
-      ],
-      "materials": {
-        "acrylique-r": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Pull en PP-PA (Polypropylène/Polyamide)",
-      "mass": [
-        0.05,
-        0.07,
-        0.01
-      ],
-      "materials": {
-        "pp-pa": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Pull en PBT (Polytéréphtalate de Butylène)",
-      "mass": [
-        0.13,
-        0.15,
-        0.01
-      ],
-      "materials": {
-        "pbt": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "Pull en laine mérinos pour un confort supérieur",
-      "mass": [
-        0.4,
-        0.6,
-        0.1
-      ],
-      "materials": {
-        "laine-merinos": 100
-      },
-      "fabricProcess": "knitting-integral",
-      "fabrication": "Tricot en laine mérinos de haute qualité pour une chaleur douce et un toucher luxueux."
-    },
-    {
-      "name": "Pull en coton léger pour une superposition élégante",
-      "mass": [
-        0.3,
-        0.5,
-        0.1
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "knitting-integral",
-      "fabrication": "Tricot en coton léger et respirant, parfait pour être porté seul ou sous une veste légère."
-    },
-    {
-      "name": "Pull en cachemire pour une sensation de luxe",
-      "mass": [
-        0.5,
-        0.8,
-        0.15
-      ],
-      "materials": {
-        "cachemire": 100
-      },
-      "fabricProcess": "knitting-integral",
-      "fabrication": "Tricot en cachemire de haute qualité pour une douceur incomparable et une chaleur luxueuse."
-    }
-  ],
-  "tshirt": [
-    {
-      "name": "T-shirt en néoprène",
-      "mass": [
-        0.4,
-        0.6,
-        0.1
-      ],
-      "materials": {
-        "neoprene": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "T-shirt en polypropylène (PP)",
-      "mass": [
-        0.04,
-        0.06,
-        0.01
-      ],
-      "materials": {
-        "pp": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": ""
-    },
-    {
-      "name": "T-shirt en coton léger pour l'été",
-      "mass": [
-        0.2,
-        0.3,
-        0.05
-      ],
-      "materials": {
-        "coton": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Maille en coton légère et respirante pour un confort optimal pendant les journées chaudes."
-    },
-    {
-      "name": "T-shirt en jersey de coton extensible pour un ajustement parfait",
-      "mass": [
-        0.3,
-        0.4,
-        0.05
-      ],
-      "materials": {
-        "coton": 95,
-        "pu": 5
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Jersey de coton mélangé avec de l'élasthanne pour un tissu extensible et une liberté de mouvement maximale."
-    },
-    {
-      "name": "T-shirt en lin (filasse) pour une sensation de fraîcheur",
-      "mass": [
-        0.2,
-        0.4,
-        0.1
-      ],
-      "materials": {
-        "lin-filasse": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Maille en lin (filasse) légère et aérée pour une sensation de fraîcheur et de légèreté, idéale pour les climats chauds."
-    },
-    {
-      "name": "T-shirt en lin (étoupe) pour une sensation de fraîcheur",
-      "mass": [
-        0.2,
-        0.4,
-        0.1
-      ],
-      "materials": {
-        "lin-etoupe": 100
-      },
-      "fabricProcess": "weaving",
-      "fabrication": "Maille en lin (étoupe) légère et aérée pour une sensation de fraîcheur et de légèreté, idéale pour les climats chauds."
+      "fabricProcess": "knitting-mix",
+      "fabrication": "Polo de sport confortable et sèche-rapide en polyester recyclé, pour un look sportswear et durable."
     }
   ]
 }

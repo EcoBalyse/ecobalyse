@@ -11,6 +11,7 @@ import argparse
 import json
 import pandas as pd
 from random import randint
+import hashlib
 
 # %%
 
@@ -70,58 +71,99 @@ def main():
             count_file = 1
 
             for exemple in exemples:
+                tab_materials = []
+                for material, percentage in exemple['materials'].items():
+                    tab_materials.append({"id": material, "share": percentage/100})
+
+                if verbose:
+                    print(f"Materials : {tab_materials}")
+
                 mass_min, mass_max, increment = exemple['mass']
                 mass = mass_min
-                while mass < mass_max:
+                while mass <= mass_max:
                     mass = round(mass, 2)
                     if verbose:
                         print(f"Mass : {mass}")
 
-                    for fabric_country  in df_countries["code"]:
-                        tab_materials = []
-                        for material, percentage in exemple['materials'].items():
-                            tab_materials.append({"id": material, "share": percentage/100})
+                    for countryMaking in df_countries["code"]:
+                        if countryMaking == "---":
+                            continue
 
-                        if verbose:
-                            print(f"Materials : {tab_materials}")
+                        airTransportRatio = 0
+                        for low_cost in [False, True]:
+                            if low_cost:
+                                json_data = {
+                                    'mass': mass,
+                                    'materials': tab_materials,
+                                    'product': textile_type,
+                                    'countrySpinning': countryMaking ,
+                                    'countryFabric': countryMaking ,
+                                    'countryDyeing': countryMaking ,
+                                    'countryMaking': countryMaking ,
+                                    'fabricProcess': exemple['fabricProcess'],
+                                    "makingWaste": None,
+                                    "makingDeadStock": None,
+                                    "makingComplexity": None,
+                                    "yarnSize": None,
+                                    "surfaceMass": None,
+                                    "disabledSteps": [
+                                        "use"
+                                    ]
+                                }
 
-                        json_data = {
-                            'mass': mass,
-                            'materials': tab_materials,
-                            'product': textile_type,
-                            'countrySpinning': fabric_country ,
-                            'countryFabric': fabric_country ,
-                            'countryDyeing': fabric_country ,
-                            'countryMaking': fabric_country ,
-                            'fabricProcess': exemple['fabricProcess']
-                        }
+                                if air_transport_ratio > 0:
+                                    json_data['airTransportRatio'] = air_transport_ratio
+                            else:
+                                json_data = {
+                                    'mass': mass,
+                                    'materials': tab_materials,
+                                    'product': textile_type,
+                                    'countrySpinning': countryMaking ,
+                                    'countryFabric': countryMaking ,
+                                    'countryDyeing': countryMaking ,
+                                    'countryMaking': countryMaking ,
+                                    'fabricProcess': exemple['fabricProcess']
+                                }
 
-                        headers = {
-                            'User-Agent': ragent(),
-                            'accept': 'application/json',
-                            'content-type': 'application/json',
-                        }
+                            headers = {
+                                'User-Agent': ragent(),
+                                'accept': 'application/json',
+                                'content-type': 'application/json',
+                            }
 
-                        try:
-                            response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=json_data)
-                        except:
-                            pass
+                            try:
+                                response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=json_data)
+                            except Exception as e:
+                                print("Error ecobalyse.beta.gouv.fr:", e)
+                            else:
+                                if response.status_code == 200:
+                                    # Calcul du hash MD5 de la structure de données
+                                    json_str = json.dumps(json_data, sort_keys=True)
+                                    md5_id = hashlib.md5(json_str.encode()).hexdigest()
 
-                        if response.status_code == 200:
-                            df = pd.DataFrame([response.json()])
+                                    # Ajout du champ "md5_id" à la réponse JSON
+                                    response_json = response.json()
+                                    response_json['md5_id'] = md5_id
 
-                            concatenated_df = pd.concat([concatenated_df, df], ignore_index=True)
+                                    if not low_cost:
+                                        airTransportRatio = response_json['lifeCycle'][0]['country']['airTransportRatio']
 
-                            count += 1
+                                    df = pd.DataFrame([response_json])
 
-                            if count > limit:
-                                # Enregistrement du DataFrame fusionné dans un fichier JSON
-                                output_file = f"data/{textile_type}_{count_file}.json"
-                                concatenated_df.to_json(output_file, orient="records", indent=4)
+                                    concatenated_df = pd.concat([concatenated_df, df], ignore_index=True)
 
-                                count = 0
-                                count_file += 1
-                                concatenated_df = pd.DataFrame()
+                                    count += 1
+
+                                    if count > limit:
+                                        # Enregistrement du DataFrame fusionné dans un fichier JSON
+                                        output_file = f"data/{textile_type}_{count_file}.json"
+                                        concatenated_df.to_json(output_file, orient="records", indent=4)
+
+                                        count = 0
+                                        count_file += 1
+                                        concatenated_df = pd.DataFrame()
+                                else:
+                                    print("Error ecobalyse.beta.gouv.fr status_code:", response.status_code)
 
                             
                     mass += increment  # Augmente le poids par pas
