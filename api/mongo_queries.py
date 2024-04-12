@@ -30,6 +30,7 @@ def get_avg_product_list_mongo(product_id: str, sort: int, nb_doc: int):
         },
         {
             "$project": {
+                "inputs": "$inputs",
                 "average_impacts": {
                     "$avg": [
                         "$impacts.acd", "$impacts.cch", "$impacts.etf", "$impacts.etf-c",
@@ -51,6 +52,9 @@ def get_avg_product_list_mongo(product_id: str, sort: int, nb_doc: int):
     ]
 
     result_cursor = list(ecobalyse['impacts'].aggregate(pipeline))
+
+    for doc in result_cursor:
+        del doc["_id"]
 
     results = [doc for doc in result_cursor]
 

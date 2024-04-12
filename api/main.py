@@ -4,6 +4,8 @@ from pydantic import BaseModel
 from typing import List, Optional
 from dotenv import load_dotenv
 import os
+import json
+import hashlib
 
 from mongo_queries import *
 from redis_queries import *
