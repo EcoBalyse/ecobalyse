@@ -6,8 +6,22 @@ services:
       vpcbr:
         ipv4_address: 10.6.0.2
 
+  mlflow:
+    container_name: mlflow
+    image: ghcr.io/mlflow/mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./requirements/mlflow/data:/mlflow
+    networks:
+      vpcbr:
+        ipv4_address: 10.6.0.6
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
+
   Spark:
     image: ecobalyse-spark
+    depends_on:
+      - mlflow
     networks:
       vpcbr:
         ipv4_address: 10.6.0.3
