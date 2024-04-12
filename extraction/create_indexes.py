@@ -16,11 +16,13 @@ ecobalyse = client["ecobalyse"]
 # Define new indexes for each collection
 indexes_to_create = [
     ("products", "id"),
+    ("countries", "code"),
     ("countries", "name"),
     ("fabricProcess", "id"),
     ("materials", "id"),
     ("impacts", "impacts"),
     ("impacts", "inputs"),
+    ("impacts", "product_id"),
     ("impacts", "md5_id")
 ]
 
