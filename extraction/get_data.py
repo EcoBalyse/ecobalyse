@@ -111,8 +111,8 @@ def main():
                                     ]
                                 }
 
-                                if air_transport_ratio > 0:
-                                    json_data['airTransportRatio'] = air_transport_ratio
+                                if airTransportRatio > 0:
+                                    json_data['airTransportRatio'] = airTransportRatio
                             else:
                                 json_data = {
                                     'mass': mass,
