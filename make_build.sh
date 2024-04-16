@@ -9,6 +9,7 @@ repertoire=$(cd "$(dirname "$0")" && pwd)
 # PATH
 EXTRACT_PATH=$repertoire/extraction
 SPARK_PATH=$repertoire/spark
+REQUIREMENTS_PATH=$repertoire/requirements
 API_PATH=$repertoire/api
 
 ##################
@@ -17,12 +18,18 @@ API_PATH=$repertoire/api
 
 cd $EXTRACT_PATH
 
+mkdir -p data
+
 # Build des images
 docker build -t ecobalyse-extract .
 
 ##################
 ###   Spark    ###
 ##################
+
+cd $REQUIREMENTS_PATH
+
+mkdir -p mlflow/data/artifacts
 
 cd $SPARK_PATH
 
