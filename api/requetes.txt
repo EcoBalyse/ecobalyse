@@ -1,0 +1,14 @@
+# Vérifier que l'API est fonctionnelle
+curl -X GET -i http://localhost:8000/
+
+# Affichage de la liste "poducts"
+curl -X GET -i "http://localhost:8000/product" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+
+# Affichage des produits "jean"
+curl -X GET -i "http://localhost:8000/product/jean" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+
+# Affichage des produits "jean" fabriqués en Chine (CN)
+curl -X GET -i "http://localhost:8000/product/jean/CN" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+
+# Ajout d'un produit
+curl -X POST "http://localhost:8000/product" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H "accept: application/json" -H "content-type: application/json" -d '{"mass":0.17,"materials":[{"id":"ei-coton","share":1,"country":"FR"}],"product":"tshirt","countrySpinning":"FR","countryFabric":"FR","countryDyeing":"FR","countryMaking":"FR","fabricProcess":"knitting-mix"}'

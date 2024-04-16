@@ -1,0 +1,66 @@
+version: "2.4"
+services:
+  Extraction:
+    image: ecobalyse-extract
+    networks:
+      vpcbr:
+        ipv4_address: 10.6.0.2
+
+  mlflow:
+    container_name: mlflow
+    image: ghcr.io/mlflow/mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./requirements/mlflow/data:/mlflow
+    networks:
+      vpcbr:
+        ipv4_address: 10.6.0.6
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
+
+  Spark:
+    image: ecobalyse-spark
+    depends_on:
+      - mlflow
+    networks:
+      vpcbr:
+        ipv4_address: 10.6.0.3
+
+  redis:
+    container_name: redis
+    image: redis:7.2.0
+    networks:
+      vpcbr:
+        ipv4_address: 10.6.0.4
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./requirements/redis/data:/data
+      - ./requirements/redis/conf:/etc/redis_conf
+      - ./requirements/redis/modules:/lib/redis_modules
+    command: [ "redis-server", "/etc/redis_conf/redis_7.2.conf" ]
+    privileged: true
+
+  API:
+    image: ecobalyse-api
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: exit 0
+      interval: 5s
+      timeout: 5s
+      retries: 1
+      start_period: 5s
+    depends_on:
+      - redis
+    networks:
+      vpcbr:
+        ipv4_address: 10.6.0.5
+
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.6.0.0/16
+         gateway: 10.6.0.1                   

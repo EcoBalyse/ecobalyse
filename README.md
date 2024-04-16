@@ -15,33 +15,26 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-# Installer des dépendances avec Poetry
+### For INDIVIDUAL ###
 
-1. Poetry:
+# Extraction
 
-**Installer Poetry:**
+docker build -t ecobalyse-extract .
 
-```
-python -m pip install poetry
-```
+docker run -it --rm ecobalyse-extract
 
-**Créer un projet Poetry:**
+# PySpark
 
-```
-poetry new mon-projet-python
-```
+docker build -t ecobalyse-spark .
 
-**Ajouter des dépendances au fichier pyproject.toml:**
+docker run -it --rm ecobalyse-spark
 
-```
-[tool.poetry.dependencies]
-python = "^3.11"
-pandas = "^2.2.1"
-ipykernel = "^6.29.3"
-```
+# API
 
-**Installer les dépendances:**
+docker build -t ecobalyse-api .
 
-```
-poetry install
-```
+docker run -it --rm ecobalyse-api
+
+### For ALL ###
+
+docker-compose up -d
