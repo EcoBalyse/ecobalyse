@@ -1,5 +1,5 @@
 # Autre
-data/
+data/*
 mongodb_ecobalyse/
 .env
 
