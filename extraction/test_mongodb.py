@@ -27,5 +27,17 @@ print(client.list_database_names())
 print(ecobalyse.list_collection_names())
 pprint(ecobalyse["impacts"].distinct("product_id"))
 
+# Retrieve collections list in database
+collections = ecobalyse.list_collection_names()
+
+# For each collection, print indexes
+for collection_name in collections:
+    collection = ecobalyse[collection_name]
+    indexes = collection.list_indexes()
+    
+    print(f"Indexes for collection '{collection_name}':")
+    for index in indexes:
+        print(index)
+
 # Fermer la connexion
 client.close()
