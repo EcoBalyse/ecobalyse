@@ -1,5 +1,6 @@
 # Autre
-data/*
+requirements/extraction/data/*
+requirements/extraction/json/*
 mongodb_ecobalyse/
 .env
 

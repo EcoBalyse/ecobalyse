@@ -38,3 +38,7 @@ docker run -it --rm ecobalyse-api
 ### For ALL ###
 
 docker-compose up -d
+
+# or individual :
+
+docker-compose up -d Extraction

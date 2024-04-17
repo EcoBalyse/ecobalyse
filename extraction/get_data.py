@@ -54,10 +54,10 @@ def main():
     else:
         limit = 10000
 
-    df_countries = pd.read_json('json/countries.json')
+    df_countries = pd.read_json('/json/countries.json')
 
     # Charger le fichier JSON
-    with open('json/products_details.json') as f:
+    with open('/products/products_details.json') as f:
         data = json.load(f)
 
     for textile_type, exemples in data.items():
@@ -156,7 +156,7 @@ def main():
 
                                     if count > limit:
                                         # Enregistrement du DataFrame fusionné dans un fichier JSON
-                                        output_file = f"data/{textile_type}_{count_file}.json"
+                                        output_file = f"/data/{textile_type}_{count_file}.json"
                                         concatenated_df.to_json(output_file, orient="records", indent=4)
 
                                         count = 0
@@ -169,7 +169,7 @@ def main():
                     mass += increment  # Augmente le poids par pas
 
             # Enregistrement du DataFrame fusionné dans un fichier JSON
-            output_file = f"data/{textile_type}_{count_file}.json"
+            output_file = f"/data/{textile_type}_{count_file}.json"
             concatenated_df.to_json(output_file, orient="records", indent=4)
 
             if arg_textile_type != 'all':

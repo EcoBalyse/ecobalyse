@@ -18,7 +18,7 @@ response = requests.get('https://ecobalyse.beta.gouv.fr/api/textile/countries', 
 if response.status_code == 200:
     json_data = response.json()
 
-    with open('json/countries.json', 'w') as json_file:
+    with open('/json/countries.json', 'w') as json_file:
         json.dump(json_data, json_file)
 
 ### MATERIALS ###
@@ -27,5 +27,5 @@ response = requests.get('https://ecobalyse.beta.gouv.fr/api/textile/materials', 
 if response.status_code == 200:
     json_data = response.json()
 
-    with open('json/materials.json', 'w') as json_file:
+    with open('/json/materials.json', 'w') as json_file:
         json.dump(json_data, json_file)
