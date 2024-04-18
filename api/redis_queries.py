@@ -49,3 +49,38 @@ def search_product_md5_id(md5_id: str):
         redis_client.json().set(f"product:md5:{md5_id}", '$', product_md5_id)
 
     return product_md5_id
+
+def get_stats_countries():
+    stats_countries = redis_client.json().get("stats:countries")
+    if (stats_countries == None):
+        stats_countries = get_stats_countries_mongo()
+        redis_client.json().set("stats:countries", '$', stats_countries)
+    return stats_countries
+
+def get_stats_days_of_wear():
+    stats_days_of_wear = redis_client.json().get("stats:days_of_wear")
+    if (stats_days_of_wear == None):
+        stats_days_of_wear = get_stats_days_of_wear_mongo()
+        redis_client.json().set("stats:days_of_wear", '$', stats_days_of_wear)
+    return stats_days_of_wear
+
+def get_stats_impacts():
+    stats_impacts = redis_client.json().get("stats:impacts")
+    if (stats_impacts == None):
+        stats_impacts = get_stats_impacts_mongo()
+        redis_client.json().set("stats:impacts", '$', stats_impacts)
+    return stats_impacts
+
+def get_stats_outliers():
+    stats_outliers = redis_client.json().get("stats:outliers")
+    if (stats_outliers == None):
+        stats_outliers = get_stats_outliers_mongo()
+        redis_client.json().set("stats:outliers", '$', stats_outliers)
+    return stats_outliers
+
+def get_stats_ranking():
+    stats_ranking = redis_client.json().get("stats:ranking")
+    if (stats_ranking == None):
+        stats_ranking = get_stats_ranking_mongo()
+        redis_client.json().set("stats:ranking", '$', stats_ranking)
+    return stats_ranking
