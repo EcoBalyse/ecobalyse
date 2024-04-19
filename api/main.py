@@ -1,11 +1,12 @@
 from fastapi import Security, FastAPI, HTTPException, Depends, status
 from fastapi.security.api_key import APIKeyHeader, APIKey
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
 from dotenv import load_dotenv
 import os
 import json
 import hashlib
+import requests
 
 from mongo_queries import *
 from redis_queries import *
@@ -72,8 +73,8 @@ def get_product(id: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_a
     else:
         raise HTTPException(status_code=404, detail="Document not found")
 
-@api.get("/product/{id}/top_product", name="Get Product")
-def get_product(id: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_api_key)):
+@api.get("/product/{id}/good_product", name="Get Product")
+def get_product_good(id: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_api_key)):
     """
     TODO
     """
@@ -85,7 +86,7 @@ def get_product(id: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_a
         raise HTTPException(status_code=404, detail="Document not found")
 
 @api.get("/product/{id}/bad_product", name="Get Product")
-def get_product(id: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_api_key)):
+def get_product_bad(id: str, nb_doc: int = 5, api_key_header: APIKey = Depends(get_api_key)):
     """
     TODO
     """
@@ -116,36 +117,43 @@ def create_product(product: Product, api_key_header: APIKey = Depends(get_api_ke
     """
 
     # Calcul du hash MD5 de la structure de données
-    json_str = json.dumps(product.dict(), sort_keys=True)
-    md5_id = hashlib.md5(json_str.encode()).hexdigest()
+    md5_id = None
+    try:
+        json_str = json.dumps(product.dict(), sort_keys=True)
+        md5_id = hashlib.md5(json_str.encode()).hexdigest()
+    except:
+        HTTPException(status_code=400, detail='The string does not contain a valid JSON.')
+
+    if not md5_id:
+        HTTPException(status_code=400, detail='Error in md5 id calculation.')
 
     if search_product_md5_id(md5_id) <= 0:
         headers = {
-            'accept': 'application/json',
-            'content-type': 'application/json',
-        }
+                    'accept': 'application/json',
+                    'content-type': 'application/json'
+                }
 
         response = None
 
         try:
             response = requests.post('https://ecobalyse.beta.gouv.fr/api/textile/simulator/detailed', headers=headers, json=product.dict())
-        except:
-            HTTPException(status_code=400, detail='Failed contact ecobalyse gouv api')
+        except Exception as e:
+            HTTPException(status_code=400, detail=f'Failed contact ecobalyse gouv api : {e}')
+        else:
+            if response.status_code == 200:
+                # Ajout du champ "md5_id" à la réponse JSON
+                response_json = response.json()
+                response_json['md5_id'] = md5_id
 
-        if response and response.status_code == 200:
-            # Ajout du champ "md5_id" à la réponse JSON
-            response_json = response.json()
-            response_json['md5_id'] = md5_id
+                if insert_product_mongo(response_json) == True:
+                    return {'message': f'Product added {md5_id}'}
 
-            if insert_product_mongo(response_json) == True:
-                return {'message': f'Product added {md5_id}'}
-
-        return {'message': 'Not possible'}
+            return {'message': 'Not possible'}
     else:
         return {'message': 'Product already exist'}
 
-# Route pour supprimer un nouveau produit
-@api.delete('/product', name="Add new product")
+# Route pour supprimer un produit
+@api.delete('/product', name="Delete product")
 def delete_product(md5_id: str, api_key_header: APIKey = Depends(get_api_key)):
     """
     TODO
@@ -157,3 +165,63 @@ def delete_product(md5_id: str, api_key_header: APIKey = Depends(get_api_key)):
         raise HTTPException(status_code=404, detail="Product not found")
 
     return {"message": "Product deleted successfully"}
+
+@api.get("/stats/countries")
+def get_countries_stats(api_key_header: APIKey = Depends(get_api_key)):
+    """
+    TODO
+    """
+    results = get_stats_countries()
+   
+    if results:
+        return results
+    else:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+@api.get("/stats/days_of_wear")
+def get_days_of_wear_stats(api_key_header: APIKey = Depends(get_api_key)):
+    """
+    TODO
+    """
+    results = get_stats_days_of_wear()
+   
+    if results:
+        return results
+    else:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+@api.get("/stats/impacts")
+def get_impacts_stats(api_key_header: APIKey = Depends(get_api_key)):
+    """
+    TODO
+    """
+    results = get_stats_impacts()
+   
+    if results:
+        return results
+    else:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+@api.get("/stats/outliers")
+def get_outliers_stats(api_key_header: APIKey = Depends(get_api_key)):
+    """
+    TODO
+    """
+    results = get_stats_outliers()
+   
+    if results:
+        return results
+    else:
+        raise HTTPException(status_code=404, detail="Document not found")
+    
+@api.get("/stats/ranking")
+def get_ranking_stats(api_key_header: APIKey = Depends(get_api_key)):
+    """
+    TODO
+    """
+    results = get_stats_ranking()
+   
+    if results:
+        return results
+    else:
+        raise HTTPException(status_code=404, detail="Document not found")

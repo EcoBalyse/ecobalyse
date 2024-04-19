@@ -18,8 +18,6 @@ API_PATH=$repertoire/api
 
 cd $EXTRACT_PATH
 
-mkdir -p data
-
 # Build des images
 docker build -t ecobalyse-extract .
 
@@ -29,6 +27,8 @@ docker build -t ecobalyse-extract .
 
 cd $REQUIREMENTS_PATH
 
+mkdir -p extraction/json
+mkdir -p extraction/data
 mkdir -p mlflow/data/artifacts
 
 cd $SPARK_PATH

@@ -7,8 +7,29 @@ curl -X GET -i "http://localhost:8000/product" -H 'access_token: OK0hYzIpUceSuza
 # Affichage des produits "jean"
 curl -X GET -i "http://localhost:8000/product/jean" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
 
-# Affichage des produits "jean" fabriqués en Chine (CN)
-curl -X GET -i "http://localhost:8000/product/jean/CN" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+# Affichage des produits "chemise" fabriqués en Chine (CN)
+curl -X GET -i "http://localhost:8000/product/chemise/CN" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+
+# Affichage Good product "manteau"
+curl -X GET -i "http://localhost:8000/product/manteau/good_product" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+
+# Affichage Bad product "tshirt"
+curl -X GET -i "http://localhost:8000/product/tshirt/bad_product" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+
+# Stats Spark
+curl -X GET -i "http://localhost:8000/stats/countries" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+curl -X GET -i "http://localhost:8000/stats/days_of_wear" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+curl -X GET -i "http://localhost:8000/stats/impacts" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+curl -X GET -i "http://localhost:8000/stats/outliers" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
+curl -X GET -i "http://localhost:8000/stats/ranking" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
 
 # Ajout d'un produit
-curl -X POST "http://localhost:8000/product" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H "accept: application/json" -H "content-type: application/json" -d '{"mass":0.17,"materials":[{"id":"ei-coton","share":1,"country":"FR"}],"product":"tshirt","countrySpinning":"FR","countryFabric":"FR","countryDyeing":"FR","countryMaking":"FR","fabricProcess":"knitting-mix"}'
+curl -X POST "http://localhost:8000/product" \
+ -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX'\
+ -H "content-type: application/json" \
+ -d '{"mass": 0.17, "materials": [{"id": "ei-coton", "share": 1, "country": "FR"}], "product": "tshirt", "countrySpinning": "FR", "countryFabric": "FR", "countryDyeing": "FR", "countryMaking": "FR", "fabricProcess": "knitting-mix"}'
+
+# Suppression d'un produit
+curl -X DELETE "http://localhost:8000/product?md5_id=15a853d8fc6bee14a946559190111f51" \
+     -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' \
+     -H "content-type: application/json"

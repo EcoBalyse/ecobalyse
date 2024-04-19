@@ -80,3 +80,39 @@ def insert_product_mongo(product):
 
 def delete_product_mongo(md5_id: str):
     return ecobalyse["impacts"].delete_one({"md5_id": md5_id})
+
+
+def get_stats_countries_mongo():
+    result_cursor = ecobalyse['stats_countries'].find({}, {'_id': 0})
+
+    results = [doc for doc in result_cursor]
+
+    return results
+
+def get_stats_days_of_wear_mongo():
+    result_cursor = ecobalyse['stats_days_of_wear'].find({}, {'_id': 0})
+
+    results = [doc for doc in result_cursor]
+
+    return results
+
+def get_stats_impacts_mongo():
+    result_cursor = ecobalyse['stats_impacts'].find({}, {'_id': 0})
+
+    results = [doc for doc in result_cursor]
+
+    return results
+
+def get_stats_outliers_mongo():
+    result_cursor = ecobalyse['stats_outliers'].find({}, {'_id': 0}).limit(200)
+
+    results = [doc for doc in result_cursor]
+
+    return results
+
+def get_stats_ranking_mongo():
+    result_cursor = ecobalyse['stats_ranking'].find({}, {'_id': 0})
+
+    results = [doc for doc in result_cursor]
+
+    return results

@@ -1,10 +1,16 @@
 version: "2.4"
 services:
   Extraction:
+    container_name: ecobalyse-extract
     image: ecobalyse-extract
     networks:
       vpcbr:
         ipv4_address: 10.6.0.2
+    volumes:
+      - ./requirements/extraction/data:/data
+      - ./requirements/extraction/json:/json
+      - ./requirements/extraction/products:/products
+    command: python3 /extraction/get_json.py
 
   mlflow:
     container_name: mlflow
@@ -19,6 +25,7 @@ services:
     command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
 
   Spark:
+    container_name: ecobalyse-spark
     image: ecobalyse-spark
     depends_on:
       - mlflow
@@ -42,6 +49,7 @@ services:
     privileged: true
 
   API:
+    container_name: ecobalyse-api
     image: ecobalyse-api
     ports:
       - "8000:8000"
