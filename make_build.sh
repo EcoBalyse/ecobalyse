@@ -11,6 +11,7 @@ EXTRACT_PATH=$repertoire/extraction
 SPARK_PATH=$repertoire/spark
 REQUIREMENTS_PATH=$repertoire/requirements
 API_PATH=$repertoire/api
+AIRFLOW_PATH=$repertoire/airflow
 
 ##################
 ### Extraction ###
@@ -51,3 +52,17 @@ cd $API_PATH
 
 # Build des images
 docker build -t ecobalyse-api .
+
+######################
+###    AIRFLOW     ###
+######################
+
+cd $AIRFLOW_PATH
+
+mkdir -p dags logs plugins
+
+cd $repertoire
+
+echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env
+
+docker-compose up airflow-init
