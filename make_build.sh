@@ -12,6 +12,7 @@ SPARK_PATH=$repertoire/spark
 REQUIREMENTS_PATH=$repertoire/requirements
 API_PATH=$repertoire/api
 AIRFLOW_PATH=$repertoire/airflow
+ADD_PRODUCT_PATH=$repertoire/add_product
 
 ##################
 ### Extraction ###
@@ -21,6 +22,15 @@ cd $EXTRACT_PATH
 
 # Build des images
 docker build -t ecobalyse-extract .
+
+###################
+### Add Product ###
+###################
+
+cd $ADD_PRODUCT_PATH
+
+# Build des images
+docker build -t ecobalyse-add .
 
 ##################
 ###   Spark    ###
@@ -63,6 +73,11 @@ mkdir -p dags logs plugins
 
 cd $repertoire
 
-echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env
+airflow_uid="AIRFLOW_UID=$(id -u)"
+airflow_gid="AIRFLOW_GID=0"
+
+if ! grep -q "^$airflow_uid" ./requirements/.env || ! grep -q "^$airflow_gid" ./requirements/.env; then
+    echo -e "\n\n# Airflow Config\n$airflow_uid\n$airflow_gid" >> .env
+fi
 
 docker-compose up airflow-init

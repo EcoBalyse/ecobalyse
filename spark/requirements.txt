@@ -1,5 +1,4 @@
 pandas
 pymongo
-python-dotenv
 pyspark
 requests

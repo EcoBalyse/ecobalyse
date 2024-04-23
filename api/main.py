@@ -1,8 +1,7 @@
 from fastapi import Security, FastAPI, HTTPException, Depends, status
 from fastapi.security.api_key import APIKeyHeader, APIKey
 from pydantic import BaseModel
-from typing import List
-from dotenv import load_dotenv
+from typing import Optional, List
 import os
 import json
 import hashlib
@@ -11,10 +10,8 @@ import requests
 from mongo_queries import *
 from redis_queries import *
 
-load_dotenv()
-
-API_KEY = os.getenv('API_KEY')
-API_KEY_NAME = os.getenv('API_KEY_NAME')
+API_KEY = os.environ.get('API_KEY')
+API_KEY_NAME = os.environ.get('API_KEY_NAME')
 
 api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
 
@@ -27,7 +24,7 @@ api = FastAPI(
 class Material(BaseModel):
     id: str
     share: float
-    country: str
+    country: Optional[str] = None
 
 class Product(BaseModel):
     mass: float

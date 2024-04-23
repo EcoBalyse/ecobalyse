@@ -3,7 +3,7 @@ from mongo_queries import *
 
 redis_client = redis.Redis(
     host="api-redis",
-    port=6379,
+    port=6380,
     health_check_interval=30,
     # needed to decode redis response to utf-8 because redis returns bytes objects
     charset="utf-8",

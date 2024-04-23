@@ -1,0 +1,211 @@
+[
+    {
+        "mass": 0.2,
+        "materials": [
+            {
+                "id": "ei-coton-organic",
+                "share": 0.7
+            },
+            {
+                "id": "ei-lin",
+                "share": 0.3
+            }
+        ],
+        "product": "chemise",
+        "countrySpinning": "FR",
+        "countryFabric": "FR" ,
+        "countryDyeing": "FR" ,
+        "countryMaking": "FR" ,
+        "fabricProcess": "weaving"
+    },
+    {
+        "mass": 0.3,
+        "materials": [
+            {
+                "id": "ei-coton-organic",
+                "share": 0.7
+            },
+            {
+                "id": "ei-lin",
+                "share": 0.3
+            }
+        ],
+        "product": "chemise",
+        "countrySpinning": "FR",
+        "countryFabric": "FR" ,
+        "countryDyeing": "FR" ,
+        "countryMaking": "FR" ,
+        "fabricProcess": "weaving"
+    },
+    {
+        "mass": 0.4,
+        "materials": [
+            {
+                "id": "ei-coton-organic",
+                "share": 0.7
+            },
+            {
+                "id": "ei-lin",
+                "share": 0.3
+            }
+        ],
+        "product": "chemise",
+        "countrySpinning": "CN",
+        "countryFabric": "CN" ,
+        "countryDyeing": "CN" ,
+        "countryMaking": "CN" ,
+        "fabricProcess": "weaving"
+    },
+    {
+        "mass": 0.15,
+        "materials": [
+            {
+                "id": "coton-rdp",
+                "share": 0.5
+            },
+            {
+                "id": "ei-pet",
+                "share": 0.5
+            }
+        ],
+        "product": "tshirt",
+        "countrySpinning": "CN",
+        "countryFabric": "CN" ,
+        "countryDyeing": "CN" ,
+        "countryMaking": "CN" ,
+        "fabricProcess": "knitting-mix"
+    },
+    {
+        "mass": 0.2,
+        "materials": [
+            {
+                "id": "coton-rdp",
+                "share": 0.5
+            },
+            {
+                "id": "ei-pet",
+                "share": 0.5
+            }
+        ],
+        "product": "tshirt",
+        "countrySpinning": "FR",
+        "countryFabric": "FR" ,
+        "countryDyeing": "FR" ,
+        "countryMaking": "FR" ,
+        "fabricProcess": "knitting-mix"
+    },
+    {
+        "mass": 0.5,
+        "materials": [
+            {
+                "id": "ei-coton",
+                "share": 0.9
+            },
+            {
+                "id": "elasthane",
+                "share": 0.1
+            }
+        ],
+        "product": "jean",
+        "countrySpinning": "CN",
+        "countryFabric": "CN" ,
+        "countryDyeing": "CN" ,
+        "countryMaking": "CN" ,
+        "fabricProcess": "weaving"
+    },
+    {
+        "mass": 0.6,
+        "materials": [
+            {
+                "id": "ei-coton",
+                "share": 0.9
+            },
+            {
+                "id": "elasthane",
+                "share": 0.1
+            }
+        ],
+        "product": "jean",
+        "countrySpinning": "CN",
+        "countryFabric": "CN" ,
+        "countryDyeing": "CN" ,
+        "countryMaking": "CN" ,
+        "fabricProcess": "weaving"
+    },
+    {
+        "mass": 0.7,
+        "materials": [
+            {
+                "id": "ei-coton",
+                "share": 0.9
+            },
+            {
+                "id": "elasthane",
+                "share": 0.1
+            }
+        ],
+        "product": "jean",
+        "countrySpinning": "CN",
+        "countryFabric": "CN" ,
+        "countryDyeing": "CN" ,
+        "countryMaking": "CN" ,
+        "fabricProcess": "weaving"
+    },
+    {
+        "mass": 0.4,
+        "materials": [
+            {
+                "id": "ei-laine-par-defaut",
+                "share": 0.75
+            },
+            {
+                "id": "ei-acrylique",
+                "share": 0.25
+            }
+        ],
+        "product": "pull",
+        "countrySpinning": "CN",
+        "countryFabric": "CN" ,
+        "countryDyeing": "CN" ,
+        "countryMaking": "CN" ,
+        "fabricProcess": "knitting-mix"
+    },
+    {
+        "mass": 0.5,
+        "materials": [
+            {
+                "id": "ei-laine-par-defaut",
+                "share": 0.75
+            },
+            {
+                "id": "ei-acrylique",
+                "share": 0.25
+            }
+        ],
+        "product": "pull",
+        "countrySpinning": "CN",
+        "countryFabric": "CN" ,
+        "countryDyeing": "CN" ,
+        "countryMaking": "CN" ,
+        "fabricProcess": "knitting-mix"
+    },
+    {
+        "mass": 0.6,
+        "materials": [
+            {
+                "id": "ei-laine-par-defaut",
+                "share": 0.75
+            },
+            {
+                "id": "ei-acrylique",
+                "share": 0.25
+            }
+        ],
+        "product": "pull",
+        "countrySpinning": "CN",
+        "countryFabric": "CN" ,
+        "countryDyeing": "CN" ,
+        "countryMaking": "CN" ,
+        "fabricProcess": "knitting-mix"
+    }
+]
