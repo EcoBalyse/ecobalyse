@@ -10,5 +10,8 @@ COPY . /app
 # Installation des dépendances
 RUN pip install -r requirements.txt
 
+# Créer les répertoires nécessaires
+RUN mkdir -p /json
+
 # Définir la commande à exécuter lorsque le conteneur démarre
 CMD [ "bash" ]

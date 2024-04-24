@@ -1,6 +1,7 @@
 
 from pymongo import MongoClient
 import os
+import requests
 
 # Connexion à MongoDBAtlas
 uri = f"mongodb+srv://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"

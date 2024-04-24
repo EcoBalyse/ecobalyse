@@ -16,13 +16,20 @@ x-airflow-common: &airflow-common
     AIRFLOW__SMTP__SMTP_USER: "de.airflow@gmail.com"
     AIRFLOW__SMTP__SMTP_PASSWORD: "cfsrvkongsobheta"
     AIRFLOW__SMTP__SMTP_MAIL_FROM: "de.airflow@gmail.com"
+    DB_USER: ${DB_USER}
+    DB_PASSWORD: ${DB_PASSWORD}
+    DB_CLUSTER: ${DB_CLUSTER}
+    API_URL: ${API_URL}
+    API_KEY: ${API_KEY}
+    API_KEY_NAME: ${API_KEY_NAME}
+    PROJECT_PATH: ${PROJECT_PATH}
 
-    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- pymongo}
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- apache-airflow-providers-docker pymongo}
   volumes:
     - ./airflow/dags:/opt/airflow/dags
     - ./airflow/logs:/opt/airflow/logs
     - ./airflow/plugins:/opt/airflow/plugins
-    - ./requirements:/opt/requirements
+    - /var/run/docker.sock:/var/run/docker.sock
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
   depends_on:
     redis:
@@ -35,7 +42,7 @@ services:
   #   container_name: ecobalyse-extract
   #   image: ecobalyse-extract
   #   env_file:
-  #     - ./requirements/.env
+  #     - .env
   #   networks:
   #     - vpcbr
   #   volumes:
@@ -48,7 +55,7 @@ services:
   #   container_name: ecobalyse-add
   #   image: ecobalyse-add
   #   env_file:
-  #     - ./requirements/.env
+  #     - .env
   #   depends_on:
   #     - api
   #   networks:
@@ -72,7 +79,7 @@ services:
   #   container_name: ecobalyse-spark
   #   image: ecobalyse-spark
   #   env_file:
-  #     - ./requirements/.env
+  #     - .env
   #   depends_on:
   #     - mlflow
   #   networks:
@@ -102,7 +109,7 @@ services:
     container_name: ecobalyse-api
     image: ecobalyse-api
     env_file:
-      - ./requirements/.env
+      - .env
     ports:
       - "8000:8000"
     healthcheck:
@@ -133,6 +140,8 @@ services:
       interval: 5s
       retries: 5
     restart: always
+    networks:
+      - vpcbr
 
   redis:
     image: redis:latest
@@ -144,6 +153,18 @@ services:
       timeout: 30s
       retries: 50
     restart: always
+    networks:
+      - vpcbr
+
+  docker-proxy:
+    image: bobrik/socat
+    command: "TCP4-LISTEN:2375,fork,reuseaddr UNIX-CONNECT:/var/run/docker.sock"
+    ports:
+      - "2376:2375"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - vpcbr
 
   airflow-webserver:
     <<: *airflow-common
@@ -156,6 +177,8 @@ services:
       timeout: 10s
       retries: 5
     restart: always
+    networks:
+      - vpcbr
 
   airflow-scheduler:
     <<: *airflow-common
@@ -170,6 +193,8 @@ services:
       timeout: 10s
       retries: 5
     restart: always
+    networks:
+      - vpcbr
 
   airflow-worker:
     <<: *airflow-common
@@ -182,6 +207,8 @@ services:
       timeout: 10s
       retries: 5
     restart: always
+    networks:
+      - vpcbr
 
   airflow-init:
     <<: *airflow-common
@@ -192,6 +219,8 @@ services:
       _AIRFLOW_WWW_USER_CREATE: "true"
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+    networks:
+      - vpcbr
 
   flower:
     <<: *airflow-common
@@ -204,6 +233,8 @@ services:
       timeout: 10s
       retries: 5
     restart: always
+    networks:
+      - vpcbr
 
 volumes:
   postgres-db-volume:

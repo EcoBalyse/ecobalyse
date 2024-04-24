@@ -142,6 +142,9 @@ def create_product(product: Product, api_key_header: APIKey = Depends(get_api_ke
                 response_json = response.json()
                 response_json['md5_id'] = md5_id
 
+                product_id = response_json.get("inputs", {}).get("product", {}).get("id")        
+                response_json["product_id"] = product_id
+
                 if insert_product_mongo(response_json) == True:
                     return {'message': f'Product added {md5_id}'}
 

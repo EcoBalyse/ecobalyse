@@ -13,5 +13,8 @@ RUN pip install -r requirements.txt
 # Définir le script make_all.sh comme exécutable
 RUN chmod +x /extraction/make_all.sh
 
+# Créer les répertoires nécessaires
+RUN mkdir -p /data /json /products
+
 # Définir la commande à exécuter lorsque le conteneur démarre
 CMD [ "bash" ]

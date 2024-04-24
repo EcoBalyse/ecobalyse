@@ -76,8 +76,14 @@ cd $repertoire
 airflow_uid="AIRFLOW_UID=$(id -u)"
 airflow_gid="AIRFLOW_GID=0"
 
-if ! grep -q "^$airflow_uid" ./requirements/.env || ! grep -q "^$airflow_gid" ./requirements/.env; then
+touch .env
+
+if ! grep -q "^$airflow_uid" .env || ! grep -q "^$airflow_gid" .env; then
     echo -e "\n\n# Airflow Config\n$airflow_uid\n$airflow_gid" >> .env
+fi
+
+if ! grep -q "^# Project path" .env; then
+    echo -e "\n\n# Project path\nPROJECT_PATH=$repertoire" >> .env
 fi
 
 docker-compose up airflow-init

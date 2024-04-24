@@ -1,16 +1,19 @@
 from datetime import datetime, timedelta
 from airflow import DAG
-from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.docker_operator import DockerOperator
-from airflow.operators.bash_operator import BashOperator
+from airflow.operators.python_operator import BranchPythonOperator
+from airflow.utils.trigger_rule import TriggerRule
+from docker.types import Mount
+import os
 
 default_args = {
     'owner': 'airflow',
+    'start_date': datetime(2024, 4, 24),
     'depends_on_past': False,
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'retry_delay': timedelta(minutes=2),
 }
 
 dag = DAG(
@@ -18,46 +21,52 @@ dag = DAG(
     default_args=default_args,
     description='ecobalyse project management',
     schedule_interval=timedelta(hours=1),
-    start_date=datetime(2024, 4, 23),
     catchup=False,
+    tags=['ecobalyse', 'datascientest'],
 )
 
-task_extraction_run_get_json = BashOperator(
-    task_id='extraction_run_get_json',
-    bash_command='docker run --rm --name ecobalyse-extract --env-file /opt/requirements/.env -v /opt/requirements/extraction/data:/data -v /opt/requirements/extraction/json:/json -v /opt/requirements/extraction/products:/products ecobalyse-extract python3 /extraction/get_json.py',
-    auto_remove=True,
-    dag=dag
+project_patch = os.environ.get('PROJECT_PATH')
+
+# Définition de task_1
+task_1 = DockerOperator(
+    task_id='extraction_run_add_product',
+    image='ecobalyse-add',
+    container_name='ecobalyse-add',
+    api_version='auto',
+    auto_remove='force',
+    command='python3 /app/add_product.py',
+    mounts=[
+        Mount(target='/json', source=f'{project_patch}/requirements/add_product/json', type='bind'),
+    ],
+    environment={
+        'API_URL': os.environ.get('API_URL'),
+        'API_KEY': os.environ.get('API_KEY'),
+        'API_KEY_NAME': os.environ.get('API_KEY_NAME'),
+    },
+    docker_url="tcp://docker-proxy:2375",
+    network_mode='ecobalyse_vpcbr',
+    mount_tmp_dir=False,
+    dag=dag,
 )
 
-# task_extraction_run_get_json = DockerOperator(
-#     task_id='extraction_run_get_json',
-#     image='ecobalyse-extract',
-#     api_version='auto',
-#     auto_remove=True,
-#     command='python3 /extraction/get_json.py',
-#     volumes=['/opt/requirements/extraction/data:/data',
-#              '/opt/requirements/extraction/json:/json',
-#              '/opt/requirements/extraction/products:/products'],
-#     network_mode='vpcbr',
-#     dag=dag
-# )
+# Définition de task_2
+task_2 = DockerOperator(
+    task_id='extraction_run_spark',
+    image='ecobalyse-spark',
+    container_name='ecobalyse-spark',
+    api_version='auto',
+    auto_remove='force',
+    command='spark-submit /spark/script_spk.py',
+    environment={
+        'DB_USER': os.environ.get('DB_USER'),
+        'DB_PASSWORD': os.environ.get('DB_PASSWORD'),
+        'DB_CLUSTER': os.environ.get('DB_CLUSTER'),
+    },
+    docker_url="tcp://docker-proxy:2375",
+    network_mode='ecobalyse_vpcbr',
+    mount_tmp_dir=False,
+    dag=dag,
+)
 
-# task_extraction_run_get_data = DockerOperator(
-#     task_id='extraction_run_get_data', 
-#     image='ecobalyse-extract',
-#     api_version='auto',
-#     auto_remove=True,
-#     command='python3 /extraction/get_data.py -t all',
-#     dag=dag,
-#     schedule_interval='@monthly'
-#     )
-
-# # Tâche 2 qui se lance toutes les heures
-# task2 = DummyOperator(task_id='task2', dag=dag, start_date=datetime(2024, 4, 23), schedule_interval=timedelta(hours=1))
-
-# # Tâche commune
-# common_task = DummyOperator(task_id='common_task', dag=dag)
-
-# # Liaisons
-# task1 >> common_task
-# task2 >> common_task
+# Définition des dépendances entre les tâches
+task_1 >> task_2
