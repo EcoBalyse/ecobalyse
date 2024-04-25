@@ -6,7 +6,7 @@ API_KEY = os.environ.get('API_KEY')
 API_KEY_NAME = os.environ.get('API_KEY_NAME')
 
 def main():
-    url = os.environ.get('API_URL')
+    url = f"{os.environ.get('API_URL')}/product"
     headers = {
         f"{API_KEY_NAME}": f"{API_KEY}",
         "Content-Type": "application/json"
