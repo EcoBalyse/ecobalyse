@@ -70,7 +70,8 @@ task_3 = DockerOperator(
     container_name='ecobalyse-extract',
     api_version='auto',
     auto_remove='force',
-    command='python3 /extraction/create_mongodb.py -i',
+    # command='python3 /extraction/create_mongodb.py -i',
+    command='python3 /extraction/create_mongodb.py',
     mounts=[
         Mount(target='/data', source=f'{project_patch}/requirements/extraction/data', type='bind'),
         Mount(target='/json', source=f'{project_patch}/requirements/extraction/json', type='bind'),

@@ -51,8 +51,10 @@ docker build -t ecobalyse-spark .
 ###   Redis    ###
 ##################
 
-#echo "vm.overcommit_memory = 1" | sudo tee /etc/sysctl.conf
-#sudo sysctl "vm.overcommit_memory=1"
+if ! grep -q "vm.overcommit_memory = 1" /etc/sysctl.conf; then
+    echo "vm.overcommit_memory = 1" | sudo tee /etc/sysctl.conf
+    sudo sysctl "vm.overcommit_memory=1"
+fi
 
 ##################
 ###    API     ###
