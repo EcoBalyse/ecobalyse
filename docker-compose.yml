@@ -1,18 +1,6 @@
 version: "2.4"
 services:
-  Extraction:
-    container_name: ecobalyse-extract
-    image: ecobalyse-extract
-    networks:
-      vpcbr:
-        ipv4_address: 10.6.0.2
-    volumes:
-      - ./requirements/extraction/data:/data
-      - ./requirements/extraction/json:/json
-      - ./requirements/extraction/products:/products
-    command: python3 /extraction/get_json.py
-
-  mlflow:
+   mlflow-tracker:
     container_name: mlflow
     image: ghcr.io/mlflow/mlflow
     ports:
@@ -24,46 +12,17 @@ services:
         ipv4_address: 10.6.0.6
     command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
 
-  Spark:
-    container_name: ecobalyse-spark
-    image: ecobalyse-spark
+  spark-worker:
+    build:
+      context: ./
+      dockerfile: spark/Dockerfile
     depends_on:
-      - mlflow
+      - mlflow-tracker
+    volumes:
+      - ./spark/scripts:/spark/scripts
     networks:
       vpcbr:
         ipv4_address: 10.6.0.3
-
-  redis:
-    container_name: redis
-    image: redis:7.2.0
-    networks:
-      vpcbr:
-        ipv4_address: 10.6.0.4
-    ports:
-      - '6379:6379'
-    volumes:
-      - ./requirements/redis/data:/data
-      - ./requirements/redis/conf:/etc/redis_conf
-      - ./requirements/redis/modules:/lib/redis_modules
-    command: [ "redis-server", "/etc/redis_conf/redis_7.2.conf" ]
-    privileged: true
-
-  API:
-    container_name: ecobalyse-api
-    image: ecobalyse-api
-    ports:
-      - "8000:8000"
-    healthcheck:
-      test: exit 0
-      interval: 5s
-      timeout: 5s
-      retries: 1
-      start_period: 5s
-    depends_on:
-      - redis
-    networks:
-      vpcbr:
-        ipv4_address: 10.6.0.5
 
 networks:
   vpcbr:
