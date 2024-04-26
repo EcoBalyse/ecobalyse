@@ -124,7 +124,7 @@ def create_product(product: Product, api_key_header: APIKey = Depends(get_api_ke
     if not md5_id:
         HTTPException(status_code=400, detail='Error in md5 id calculation.')
 
-    if search_product_md5_id(md5_id) <= 0:
+    if search_product_md5_id_mongo(md5_id) <= 0:
         headers = {
                     'accept': 'application/json',
                     'content-type': 'application/json'
