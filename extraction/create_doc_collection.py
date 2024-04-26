@@ -1,12 +1,10 @@
 
 from pymongo import MongoClient
-#import json
-from dotenv import load_dotenv
 import os
+import requests
 
 # Connexion à MongoDBAtlas
-load_dotenv()
-uri = f"mongodb+srv://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"
+uri = f"mongodb+srv://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"
 client = MongoClient(uri)
 ecobalyse = client["ecobalyse"]
 

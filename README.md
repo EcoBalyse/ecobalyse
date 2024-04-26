@@ -21,19 +21,29 @@ Here are some ideas to get you started:
 
 docker build -t ecobalyse-extract .
 
-docker run -it --rm ecobalyse-extract
+### OLD ###
+# docker run -it --rm ecobalyse-extract
 
 # PySpark
 
 docker build -t ecobalyse-spark .
 
-docker run -it --rm ecobalyse-spark
+### OLD ###
+# docker run -it --rm ecobalyse-spark
 
 # API
 
 docker build -t ecobalyse-api .
 
-docker run -it --rm ecobalyse-api
+### OLD ###
+# docker run -it --rm ecobalyse-api
+
+# Add_product
+
+docker build -t ecobalyse-add .
+
+### OLD ###
+# docker run -it --rm ecobalyse-add
 
 ### For ALL ###
 

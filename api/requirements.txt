@@ -2,6 +2,5 @@ fastapi
 uvicorn
 pydantic
 pymongo
-python-dotenv
 redis
 requests

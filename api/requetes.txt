@@ -1,6 +1,9 @@
 # Vérifier que l'API est fonctionnelle
 curl -X GET -i http://localhost:8000/
 
+# Vider cache Redis
+curl -X GET -i http://localhost:8000/cache/clear
+
 # Affichage de la liste "poducts"
 curl -X GET -i "http://localhost:8000/product" -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' -H 'Content-Type: application/json'
 

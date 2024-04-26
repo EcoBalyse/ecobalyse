@@ -1,11 +1,9 @@
 from pymongo import MongoClient
-from dotenv import load_dotenv
 import os
 
 class Mongo:
     def __init__(self):
-        load_dotenv()
-        self.uri = f"mongodb+srv://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"
+        self.uri = f"mongodb+srv://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"
         self.db_name = 'ecobalyse'  
         self.client = MongoClient(self.uri)
         self.db = self.client[self.db_name]

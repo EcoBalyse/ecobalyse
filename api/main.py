@@ -1,8 +1,7 @@
 from fastapi import Security, FastAPI, HTTPException, Depends, status
 from fastapi.security.api_key import APIKeyHeader, APIKey
 from pydantic import BaseModel
-from typing import List
-from dotenv import load_dotenv
+from typing import Optional, List
 import os
 import json
 import hashlib
@@ -11,10 +10,8 @@ import requests
 from mongo_queries import *
 from redis_queries import *
 
-load_dotenv()
-
-API_KEY = os.getenv('API_KEY')
-API_KEY_NAME = os.getenv('API_KEY_NAME')
+API_KEY = os.environ.get('API_KEY')
+API_KEY_NAME = os.environ.get('API_KEY_NAME')
 
 api_key_header = APIKeyHeader(name=API_KEY_NAME, auto_error=False)
 
@@ -27,7 +24,7 @@ api = FastAPI(
 class Material(BaseModel):
     id: str
     share: float
-    country: str
+    country: Optional[str] = None
 
 class Product(BaseModel):
     mass: float
@@ -53,6 +50,17 @@ def check_api():
     """Check health API
     """
     return {'message': 'API is working'}
+
+@api.get('/cache/clear', name="Clear Redis cache")
+def check_api():
+    """Clear Redis cache
+    """
+    try:
+        clear_cache()
+    except:
+        raise HTTPException(status_code=404, detail="Error clear cache")
+
+    return {'message': 'Redis cache cleared'}
 
 @api.get("/product", name="Get Product ID list")
 def get_product(api_key_header: APIKey = Depends(get_api_key)):
@@ -127,7 +135,7 @@ def create_product(product: Product, api_key_header: APIKey = Depends(get_api_ke
     if not md5_id:
         HTTPException(status_code=400, detail='Error in md5 id calculation.')
 
-    if search_product_md5_id(md5_id) <= 0:
+    if search_product_md5_id_mongo(md5_id) <= 0:
         headers = {
                     'accept': 'application/json',
                     'content-type': 'application/json'
@@ -144,6 +152,9 @@ def create_product(product: Product, api_key_header: APIKey = Depends(get_api_ke
                 # Ajout du champ "md5_id" à la réponse JSON
                 response_json = response.json()
                 response_json['md5_id'] = md5_id
+
+                product_id = response_json.get("inputs", {}).get("product", {}).get("id")        
+                response_json["product_id"] = product_id
 
                 if insert_product_mongo(response_json) == True:
                     return {'message': f'Product added {md5_id}'}

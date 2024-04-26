@@ -3,6 +3,8 @@ requirements/extraction/data/*
 requirements/extraction/json/*
 mongodb_ecobalyse/
 .env
+airflow/dags/__py_cache__
+airflow/logs/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

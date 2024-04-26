@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 from pyspark.sql import SparkSession
 import os
 from mongo_module import Mongo
@@ -9,10 +8,8 @@ from pyspark.sql.functions import count
 from pyspark.sql.functions import lit
 
 
-load_dotenv()
-
 # Create uri
-uri = f"mongodb+srv://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"
+uri = f"mongodb+srv://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"
 
 # Create Spark
 spark = SparkSession.builder \

@@ -2,13 +2,16 @@ import redis
 from mongo_queries import *
 
 redis_client = redis.Redis(
-    host="redis",
-    port=6379,
+    host="api-redis",
+    port=6380,
     health_check_interval=30,
     # needed to decode redis response to utf-8 because redis returns bytes objects
     charset="utf-8",
     decode_responses=True
 )
+
+def clear_cache():
+    redis_client.flushall()
 
 def get_product_id():
     product_id = redis_client.json().get("product:id")
