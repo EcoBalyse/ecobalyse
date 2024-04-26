@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.docker_operator import DockerOperator
-from airflow.operators.python_operator import BranchPythonOperator
-from airflow.utils.trigger_rule import TriggerRule
+from airflow.operators.bash_operator import BashOperator
 from docker.types import Mount
 import os
 
@@ -50,7 +49,14 @@ task_1 = DockerOperator(
 )
 
 # Définition de task_2
-task_2 = DockerOperator(
+task_2 = BashOperator(
+    task_id='clear_cache',
+    bash_command='curl -X GET -i http://api:8000/cache/clear',
+    dag=dag,
+)
+
+# Définition de task_3
+task_3 = DockerOperator(
     task_id='extraction_run_spark',
     image='ecobalyse-spark',
     container_name='ecobalyse-spark',
@@ -68,8 +74,8 @@ task_2 = DockerOperator(
     dag=dag,
 )
 
-# Définition de task_3
-task_3 = DockerOperator(
+# Définition de task_4
+task_4 = DockerOperator(
     task_id='extraction_run_train_model',
     image='ecobalyse-spark',
     container_name='ecobalyse-spark',
@@ -88,4 +94,4 @@ task_3 = DockerOperator(
 )
 
 # Définition des dépendances entre les tâches
-task_1 >> task_2 >> task_3
+task_1 >> task_2 >> task_3 >> task_4

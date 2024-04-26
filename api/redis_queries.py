@@ -10,6 +10,9 @@ redis_client = redis.Redis(
     decode_responses=True
 )
 
+def clear_cache():
+    redis_client.flushall()
+
 def get_product_id():
     product_id = redis_client.json().get("product:id")
     if (product_id == None):

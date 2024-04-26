@@ -1,8 +1,7 @@
 from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.docker_operator import DockerOperator
-from airflow.operators.python_operator import BranchPythonOperator
-from airflow.utils.trigger_rule import TriggerRule
+from airflow.operators.bash_operator import BashOperator
 from docker.types import Mount
 import os
 
@@ -51,7 +50,7 @@ task_2 = DockerOperator(
     container_name='ecobalyse-extract',
     api_version='auto',
     auto_remove='force',
-    command='python3 /extraction/get_data.py -t all',
+    command='python3 /extraction/get_data.py -t chemise',
     mounts=[
         Mount(target='/data', source=f'{project_patch}/requirements/extraction/data', type='bind'),
         Mount(target='/json', source=f'{project_patch}/requirements/extraction/json', type='bind'),
@@ -107,5 +106,12 @@ task_4 = DockerOperator(
     dag=dag,
 )
 
+# Définition de task_5
+task_5 = BashOperator(
+    task_id='clear_cache',
+    bash_command='curl -X GET -i http://api:8000/cache/clear',
+    dag=dag,
+)
+
 # Définition des dépendances entre les tâches
-task_1 >> task_2 >> task_3 >> task_4
+task_1 >> task_2 >> task_3 >> task_4 >> task_5

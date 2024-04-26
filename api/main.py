@@ -51,6 +51,17 @@ def check_api():
     """
     return {'message': 'API is working'}
 
+@api.get('/cache/clear', name="Clear Redis cache")
+def check_api():
+    """Clear Redis cache
+    """
+    try:
+        clear_cache()
+    except:
+        raise HTTPException(status_code=404, detail="Error clear cache")
+
+    return {'message': 'Redis cache cleared'}
+
 @api.get("/product", name="Get Product ID list")
 def get_product(api_key_header: APIKey = Depends(get_api_key)):
     """
