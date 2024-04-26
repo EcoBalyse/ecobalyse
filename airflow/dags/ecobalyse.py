@@ -28,7 +28,7 @@ project_patch = os.environ.get('PROJECT_PATH')
 
 # Définition de task_1
 task_1 = DockerOperator(
-    task_id='extraction_run_add_product',
+    task_id='run_add_product',
     image='ecobalyse-add',
     container_name='ecobalyse-add',
     api_version='auto',
@@ -57,7 +57,7 @@ task_2 = BashOperator(
 
 # Définition de task_3
 task_3 = DockerOperator(
-    task_id='extraction_run_spark',
+    task_id='run_spark',
     image='ecobalyse-spark',
     container_name='ecobalyse-spark',
     api_version='auto',
@@ -76,7 +76,7 @@ task_3 = DockerOperator(
 
 # Définition de task_4
 task_4 = DockerOperator(
-    task_id='extraction_run_train_model',
+    task_id='run_train_model',
     image='ecobalyse-spark',
     container_name='ecobalyse-spark',
     api_version='auto',
