@@ -12,8 +12,8 @@ default_args = {
     'depends_on_past': False,
     'email_on_failure': False,
     'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=2),
+    # 'retries': 1,
+    # 'retry_delay': timedelta(minutes=2),
 }
 
 dag = DAG(
@@ -68,5 +68,24 @@ task_2 = DockerOperator(
     dag=dag,
 )
 
+# Définition de task_3
+task_3 = DockerOperator(
+    task_id='extraction_run_train_model',
+    image='ecobalyse-spark',
+    container_name='ecobalyse-spark',
+    api_version='auto',
+    auto_remove='force',
+    command='spark-submit /spark/train_model.py',
+    environment={
+        'DB_USER': os.environ.get('DB_USER'),
+        'DB_PASSWORD': os.environ.get('DB_PASSWORD'),
+        'DB_CLUSTER': os.environ.get('DB_CLUSTER'),
+    },
+    docker_url="tcp://docker-proxy:2375",
+    network_mode='ecobalyse_vpcbr',
+    mount_tmp_dir=False,
+    dag=dag,
+)
+
 # Définition des dépendances entre les tâches
-task_1 >> task_2
+task_1 >> task_2 >> task_3
