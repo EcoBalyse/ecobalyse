@@ -4,6 +4,7 @@ import json
 import os
 import hashlib
 import argparse
+import sys
 
 def main():
     reset = False
