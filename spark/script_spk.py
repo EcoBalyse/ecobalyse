@@ -11,7 +11,7 @@ from pyspark.sql.functions import lit
 # Create uri
 uri = f"mongodb+srv://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"
 
-# Create Spark
+# Create Spark Session
 spark = SparkSession.builder \
     .appName("MongoDB Spark Connector Example") \
     .config("spark.mongodb.input.uri", uri) \
@@ -184,5 +184,5 @@ Mongo.create_collection("stats_ranking")
 write_spark_data_mongodb(stats_ranking, 'stats_ranking')
 
 
-# Fermer la session Spark
+# Close Spark Session
 spark.stop()

@@ -38,32 +38,6 @@ x-airflow-common: &airflow-common
       condition: service_healthy
 
 services:
-  # Extraction:
-  #   container_name: ecobalyse-extract
-  #   image: ecobalyse-extract
-  #   env_file:
-  #     - .env
-  #   networks:
-  #     - vpcbr
-  #   volumes:
-  #     - ./requirements/extraction/data:/data
-  #     - ./requirements/extraction/json:/json
-  #     - ./requirements/extraction/products:/products
-  #   command: python3 /extraction/get_json.py
-
-  # Add-product:
-  #   container_name: ecobalyse-add
-  #   image: ecobalyse-add
-  #   env_file:
-  #     - .env
-  #   depends_on:
-  #     - api
-  #   networks:
-  #     - vpcbr
-  #   volumes:
-  #     - ./requirements/add_product/json:/json
-  #   command: python3 /app/add_product.py
-
   mlflow:
     container_name: mlflow
     image: ghcr.io/mlflow/mlflow
@@ -74,16 +48,6 @@ services:
     networks:
       - vpcbr
     command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
-
-  # Spark:
-  #   container_name: ecobalyse-spark
-  #   image: ecobalyse-spark
-  #   env_file:
-  #     - .env
-  #   depends_on:
-  #     - mlflow
-  #   networks:
-  #     - vpcbr
 
   api-redis:
     container_name: api-redis

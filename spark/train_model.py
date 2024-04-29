@@ -81,18 +81,18 @@ struct_schema = StructType([
 dfs['impacts'] = dfs['impacts'].withColumn("impacts", col("impacts").cast(struct_schema))
 dfs = dfs['impacts']
 
-# Supprimer les colonnes _id, md5_id, etc.
+# Delete columns _id, md5_id, etc.
 dfs = dfs.drop("_id", "md5_id","transport", "complementsImpacts","durability","useNbCycles","daysOfWear", "lifeCycle")
 dfs.show(20)
 
-# Garder seulement la valeur ecs dans la colonne impacts
+# Keep only the ecs value in the impacts column
 df_vf = dfs.withColumn("impacts", col("impacts").getItem("ecs"))
 
-# Afficher le DataFrame résultant
+# Display the resulting DataFrame
 df_vf.show()
 df_vf.printSchema()
 
-# sélectionner les colonnes nécessaires et renommer le nom des colonnes
+# Select the required columns and rename the column names
 
 selected_df = df_vf.select(col("impacts").alias("ImpactScore"),
     col("product_id").alias("ProductId"),
@@ -126,38 +126,41 @@ selected_df = selected_df.drop("Price")
 selected_df.show()
 selected_df.describe().toPandas()
 
-#afficher les valeurs manquantes
+# Display missing values
 
-# Compter le nombre de valeurs manquantes dans chaque colonne
+# Count the number of missing values in each column
 
 missing_counts = selected_df.select([sum(when(col(c).isNull(), 1).otherwise(0)).alias(c) for c in selected_df.columns]) \
                              .collect()[0]
 
-# Afficher le nombre de valeurs manquantes pour chaque colonne
+# Display the number of missing values for each column
 for col_name, missing_count in zip(selected_df.columns, missing_counts):
-    print(f"Nombre de valeurs manquantes dans la colonne '{col_name}': {missing_count}")
+    print(f"Number of missing values in column '{col_name}': {missing_count}")
 
-#traitement des valeurs manquantes
+# Handling missing values
 
-# Supprimer les lignes avec des valeurs manquantes dans la colonne 'ProductId'
+# Delete rows with missing values in the 'ProductId' column
 selected_df = selected_df.na.drop(subset=["ProductId"])
-# Remplacer les valeurs manquantes dans la colonne 'MaterialId_2' par "no-material2"
+
+# Replace missing values in the 'MaterialId_2' column with “no-material2”.
 selected_df = selected_df.fillna("no-material2", subset=["MaterialId_2"])
-# Remplacer les valeurs manquantes dans la colonne 'MaterialId_2_share' par 0
+
+# Replace missing values in the 'MaterialId_2_share' column with 0
 selected_df = selected_df.fillna(0, subset=["MaterialId_2_share"])
-# Remplacer les valeurs manquantes dans la colonne 'AirTransportRatio' par la médiane
+
+# Replace missing values in the 'AirTransportRatio' column with the median
 median_air_transport_ratio = selected_df.approxQuantile("AirTransportRatio", [0.5], 0.25)[0]
 selected_df = selected_df.fillna(median_air_transport_ratio, subset=["AirTransportRatio"])
-# Afficher les 5 premières lignes pour vérifier les changements
+
+# Display the first 5 lines to check for changes
 selected_df.show(5)
-# Vérifier s'il reste des valeurs manquantes dans les colonnes sélectionnées
+
+# Check for missing values in selected columns
 selected_df.select([count(when(col(c).isNull(), c)).alias(c) for c in selected_df.columns]).show()
 
 #-------------------------------#
 
-
-
-# Création des indexeurs
+# Creating indexers
 
 CountryDyeingCodeIndexer = StringIndexer(inputCol='CountryDyeingCode', outputCol='indexedCountryDyeingCode')
 CountryFabricCodeIndexer = StringIndexer(inputCol='CountryFabricCode', outputCol='indexedCountryFabricCode')
@@ -167,7 +170,7 @@ MaterialId_1Indexer = StringIndexer(inputCol='MaterialId_1', outputCol='indexedM
 MaterialId_2Indexer = StringIndexer(inputCol='MaterialId_2', outputCol='indexedMaterialId_2')
 ProductIdIndexer = StringIndexer(inputCol='ProductId', outputCol='indexedProductId')
 
-# Combiner les traitements
+# Combining treatments
 
 all_stages = [
     CountryDyeingCodeIndexer,
@@ -179,18 +182,18 @@ all_stages = [
     ProductIdIndexer,
 ]
 
-# Création d'une Pipeline
+# Creating a Pipeline
 pipeline = Pipeline(stages=all_stages)
 
-# Indexer les variables de selected_df
+# Index selected_df variables
 dfIndexed = pipeline.fit(selected_df).transform(selected_df)
 
-# Affichage d'un extrait de hrIndexed
+# Display an extract of hrIndexed
 dfIndexed.sample(False, 0.001 , seed = 222).toPandas()
 
-# Mise en forme de la base en format svmlib #
+# Formatting the database in svmlib format #
 
-# Création d'une base de données excluant les variables non indexées
+# Create a database excluding non-indexed variables
 dfNumeric = dfIndexed.select(
     'ImpactScore',
     'indexedProductId',
@@ -205,91 +208,89 @@ dfNumeric = dfIndexed.select(
     'indexedFabricProcess',
     'AirTransportRatio')
 
-# Création d'une variable DenseVector contenant les features en passant par la structure RDD
+# Creation of a DenseVector variable containing features via the RDD structure
 dfRdd = dfNumeric.rdd.map(lambda x: (x[0], DenseVector(x[1:])))
 
-# Transformation en DataFrame et nommage des variables pour obtenir une base au format svmlib
+# DataFrame transformation and variable naming to obtain a database in svmlib format
 dfLibsvm = spark.createDataFrame(dfRdd, ['label', 'features'])
 
-# Affichage d'un extrait de hrLibsvm
+# Displaying an extract from hrLibsvm
 dfLibsvm.sample(False, .001, seed = 222).toPandas()
 dfNumeric.describe().toPandas()
 
 mlflow.autolog()
 
 with mlflow.start_run(run_name="Ecobalyse test Linear Regression"):
-    # Créer un indexeur de vecteur pour indexer les colonnes numériques dans la colonne "features"
+    # Create a vector indexer to index the numeric columns in the “features” column
     featureIndexer = VectorIndexer(inputCol="features", outputCol="indexedFeatures", maxCategories=10).fit(dfLibsvm)
-    # Créer un regressor RandomForest
+
+    # Create a RandomForest regressor
     lr = LinearRegression(featuresCol="features", labelCol="label")
 
-    # Créer le pipeline avec les étapes: featureIndexer, RandomForest
+    # Create pipeline with steps: featureIndexer, RandomForest
     pipeline_lr = Pipeline(stages=[featureIndexer] + [lr])
 
-    # Décomposition des données en deux ensembles: données d'entraînement et de test
+    # Decomposition of data into two sets: training and test data
     (train, test) = dfLibsvm.randomSplit([0.7, 0.3], seed = 222)
 
-    # Apprentissage du modèle en utilisant les données d'entraînement
+    # Model learning using training data
     model = pipeline_lr.fit(train)
 
-    # Fait des prédictions sur l'ensemble de test
+    # Makes predictions about the test set
     predictions = model.transform(test)
 
-    # Évalue les performances du modèle
+    # Evaluates model performance
     evaluator = RegressionEvaluator(labelCol="label", predictionCol="prediction", metricName="rmse")
     rmse = evaluator.evaluate(predictions)
     print("Root Mean Squared Error (RMSE) on test data = %g" % rmse)
 
-    # Calculer l'écart type de la variable cible
+    # Calculate the standard deviation of the target variable
     target_stddev = test.select(stddev("label")).collect()[0][0]
-    print("Écart type de la variable cible (target) :", target_stddev)
+    print("Standard deviation of target variable :", target_stddev)
     mlflow.spark.log_model(model, "spark-model-lr")
 
-  
-  
-
-#-------- Mise en place du Random Forest
+#-------- Random Forest setup
 
 with mlflow.start_run(run_name="Ecobalyse test Random Forest"):
-    # Création de l'estimateur Random Forest Regression
+    # Creation of the Random Forest Regression estimator
     rf = RandomForestRegressor(featuresCol="features", labelCol="label")
 
-    # Création du pipeline avec l'indexeur de caractéristiques
+    # Pipeline creation with feature indexer
     pipeline_rf = Pipeline(stages=[featureIndexer, rf])
 
-    # Entraînement du modèle
+    # Model training
     model_rf = pipeline_rf.fit(train)
 
-    # Faire des prédictions sur les données de test
+    # Make predictions on test data
     predictions_rf = model_rf.transform(test)
 
-    # Évaluation du modèle en calculant le RMSE
+    # Model evaluation by calculating RMSE
     rmse_rf = evaluator.evaluate(predictions_rf)
     print("Root Mean Squared Error (RMSE) with Random Forest Regression:", rmse_rf)
 
-    # Calcul de l'écart type de la variable cible dans les données de test
+    # Calculation of the standard deviation of the target variable in the test data
     target_stddev_rf = test.select(stddev("label")).collect()[0][0]
-    print("Écart type de la variable cible (target) :", target_stddev_rf)
+    print("Standard deviation of target variable :", target_stddev_rf)
     mlflow.spark.log_model(model, "spark-model-rf")
 
 
-#-------- Mise en place du Dummy Regressor
+#-------- Setting up the Dummy Regressor
 
 with mlflow.start_run(run_name="Ecobalyse test Dummy Regressor"):
-    # Calculer la moyenne de la variable cible dans les données de test
+    # Calculate the mean of the target variable in the test data
     mean_target = train.selectExpr("avg(label)").collect()[0][0]
-    # Créer un DataFrame avec une colonne de prédictions constantes basées sur la moyenne de la variable cible
+
+    # Create a DataFrame with a column of constant predictions based on the mean of the target variable
     predictions_dummy = test.withColumn("prediction", lit(mean_target))
 
-    # Calculer RMSE
+    # Calculate RMSE
     rmse_dummy = evaluator.evaluate(predictions_dummy)
     print("Root Mean Squared Error (RMSE) with DummyRegressor:", rmse_dummy)
 
-    # Calculer l'écart type de la variable cible dans les données de test
+    # Calculate the standard deviation of the target variable in the test data
     target_stddev = test.select(stddev("label")).collect()[0][0]
-    print("Écart type de la variable cible (target) :", target_stddev)
+    print("Standard deviation of target variable :", target_stddev)
     mlflow.spark.log_model(model, "spark-model-dr")
 
-# Arrêter la session Spark
-
+# Stop Spark session
 spark.stop()

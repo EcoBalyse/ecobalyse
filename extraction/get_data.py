@@ -2,6 +2,9 @@
 """
 Created on Wed Mar 06 21:28:47 2024.
 
+This script retrieves data from the EcoBalyse API for a given textile type and limit,
+and saves the results to JSON files.
+
 """
 
 # %%
@@ -16,13 +19,13 @@ import hashlib
 # %%
 
 def readfile(path):
-    """ read file """
+    """Read a file and return a list of lines."""
     if path != None or path != "":
         return [line.strip() for line in open(path, 'r')]
     return
 
 def ragent():
-    """random agent"""
+    """Return a random user agent string."""
     user_agents = ()
     realpath = "useragent"
     for _ in readfile(realpath):
@@ -54,13 +57,15 @@ def main():
     else:
         limit = 10000
 
+    # Load countries data
     df_countries = pd.read_json('/json/countries.json')
 
-    # Charger le fichier JSON
+    # Load product details data
     with open('/products/products_details.json') as f:
         data = json.load(f)
 
-    for textile_type, exemples in data.items():
+    # Loop through product types and examples
+    for textile_type, examples in data.items():
         if textile_type == arg_textile_type or arg_textile_type == 'all':
             if verbose:
                 print(f"Type : {textile_type}")
@@ -70,7 +75,7 @@ def main():
             count = 0
             count_file = 1
 
-            for exemple in exemples:
+            for exemple in examples:
                 tab_materials = []
                 for material, percentage in exemple['materials'].items():
                     tab_materials.append({"id": material, "share": percentage/100})
@@ -137,11 +142,11 @@ def main():
                                 print("Error ecobalyse.beta.gouv.fr:", e)
                             else:
                                 if response.status_code == 200:
-                                    # Calcul du hash MD5 de la structure de données
+                                    # Calculate the MD5 hash of the data structure
                                     json_str = json.dumps(json_data, sort_keys=True)
                                     md5_id = hashlib.md5(json_str.encode()).hexdigest()
 
-                                    # Ajout du champ "md5_id" à la réponse JSON
+                                    # Add the "md5_id" field to the response JSON
                                     response_json = response.json()
                                     response_json['md5_id'] = md5_id
 
@@ -155,7 +160,7 @@ def main():
                                     count += 1
 
                                     if count > limit:
-                                        # Enregistrement du DataFrame fusionné dans un fichier JSON
+                                        # Save the concatenated DataFrame to a JSON file
                                         output_file = f"/data/{textile_type}_{count_file}.json"
                                         concatenated_df.to_json(output_file, orient="records", indent=4)
 
@@ -166,9 +171,9 @@ def main():
                                     print("Error ecobalyse.beta.gouv.fr status_code:", response.status_code)
 
                             
-                    mass += increment  # Augmente le poids par pas
+                    mass += increment  # Increase the mass by the increment value
 
-            # Enregistrement du DataFrame fusionné dans un fichier JSON
+            # Save the concatenated DataFrame to a JSON file
             output_file = f"/data/{textile_type}_{count_file}.json"
             concatenated_df.to_json(output_file, orient="records", indent=4)
 

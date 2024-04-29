@@ -3,6 +3,9 @@ import os
 
 class Mongo:
     def __init__(self):
+        """
+        Initialize the MongoDB connection and database.
+        """
         self.uri = f"mongodb+srv://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"
         self.db_name = 'ecobalyse'  
         self.client = MongoClient(self.uri)
@@ -10,16 +13,25 @@ class Mongo:
 
     @staticmethod
     def create_collection(collection_name):
+        """
+        Create a new collection in the database.
+        :param collection_name: The name of the collection to create.
+        """
         mongo_instance = Mongo()
         db = mongo_instance.db
         if collection_name not in db.list_collection_names():
             db.create_collection(collection_name)
-            print(f"La collection {collection_name} a été créée dans la base de données {mongo_instance.db_name}.")
+            print(f"The collection {collection_name} was created in the database {mongo_instance.db_name}.")
         else:
             db[collection_name].delete_many({})  
 
     @staticmethod
     def insert_data_into_collection(collection_name, data):
+        """
+        Insert data into a collection in the database.
+        :param collection_name: The name of the collection to insert data into.
+        :param data: The data to insert.
+        """
         mongo_instance = Mongo()
         db = mongo_instance.db
         collection = db[collection_name]
