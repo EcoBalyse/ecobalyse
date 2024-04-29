@@ -59,7 +59,7 @@ def main():
         # Create collections
         if collection_name not in ecobalyse.list_collection_names():
             ecobalyse.create_collection(collection_name)
-            print(f"La collection {collection_name} a été créée.")
+            print(f"The collection {collection_name} has been created.")
 
             if collection_name == "impacts":
                 reset = True
@@ -124,7 +124,7 @@ def main():
                     # Insert impact data into created collections
                     ecobalyse[collection_name].insert_many(json_data, ordered = False)
         
-            print(f"Données insérées dans la collection {collection_name}.")
+            print(f"Data inserted into the collection {collection_name}.")
 
     # Fermer la connexion
     client.close()

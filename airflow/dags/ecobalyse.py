@@ -26,7 +26,7 @@ dag = DAG(
 
 project_patch = os.environ.get('PROJECT_PATH')
 
-# Définition de task_1
+# Definition of task_1: Add new products via api
 task_1 = DockerOperator(
     task_id='run_add_product',
     image='ecobalyse-add',
@@ -48,14 +48,14 @@ task_1 = DockerOperator(
     dag=dag,
 )
 
-# Définition de task_2
+# Definition of task_2: Redis cache cleanup
 task_2 = BashOperator(
     task_id='clear_cache',
     bash_command='curl -X GET -i http://api:8000/cache/clear',
     dag=dag,
 )
 
-# Définition de task_3
+# Definition of task_3: processing data using pySpark and updating mongodb collections
 task_3 = DockerOperator(
     task_id='run_spark',
     image='ecobalyse-spark',
@@ -74,7 +74,7 @@ task_3 = DockerOperator(
     dag=dag,
 )
 
-# Définition de task_4
+# Definition of task_4: Data cleansing and normalization. Testing of different Machine Learning models (pySpark + MLFlow) and storage of MLFlow data.
 task_4 = DockerOperator(
     task_id='run_train_model',
     image='ecobalyse-spark',
@@ -93,5 +93,5 @@ task_4 = DockerOperator(
     dag=dag,
 )
 
-# Définition des dépendances entre les tâches
+# Defining dependencies between tasks
 task_1 >> task_2 >> task_3 >> task_4

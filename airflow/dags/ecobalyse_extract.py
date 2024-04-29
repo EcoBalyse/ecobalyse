@@ -26,7 +26,7 @@ dag = DAG(
 
 project_patch = os.environ.get('PROJECT_PATH')
 
-# Définition de task_1
+# Definition of task_1: json extraction from the ecobalyse api
 task_1 = DockerOperator(
     task_id='extraction_run_get_json',
     image='ecobalyse-extract',
@@ -43,7 +43,7 @@ task_1 = DockerOperator(
     dag=dag,
 )
 
-# Définition de task_2
+# Definition of task_2: extracting data from the ecobalyse api
 task_2 = DockerOperator(
     task_id='extraction_run_get_data',
     image='ecobalyse-extract',
@@ -62,7 +62,7 @@ task_2 = DockerOperator(
     dag=dag,
 )
 
-# Définition de task_3
+# Definition of task_3: creation of mongodb collections and data import
 task_3 = DockerOperator(
     task_id='extraction_run_create_mongodb',
     image='ecobalyse-extract',
@@ -87,7 +87,7 @@ task_3 = DockerOperator(
     dag=dag,
 )
 
-# Définition de task_4
+# Definition of task_4: creation of the mongodb collection for documentation on impact criteria
 task_4 = DockerOperator(
     task_id='extraction_run_doc_collection',
     image='ecobalyse-extract',
@@ -106,12 +106,12 @@ task_4 = DockerOperator(
     dag=dag,
 )
 
-# Définition de task_5
+# Definition of task_5: Redis cache cleanup
 task_5 = BashOperator(
     task_id='clear_cache',
     bash_command='curl -X GET -i http://api:8000/cache/clear',
     dag=dag,
 )
 
-# Définition des dépendances entre les tâches
+# Defining dependencies between tasks
 task_1 >> task_2 >> task_3 >> task_4 >> task_5
