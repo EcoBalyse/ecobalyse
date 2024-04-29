@@ -39,7 +39,7 @@ x-airflow-common: &airflow-common
 
 services:
   mlflow:
-    container_name: mlflow
+    container_name: ecobalyse-mlflow
     image: ghcr.io/mlflow/mlflow
     ports:
       - "5000:5000"
@@ -50,7 +50,7 @@ services:
     command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
 
   api-redis:
-    container_name: api-redis
+    container_name: ecobalyse-api-redis
     image: redis:7.2.0
     networks:
       - vpcbr
@@ -92,6 +92,7 @@ services:
   # WARNING: This configuration is for local development. Do not use it in a production deployment.
   #
   postgres:
+    container_name: ecobalyse-airflow-postgres
     image: postgres:13
     environment:
       POSTGRES_USER: airflow
@@ -108,6 +109,7 @@ services:
       - vpcbr
 
   redis:
+    container_name: ecobalyse-airflow-redis
     image: redis:latest
     ports:
       - 6379:6379
@@ -121,6 +123,7 @@ services:
       - vpcbr
 
   docker-proxy:
+    container_name: ecobalyse-airflow-docker-proxy
     image: bobrik/socat
     command: "TCP4-LISTEN:2375,fork,reuseaddr UNIX-CONNECT:/var/run/docker.sock"
     ports:
@@ -132,6 +135,7 @@ services:
 
   airflow-webserver:
     <<: *airflow-common
+    container_name: ecobalyse-airflow-webserver
     command: webserver
     ports:
       - 8080:8080
@@ -146,6 +150,7 @@ services:
 
   airflow-scheduler:
     <<: *airflow-common
+    container_name: ecobalyse-airflow-scheduler
     command: scheduler
     healthcheck:
       test:
@@ -162,6 +167,7 @@ services:
 
   airflow-worker:
     <<: *airflow-common
+    container_name: ecobalyse-airflow-worker
     command: celery worker
     healthcheck:
       test:
@@ -176,6 +182,7 @@ services:
 
   airflow-init:
     <<: *airflow-common
+    container_name: ecobalyse-airflow-init
     command: version
     environment:
       <<: *airflow-common-env
@@ -188,6 +195,7 @@ services:
 
   flower:
     <<: *airflow-common
+    container_name: ecobalyse-airflow-flower
     command: celery flower
     ports:
       - 5555:5555
