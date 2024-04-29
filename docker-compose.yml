@@ -67,7 +67,6 @@ services:
       - ./requirements/redis/conf:/etc/redis_conf
       - ./requirements/redis/modules:/lib/redis_modules
     command: [ "redis-server", "/etc/redis_conf/redis_7.2.conf" ]
-    privileged: true
 
   api:
     container_name: ecobalyse-api
