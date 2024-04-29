@@ -43,6 +43,10 @@ mkdir -p extraction/data
 mkdir -p mlflow/data/artifacts
 mkdir -p redis/data
 
+if [ -f "redis/modules/librejson.so" ]; then
+    chmod +x redis/modules/librejson.so
+fi
+
 cd $SPARK_PATH
 
 # Build des images
