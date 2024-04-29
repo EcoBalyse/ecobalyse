@@ -41,6 +41,7 @@ cd $REQUIREMENTS_PATH
 mkdir -p extraction/json
 mkdir -p extraction/data
 mkdir -p mlflow/data/artifacts
+mkdir -p redis/data
 
 cd $SPARK_PATH
 
