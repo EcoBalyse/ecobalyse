@@ -8,6 +8,7 @@ and saves the results to JSON files.
 """
 
 # %%
+import os
 import requests
 import sys
 import argparse
@@ -40,6 +41,7 @@ def main():
         description='EcoBalyse : get_data')
     parser.add_argument("-t", "--type", help="Textile type")
     parser.add_argument("-l", "--limit", help="Textile type limit")
+    parser.add_argument("-c", "--cut", help="Textile type cutting files")
     parser.add_argument("-v", "--verbose", help="Print informations", action="store_true")
 
     args = parser.parse_args()
@@ -56,6 +58,15 @@ def main():
         limit = int(args.limit)
     else:
         limit = 10000
+    if args.cut:
+        limit_cut = int(args.cut)
+    else:
+        limit_cut = 10000
+
+    # Cleaning up json files
+    json_files = [f for f in os.listdir('/data') if f.endswith('.json')]
+    for json_file in json_files:
+        os.remove(os.path.join('/data', json_file))
 
     # Load countries data
     df_countries = pd.read_json('/json/countries.json')
@@ -74,6 +85,7 @@ def main():
 
             count = 0
             count_file = 1
+            count_textile_type = 0
 
             for exemple in examples:
                 tab_materials = []
@@ -159,7 +171,7 @@ def main():
 
                                     count += 1
 
-                                    if count > limit:
+                                    if count > limit_cut:
                                         # Save the concatenated DataFrame to a JSON file
                                         output_file = f"/data/{textile_type}_{count_file}.json"
                                         concatenated_df.to_json(output_file, orient="records", indent=4)
@@ -172,6 +184,14 @@ def main():
 
                             
                     mass += increment  # Increase the mass by the increment value
+
+                if count_textile_type >= limit:
+                    if verbose:
+                        print(f"Add product : {count_textile_type}")
+
+                    break
+                else:
+                    count_textile_type += 1
 
             # Save the concatenated DataFrame to a JSON file
             output_file = f"/data/{textile_type}_{count_file}.json"

@@ -27,6 +27,8 @@ if response.status_code == 200:
     # Save the JSON data to a file
     with open('/json/countries.json', 'w') as json_file:
         json.dump(json_data, json_file)
+else:
+    print("Error ecobalyse.beta.gouv.fr status_code:", response.status_code)
 
 ### MATERIALS ###
 # Send a GET request to the EcoBalyse API to fetch data on materials
@@ -40,3 +42,5 @@ if response.status_code == 200:
     # Save the JSON data to a file
     with open('/json/materials.json', 'w') as json_file:
         json.dump(json_data, json_file)
+else:
+    print("Error ecobalyse.beta.gouv.fr status_code:", response.status_code)

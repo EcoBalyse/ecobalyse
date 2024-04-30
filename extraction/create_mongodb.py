@@ -129,6 +129,11 @@ def main():
     # Fermer la connexion
     client.close()
 
+    # Cleaning up json files
+    json_files = [f for f in os.listdir('/data') if f.endswith('.json')]
+    for json_file in json_files:
+        os.remove(os.path.join('/data', json_file))
+
 if __name__ == '__main__':
     try:
         main()
