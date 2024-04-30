@@ -156,7 +156,7 @@ for sub_key in sub_keys:
     for product_type in product_types:
         seuil_max = stats_impacts.filter((col("impact_type") == sub_key) & (col("product_id") == product_type)).select(f'seuil_max').rdd.flatMap(lambda x: x).collect()[0]
         seuil_min = stats_impacts.filter((col("impact_type") == sub_key) & (col("product_id") == product_type)).select(f'seuil_min').rdd.flatMap(lambda x: x).collect()[0]
-        outliers = dfs["impacts"].filter((col("product_id") == product_type) & ((col(f"impacts.{sub_key}") >= seuil_max) | (col(f"impacts.{sub_key}") <= seuil_min))).select("inputs.*").withColumn("impact_type", lit(sub_key))
+        outliers = dfs["impacts"].filter((col("product_id") == product_type) & ((col(f"impacts.{sub_key}") >= seuil_max) | (col(f"impacts.{sub_key}") <= seuil_min))).select("md5_id","inputs.*").withColumn("impact_type", lit(sub_key))
     if stats_outliers is None:
         stats_outliers = outliers
     else:
