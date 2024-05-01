@@ -3,7 +3,7 @@
 #
 #
 
-# Récupérer le chemin absolu du répertoire du script (utile pour l'utilisation via crontab)
+# Retrieve the absolute path of the script directory (useful for use via crontab)
 repertoire=$(cd "$(dirname "$0")" && pwd)
 
 # PATH
