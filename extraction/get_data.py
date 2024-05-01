@@ -8,7 +8,6 @@ and saves the results to JSON files.
 """
 
 # %%
-import os
 import requests
 import sys
 import argparse
@@ -63,11 +62,6 @@ def main():
     else:
         limit_cut = 10000
 
-    # Cleaning up json files
-    json_files = [f for f in os.listdir('/data') if f.endswith('.json')]
-    for json_file in json_files:
-        os.remove(os.path.join('/data', json_file))
-
     # Load countries data
     df_countries = pd.read_json('/json/countries.json')
 
@@ -86,6 +80,7 @@ def main():
             count = 0
             count_file = 1
             count_textile_type = 0
+            test_exit = False
 
             for exemple in examples:
                 tab_materials = []
@@ -182,16 +177,25 @@ def main():
                                 else:
                                     print("Error ecobalyse.beta.gouv.fr status_code:", response.status_code)
 
-                            
+                                count_textile_type += 1
+                                
+                                if count_textile_type >= limit:
+                                    test_exit = True
+                                    break
+
+                        if test_exit:
+                            break
+
+                    if test_exit:
+                        break
+
                     mass += increment  # Increase the mass by the increment value
 
-                if count_textile_type >= limit:
+                if test_exit:
                     if verbose:
                         print(f"Add product : {count_textile_type}")
 
                     break
-                else:
-                    count_textile_type += 1
 
             # Save the concatenated DataFrame to a JSON file
             output_file = f"/data/{textile_type}_{count_file}.json"
