@@ -41,6 +41,7 @@ cd $REQUIREMENTS_PATH
 mkdir -p extraction/json
 mkdir -p extraction/data
 mkdir -p mlflow/data/artifacts
+mkdir -p mlflow/data/mlruns
 mkdir -p redis/data
 
 if [ -f "redis/modules/librejson.so" ]; then
