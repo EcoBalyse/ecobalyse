@@ -47,7 +47,8 @@ services:
       - ./requirements/mlflow/data:/mlflow
     networks:
       - vpcbr
-    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
+    # command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri file:/mlflow --default-artifact-root /mlflow/artifacts
 
   api-redis:
     container_name: ecobalyse-api-redis
