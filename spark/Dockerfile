@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     unzip \
     openjdk-11-jdk-headless \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 # Définir les variables d'environnement pour Spark et le connecteur MongoDB
@@ -31,7 +32,8 @@ RUN echo >> ~/.bashrc \
 
 RUN wget -q "https://repo1.maven.org/maven2/org/mongodb/spark/mongo-spark-connector_2.12/${MONGO_SPARK_CONNECTOR_VERSION}/mongo-spark-connector_2.12-${MONGO_SPARK_CONNECTOR_VERSION}.jar" -P "${SPARK_HOME}/jars/" && \
     wget -q "https://repo1.maven.org/maven2/org/mongodb/bson/${BSON_VERSION}/bson-${BSON_VERSION}.jar" -P "${SPARK_HOME}/jars/" && \
-    wget -q "https://repo1.maven.org/maven2/org/mongodb/mongo-java-driver/${MONGO_JAVA_DRIVER_VERSION}/mongo-java-driver-${MONGO_JAVA_DRIVER_VERSION}.jar" -P "${SPARK_HOME}/jars/"
+    wget -q "https://repo1.maven.org/maven2/org/mongodb/mongo-java-driver/${MONGO_JAVA_DRIVER_VERSION}/mongo-java-driver-${MONGO_JAVA_DRIVER_VERSION}.jar" -P "${SPARK_HOME}/jars/" && \
+    wget -q "https://repo1.maven.org/maven2/org/mlflow/mlflow-spark_2.12/2.12.0/mlflow-spark_2.12-2.12.0.jar" -P "${SPARK_HOME}/jars/"
 
 RUN sed -i 's/rootLogger.level = info/rootLogger.level = error/' ${SPARK_HOME}/conf/log4j2.properties.template \
     && mv ${SPARK_HOME}/conf/log4j2.properties.template ${SPARK_HOME}/conf/log4j2.properties
