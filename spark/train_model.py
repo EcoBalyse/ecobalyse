@@ -14,15 +14,34 @@ from pyspark.sql import functions as F
 from pyspark.sql.functions import stddev, lit
 
 # Create uri
-uri = f"mongodb+srv://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"
 
+uri = f"mongodb+srv://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_CLUSTER')}/?retryWrites=true&w=majority&appName=Cluster0"
 # MLFLOW
+
 mlflow.set_tracking_uri(uri="http://mlflow:5000")
 mlflow.set_experiment(experiment_name='ecobalyse_dst')
 
 # Create Spark
 spark = SparkSession.builder \
     .appName("MongoDB Spark Connector Example") \
+    .config("spark.mongodb.input.uri", uri) \
+    .config("spark.mongodb.output.uri", uri) \
+    .config("spark.mongodb.input.database", "ecobalyse") \
+    .config("spark.mongodb.input.collection", "countries") \
+    .config("spark.mongodb.input.collection", "materials") \
+    .config("spark.mongodb.input.collection", "products") \
+    .config("spark.mongodb.input.collection", "fabricProcess") \
+    .config("spark.mongodb.input.collection", "products_details") \
+    .config("spark.mongodb.input.collection", "impacts_documentation") \
+    .config("spark.mongodb.input.collection", "impacts") \
+    .config("spark.mongodb.output.database", "ecobalyse") \
+    .config("spark.mongodb.output.collection", "countries") \
+    .config("spark.mongodb.output.collection", "materials") \
+    .config("spark.mongodb.output.collection", "products") \
+    .config("spark.mongodb.output.collection", "fabricProcess") \
+    .config("spark.mongodb.output.collection", "products_details") \
+    .config("spark.mongodb.output.collection", "impacts_documentation") \
+    .config("spark.mongodb.output.collection", "impacts") \
     .getOrCreate()
 
 # Load data collections into Spark DataFrames and store them into Spark dfs
@@ -31,7 +50,7 @@ collections = ["countries", "materials", "products", "fabricProcess", "products_
 dfs = {}
 
 for collection in collections:
-    df = spark.read.format("mongo").option("uri", uri).option("database", "ecobalyse").option("collection", collection).load()
+    df = spark.read.format("mongo").option("collection", collection).load()
     dfs[collection] = df
 
 # Define new schema to rename nested fields impact names
