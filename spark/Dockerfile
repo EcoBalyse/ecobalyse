@@ -46,8 +46,4 @@ COPY /spark/.env .
 RUN pip install -r requirements.txt
 
 # Définir la commande à exécuter lorsque le conteneur démarre
-<<<<<<< Updated upstream
 ENTRYPOINT ["tail", "-f", "/dev/null"]
-=======
-CMD ["tail", "-f", "/dev/null"]
->>>>>>> Stashed changes

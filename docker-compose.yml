@@ -1,20 +1,54 @@
-version: "2.4"
+version: "3"
+
+x-airflow-common: &airflow-common
+  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.8.1}
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+    AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
+    AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres/airflow
+    AIRFLOW__CELERY__BROKER_URL: redis://:@redis:6379/0
+    AIRFLOW__CORE__FERNET_KEY: ""
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+    AIRFLOW__CORE__LOAD_EXAMPLES: "true"
+    AIRFLOW__API__AUTH_BACKEND: "airflow.api.auth.backend.basic_auth"
+    AIRFLOW__SMTP__SMTP_HOST: "smtp.gmail.com"
+    AIRFLOW__SMTP__SMTP_PORT: 587
+    AIRFLOW__SMTP__SMTP_USER: "de.airflow@gmail.com"
+    AIRFLOW__SMTP__SMTP_PASSWORD: "cfsrvkongsobheta"
+    AIRFLOW__SMTP__SMTP_MAIL_FROM: "de.airflow@gmail.com"
+    DB_USER: ${DB_USER}
+    DB_PASSWORD: ${DB_PASSWORD}
+    DB_CLUSTER: ${DB_CLUSTER}
+    API_URL: ${API_URL}
+    API_KEY: ${API_KEY}
+    API_KEY_NAME: ${API_KEY_NAME}
+    PROJECT_PATH: ${PROJECT_PATH}
+
+    _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:- apache-airflow-providers-docker}
+  volumes:
+    - ./airflow/dags:/opt/airflow/dags
+    - ./airflow/logs:/opt/airflow/logs
+    - ./airflow/plugins:/opt/airflow/plugins
+    - /var/run/docker.sock:/var/run/docker.sock
+  user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-50000}"
+  depends_on:
+    redis:
+      condition: service_healthy
+    postgres:
+      condition: service_healthy
+
 services:
-   mlflow-tracker:
-    container_name: mlflow
+  mlflow:
+    container_name: ecobalyse-mlflow
     image: ghcr.io/mlflow/mlflow
     ports:
       - "5000:5000"
     volumes:
       - ./requirements/mlflow/data:/mlflow
     networks:
-<<<<<<< Updated upstream
-      vpcbr:
-        ipv4_address: 10.6.0.6
-    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
-=======
       - vpcbr
     command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db
+    # command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
     #command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri file:/mlflow --default-artifact-root /mlflow/artifacts
 
   api-redis:
@@ -35,16 +69,21 @@ services:
       - ./requirements/redis/conf:/etc/redis_conf
       - ./requirements/redis/modules:/lib/redis_modules
     command: [ "redis-server", "/etc/redis_conf/redis_7.2.conf" ]
->>>>>>> Stashed changes
 
-  spark-worker:
-    build:
-      context: ./
-      dockerfile: spark/Dockerfile
+  api:
+    container_name: ecobalyse-api
+    image: ecobalyse-api
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: exit 0
+      interval: 5s
+      timeout: 5s
+      retries: 1
+      start_period: 5s
     depends_on:
-<<<<<<< Updated upstream
-      - mlflow-tracker
-=======
       - api-redis
     volumes:
       - ./api/api:/app
@@ -92,12 +131,88 @@ services:
     command: "TCP4-LISTEN:2375,fork,reuseaddr UNIX-CONNECT:/var/run/docker.sock"
     ports:
       - "2376:2375"
->>>>>>> Stashed changes
     volumes:
-      - ./spark/scripts:/spark/scripts
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
-      vpcbr:
-        ipv4_address: 10.6.0.3
+      - vpcbr
+
+  airflow-webserver:
+    <<: *airflow-common
+    container_name: ecobalyse-airflow-webserver
+    command: webserver
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
+    networks:
+      - vpcbr
+
+  airflow-scheduler:
+    <<: *airflow-common
+    container_name: ecobalyse-airflow-scheduler
+    command: scheduler
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"',
+        ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
+    networks:
+      - vpcbr
+
+  airflow-worker:
+    <<: *airflow-common
+    container_name: ecobalyse-airflow-worker
+    command: celery worker
+    healthcheck:
+      test:
+        - "CMD-SHELL"
+        - 'celery --app airflow.executors.celery_executor.app inspect ping -d "celery@$${HOSTNAME}"'
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
+    networks:
+      - vpcbr
+
+  airflow-init:
+    <<: *airflow-common
+    container_name: ecobalyse-airflow-init
+    command: version
+    environment:
+      <<: *airflow-common-env
+      _AIRFLOW_DB_UPGRADE: "true"
+      _AIRFLOW_WWW_USER_CREATE: "true"
+      _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
+      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+    networks:
+      - vpcbr
+
+  flower:
+    <<: *airflow-common
+    container_name: ecobalyse-airflow-flower
+    command: celery flower
+    ports:
+      - 5555:5555
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:5555/"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    restart: always
+    networks:
+      - vpcbr
+
+volumes:
+  postgres-db-volume:
 
 networks:
   vpcbr:

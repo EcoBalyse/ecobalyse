@@ -33,3 +33,10 @@ curl -X POST "http://localhost:8000/product" \
 curl -X DELETE "http://localhost:8000/product?md5_id=15a853d8fc6bee14a946559190111f51" \
      -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' \
      -H "content-type: application/json"
+
+
+# Prédiction d'un produit
+curl -X POST "http://localhost:8000/predict" \
+     -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' \
+     -H "content-type: application/json" \
+     -d @test.json
