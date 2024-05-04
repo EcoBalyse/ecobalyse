@@ -8,16 +8,91 @@ services:
     volumes:
       - ./requirements/mlflow/data:/mlflow
     networks:
+<<<<<<< Updated upstream
       vpcbr:
         ipv4_address: 10.6.0.6
     command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
+=======
+      - vpcbr
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db
+    #command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri file:/mlflow --default-artifact-root /mlflow/artifacts
+
+  api-redis:
+    container_name: ecobalyse-api-redis
+    image: redis:7.2.0
+    networks:
+      - vpcbr
+    ports:
+      - '6380:6380'
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 30s
+      retries: 50
+    restart: always
+    volumes:
+      - ./requirements/redis/data:/data
+      - ./requirements/redis/conf:/etc/redis_conf
+      - ./requirements/redis/modules:/lib/redis_modules
+    command: [ "redis-server", "/etc/redis_conf/redis_7.2.conf" ]
+>>>>>>> Stashed changes
 
   spark-worker:
     build:
       context: ./
       dockerfile: spark/Dockerfile
     depends_on:
+<<<<<<< Updated upstream
       - mlflow-tracker
+=======
+      - api-redis
+    volumes:
+      - ./api/api:/app
+    networks:
+      - vpcbr
+
+  # Basic Airflow cluster configuration for CeleryExecutor with Redis and PostgreSQL.
+  #
+  # WARNING: This configuration is for local development. Do not use it in a production deployment.
+  #
+  postgres:
+    container_name: ecobalyse-airflow-postgres
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "airflow"]
+      interval: 5s
+      retries: 5
+    restart: always
+    networks:
+      - vpcbr
+
+  redis:
+    container_name: ecobalyse-airflow-redis
+    image: redis:latest
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 30s
+      retries: 50
+    restart: always
+    networks:
+      - vpcbr
+
+  docker-proxy:
+    container_name: ecobalyse-airflow-docker-proxy
+    image: bobrik/socat
+    command: "TCP4-LISTEN:2375,fork,reuseaddr UNIX-CONNECT:/var/run/docker.sock"
+    ports:
+      - "2376:2375"
+>>>>>>> Stashed changes
     volumes:
       - ./spark/scripts:/spark/scripts
     networks:
@@ -30,4 +105,4 @@ networks:
     ipam:
      config:
        - subnet: 10.6.0.0/16
-         gateway: 10.6.0.1                   
+         gateway: 10.6.0.1

@@ -32,24 +32,16 @@ spark = SparkSession.builder \
     .config("spark.mongodb.input.database", "ecobalyse") \
     .config("spark.mongodb.input.collection", "countries") \
     .config("spark.mongodb.input.collection", "materials") \
-    .config("spark.mongodb.input.collection", "products") \
-    .config("spark.mongodb.input.collection", "fabricProcess") \
-    .config("spark.mongodb.input.collection", "products_details") \
-    .config("spark.mongodb.input.collection", "impacts_documentation") \
     .config("spark.mongodb.input.collection", "impacts") \
     .config("spark.mongodb.output.database", "ecobalyse") \
     .config("spark.mongodb.output.collection", "countries") \
     .config("spark.mongodb.output.collection", "materials") \
-    .config("spark.mongodb.output.collection", "products") \
-    .config("spark.mongodb.output.collection", "fabricProcess") \
-    .config("spark.mongodb.output.collection", "products_details") \
-    .config("spark.mongodb.output.collection", "impacts_documentation") \
     .config("spark.mongodb.output.collection", "impacts") \
     .getOrCreate()
 
 # Load data collections into Spark DataFrames and store them into Spark dfs
 
-collections = ["countries", "materials", "products", "fabricProcess", "products_details", "impacts", "impacts_documentation"]
+collections = ["countries", "materials", "impacts"]
 dfs = {}
 
 for collection in collections:
@@ -88,16 +80,25 @@ dfs = dfs['impacts']
 dfs = dfs.drop("_id", "md5_id","transport", "complementsImpacts","durability","useNbCycles","daysOfWear", "lifeCycle")
 dfs.show(20)
 
+<<<<<<< Updated upstream:spark/scripts/train_model.py
 # Garder seulement la valeur ecs dans la colonne impacts
 df_vf = dfs.withColumn("impacts", col("impacts").getItem("ecs"))
 
 # Afficher le DataFrame résultant
 df_vf.show()
 df_vf.printSchema()
+=======
+# Keep only the ecs value in the impacts column
+dfs = dfs.withColumn("impacts", col("impacts").getItem("ecs"))
+
+# Display the resulting DataFrame
+dfs.show()
+dfs.printSchema()
+>>>>>>> Stashed changes:spark/train_model.py
 
 # sélectionner les colonnes nécessaires et renommer le nom des colonnes
 
-selected_df = df_vf.select(col("impacts").alias("ImpactScore"),
+df = dfs.select(col("impacts").alias("ImpactScore"),
     col("product_id").alias("ProductId"),
     F.expr("transform(inputs.materials, x -> x.material.id)").alias("MaterialsIds"),
     F.expr("transform(inputs.materials, x -> x.share)").alias("MaterialsShares"),
@@ -109,7 +110,7 @@ selected_df = df_vf.select(col("impacts").alias("ImpactScore"),
     col("inputs.airTransportRatio").alias("AirTransportRatio"))
 
 
-selected_df = selected_df.select(
+df = df.select(
     col("ImpactScore"),
     col("ProductId"),
     col("MaterialsIds")[0].alias("MaterialId_1"),
@@ -125,23 +126,32 @@ selected_df = selected_df.select(
     )
 
 
-selected_df = selected_df.drop("Price")
-selected_df.show()
-selected_df.describe().toPandas()
+df = df.drop("Price")
+df.show()
+df.write.csv("fichier.csv")
+
+df.describe().toPandas()
 
 #afficher les valeurs manquantes
 
 # Compter le nombre de valeurs manquantes dans chaque colonne
 
-missing_counts = selected_df.select([sum(when(col(c).isNull(), 1).otherwise(0)).alias(c) for c in selected_df.columns]) \
+missing_counts = df.select([sum(when(col(c).isNull(), 1).otherwise(0)).alias(c) for c in df.columns]) \
                              .collect()[0]
 
+<<<<<<< Updated upstream:spark/scripts/train_model.py
 # Afficher le nombre de valeurs manquantes pour chaque colonne
 for col_name, missing_count in zip(selected_df.columns, missing_counts):
     print(f"Nombre de valeurs manquantes dans la colonne '{col_name}': {missing_count}")
+=======
+# Display the number of missing values for each column
+for col_name, missing_count in zip(df.columns, missing_counts):
+    print(f"Number of missing values in column '{col_name}': {missing_count}")
+>>>>>>> Stashed changes:spark/train_model.py
 
 #traitement des valeurs manquantes
 
+<<<<<<< Updated upstream:spark/scripts/train_model.py
 # Supprimer les lignes avec des valeurs manquantes dans la colonne 'ProductId'
 selected_df = selected_df.na.drop(subset=["ProductId"])
 # Remplacer les valeurs manquantes dans la colonne 'MaterialId_2' par "no-material2"
@@ -155,6 +165,26 @@ selected_df = selected_df.fillna(median_air_transport_ratio, subset=["AirTranspo
 selected_df.show(5)
 # Vérifier s'il reste des valeurs manquantes dans les colonnes sélectionnées
 selected_df.select([count(when(col(c).isNull(), c)).alias(c) for c in selected_df.columns]).show()
+=======
+# Delete rows with missing values in the 'ProductId' column
+df = df.na.drop(subset=["ProductId"])
+
+# Replace missing values in the 'MaterialId_2' column with “no-material2”.
+df = df.fillna("no-material2", subset=["MaterialId_2"])
+
+# Replace missing values in the 'MaterialId_2_share' column with 0
+df = df.fillna(0, subset=["MaterialId_2_share"])
+
+# Replace missing values in the 'AirTransportRatio' column with the median
+median_air_transport_ratio = df.approxQuantile("AirTransportRatio", [0.5], 0.25)[0]
+df = df.fillna(median_air_transport_ratio, subset=["AirTransportRatio"])
+
+# Display the first 5 lines to check for changes
+df.show(5)
+
+# Check for missing values in selected columns
+df.select([count(when(col(c).isNull(), c)).alias(c) for c in df.columns]).show()
+>>>>>>> Stashed changes:spark/train_model.py
 
 #-------------------------------#
 
@@ -185,8 +215,13 @@ all_stages = [
 # Création d'une Pipeline
 pipeline = Pipeline(stages=all_stages)
 
+<<<<<<< Updated upstream:spark/scripts/train_model.py
 # Indexer les variables de selected_df
 dfIndexed = pipeline.fit(selected_df).transform(selected_df)
+=======
+# Index df variables
+dfIndexed = pipeline.fit(df).transform(df)
+>>>>>>> Stashed changes:spark/train_model.py
 
 # Affichage d'un extrait de hrIndexed
 dfIndexed.sample(False, 0.001 , seed = 222).toPandas()
@@ -217,6 +252,8 @@ dfLibsvm = spark.createDataFrame(dfRdd, ['label', 'features'])
 # Affichage d'un extrait de hrLibsvm
 dfLibsvm.sample(False, .001, seed = 222).toPandas()
 dfNumeric.describe().toPandas()
+print(dfNumeric)
+#print(dfLibsvm.sample(False, .001, seed = 222).toPandas())
 
 mlflow.autolog()
 

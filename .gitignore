@@ -1,6 +1,7 @@
 # Autre
 requirements/extraction/data/*
 requirements/extraction/json/*
+requirements/mlflow/*
 mongodb_ecobalyse/
 .env
 

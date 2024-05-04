@@ -4,11 +4,13 @@ FROM python:3.8-slim-buster
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copiez tous les fichiers dans le conteneur
-COPY . /app
+COPY requirements.txt /app/requirements.txt
 
 # Installation des dépendances
 RUN pip install -r requirements.txt
+
+# Copiez tous les fichiers dans le conteneur
+COPY api/ /app
 
 # Exposer le port sur lequel l'API FastAPI sera disponible
 EXPOSE 8000
