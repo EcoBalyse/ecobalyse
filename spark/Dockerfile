@@ -39,11 +39,10 @@ RUN sed -i 's/rootLogger.level = info/rootLogger.level = error/' ${SPARK_HOME}/c
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /spark
 
-COPY /spark/requirements.txt /spark/requirements.txt
-COPY /spark/.env .
+COPY . /spark/
 
 # Installation des dépendances
 RUN pip install -r requirements.txt
 
 # Définir la commande à exécuter lorsque le conteneur démarre
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+CMD ["/bin/bash"]

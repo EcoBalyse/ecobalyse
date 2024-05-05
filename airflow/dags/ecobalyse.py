@@ -11,7 +11,7 @@ default_args = {
     'depends_on_past': False,
     'email_on_failure': False,
     'email_on_retry': False,
-    'retries': 1,
+    'retries': 0,
     'retry_delay': timedelta(minutes=2),
 }
 
@@ -33,7 +33,7 @@ task_4 = DockerOperator(
     container_name='ecobalyse-spark',
     api_version='auto',
     auto_remove='force',
-    command='spark-submit /spark/train_model.py',
+    command='python /spark/train_model_bis.py',
     environment={
         'DB_USER': os.environ.get('DB_USER'),
         'DB_PASSWORD': os.environ.get('DB_PASSWORD'),

@@ -15,7 +15,7 @@ import mlflow
 
 from data_models import ClothingItemInput
 
-mlflow.set_tracking_uri("http://54.78.43.132:5000/")
+mlflow.set_tracking_uri("http://mlflow:5000/")
 
 MODEL_NAME = "ecobalyse_model"
 MODEL_VERSION = "production"
