@@ -257,7 +257,7 @@ async def predict_impact(input: ClothingItemInput, api_key_header: APIKey = Depe
         MODEL_VERSION = "production"
         MODEL_URI = f"models:/{MODEL_NAME}@{MODEL_VERSION}"
         MODEL = mlflow.sklearn.load_model(MODEL_URI)
-    else:
+    except:
         raise HTTPException(status_code=404, detail="MLFlow Models error")
 
     df = pd.json_normalize(input.__dict__)
