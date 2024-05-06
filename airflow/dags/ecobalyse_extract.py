@@ -7,7 +7,7 @@ import os
 
 default_args = {
     'owner': 'airflow',
-    'start_date': datetime(2024, 4, 24),
+    'start_date': datetime(2024, 5, 2),
     'depends_on_past': False,
     'email_on_failure': False,
     'email_on_retry': False,
@@ -19,7 +19,7 @@ dag = DAG(
     'ecobalyse_extract',
     default_args=default_args,
     description='ecobalyse project management',
-    schedule_interval='0 3 1 * *',
+    # schedule_interval='0 3 1 * *',
     catchup=False,
     tags=['ecobalyse', 'datascientest'],
 )
@@ -50,7 +50,7 @@ task_2 = DockerOperator(
     container_name='ecobalyse-extract',
     api_version='auto',
     auto_remove='force',
-    command='python3 /extraction/get_data.py -t all',
+    command='python3 /extraction/get_data.py -t all -l 5 -v',
     mounts=[
         Mount(target='/data', source=f'{project_patch}/requirements/extraction/data', type='bind'),
         Mount(target='/json', source=f'{project_patch}/requirements/extraction/json', type='bind'),

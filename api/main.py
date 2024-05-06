@@ -1,7 +1,5 @@
 from fastapi import Security, FastAPI, HTTPException, Depends, status
 from fastapi.security.api_key import APIKeyHeader, APIKey
-from pydantic import BaseModel
-from typing import Optional, List
 import os
 import json
 import hashlib
@@ -9,6 +7,12 @@ import requests
 
 from mongo_queries import *
 from redis_queries import *
+
+import pandas as pd
+import mlflow
+
+from data_models import Product
+from data_models import ClothingItemInput
 
 API_KEY = os.environ.get('API_KEY')
 API_KEY_NAME = os.environ.get('API_KEY_NAME')
@@ -19,22 +23,6 @@ api = FastAPI(
     title="Ecobalyse API",
     description="Ecobalyse: red thread project as part of the data engineer training course.",
     version="1.0.0")
-
-# Define the data model for products
-class Material(BaseModel):
-    id: str
-    share: float
-    country: Optional[str] = None
-
-class Product(BaseModel):
-    mass: float
-    materials: List[Material]
-    product: str
-    countrySpinning: str
-    countryFabric: str
-    countryDyeing: str
-    countryMaking: str
-    fabricProcess: str
 
 async def get_api_key(api_key_header: str = Security(api_key_header)):
     """
@@ -255,3 +243,25 @@ def get_ranking_stats(api_key_header: APIKey = Depends(get_api_key)):
         return results
     else:
         raise HTTPException(status_code=404, detail="Document not found")
+
+@api.post("/predict")
+async def predict_impact(input: ClothingItemInput, api_key_header: APIKey = Depends(get_api_key)):
+    """
+    Return prediction impact (load MLFlow model)
+    Raise an HTTPException with status code 404 if the model is not found.
+    """
+    try:
+        mlflow.set_tracking_uri("http://mlflow:5000/")
+
+        MODEL_NAME = "ecobalyse_model"
+        MODEL_VERSION = "production"
+        MODEL_URI = f"models:/{MODEL_NAME}@{MODEL_VERSION}"
+        MODEL = mlflow.sklearn.load_model(MODEL_URI)
+    else:
+        raise HTTPException(status_code=404, detail="MLFlow Models error")
+
+    df = pd.json_normalize(input.__dict__)
+
+    pred = MODEL.predict(df)
+
+    return {"prediction_impact": pred[0]}

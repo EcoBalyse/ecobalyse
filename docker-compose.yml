@@ -40,15 +40,14 @@ x-airflow-common: &airflow-common
 services:
   mlflow:
     container_name: ecobalyse-mlflow
-    image: ghcr.io/mlflow/mlflow
+    image: mlflow-custom
     ports:
       - "5000:5000"
     volumes:
-      - ./requirements/mlflow/data:/mlflow
+      - ./requirements/mlflow:/mlflow
     networks:
       - vpcbr
-    # command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root /mlflow/artifacts
-    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri file:/mlflow --default-artifact-root /mlflow/artifacts
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri sqlite:///mlflow.db
 
   api-redis:
     container_name: ecobalyse-api-redis
@@ -210,6 +209,7 @@ services:
 
 volumes:
   postgres-db-volume:
+  mlflow_db_volume:
 
 networks:
   vpcbr:

@@ -16,7 +16,7 @@ default_args = {
 }
 
 dag = DAG(
-    'ecobalyse',
+    'ecobalyse_training',
     default_args=default_args,
     description='ecobalyse project management',
     # schedule_interval=timedelta(hours=1),
@@ -55,27 +55,8 @@ task_2 = BashOperator(
     dag=dag,
 )
 
-# Definition of task_3: processing data using pySpark and updating mongodb collections
-task_3 = DockerOperator(
-    task_id='run_spark',
-    image='ecobalyse-spark',
-    container_name='ecobalyse-spark',
-    api_version='auto',
-    auto_remove='force',
-    command='spark-submit /spark/script_spk.py',
-    environment={
-        'DB_USER': os.environ.get('DB_USER'),
-        'DB_PASSWORD': os.environ.get('DB_PASSWORD'),
-        'DB_CLUSTER': os.environ.get('DB_CLUSTER'),
-    },
-    docker_url="tcp://docker-proxy:2375",
-    network_mode='ecobalyse_vpcbr',
-    mount_tmp_dir=False,
-    dag=dag,
-)
-
 # Definition of task_4: Data cleansing and normalization. Testing of different Machine Learning models (pySpark + MLFlow) and storage of MLFlow data.
-task_4 = DockerOperator(
+task_3 = DockerOperator(
     task_id='run_train_model',
     image='ecobalyse-spark',
     container_name='ecobalyse-spark',
@@ -94,4 +75,4 @@ task_4 = DockerOperator(
 )
 
 # Defining dependencies between tasks
-task_1 >> task_2 >> task_3 >> task_4
+task_1 >> task_2 >> task_3
