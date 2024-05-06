@@ -36,3 +36,9 @@ curl -X POST "http://localhost:8000/product" \
 curl -X DELETE "http://localhost:8000/product?md5_id=15a853d8fc6bee14a946559190111f51" \
      -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' \
      -H "content-type: application/json"
+
+# Prédiction d'un produit
+curl -X POST "http://localhost:8000/predict" \
+     -H 'access_token: OK0hYzIpUceSuzaKaj3tAj5L7K2gaKaX' \
+     -H "content-type: application/json" \
+     -d '{"ProductId":"pantalon","MaterialId_1":"ei-coton-organic","MaterialId_2":"ei-pet","MaterialId_1_share":0.7,"MaterialId_2_share":0.3,"CountryDyeingCode":"BD","CountryFabricCode":"BD","CountryMakingCode":"BD","FabricProcess":"knitting-mix","Mass":0.2,"AirTransportRatio":0.33}'

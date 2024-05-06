@@ -1,6 +1,8 @@
 # Autre
 requirements/extraction/data/*
 requirements/extraction/json/*
+requirements/redis/data/*
+requirements/mlflow/*
 mongodb_ecobalyse/
 .env
 airflow/dags/__py_cache__

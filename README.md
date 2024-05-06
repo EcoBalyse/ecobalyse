@@ -52,3 +52,10 @@ docker-compose up -d
 # or individual :
 
 docker-compose up -d Extraction
+
+docker run \
+--name ecobalyse-spark \
+--network ecobalyse_vpcbr \
+--env-file .env \
+ecobalyse-spark \
+spark-submit /spark/script_spk.py

@@ -13,6 +13,7 @@ REQUIREMENTS_PATH=$repertoire/requirements
 API_PATH=$repertoire/api
 AIRFLOW_PATH=$repertoire/airflow
 ADD_PRODUCT_PATH=$repertoire/add_product
+MLFLOW_PATH=$repertoire/mlflow-custom
 
 ##################
 ### Extraction ###
@@ -40,7 +41,7 @@ cd $REQUIREMENTS_PATH
 
 mkdir -p extraction/json
 mkdir -p extraction/data
-mkdir -p mlflow/data/artifacts
+mkdir -p mlflow
 mkdir -p redis/data
 
 if [ -f "redis/modules/librejson.so" ]; then
@@ -69,6 +70,15 @@ cd $API_PATH
 
 # Build des images
 docker build -t ecobalyse-api .
+
+#####################
+###    MLFLOW     ###
+#####################
+
+cd $MLFLOW_PATH
+
+# Build des images
+docker build -t mlflow-custom .
 
 ######################
 ###    AIRFLOW     ###
