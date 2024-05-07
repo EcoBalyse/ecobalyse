@@ -19,7 +19,7 @@ dag = DAG(
     'ecobalyse_training',
     default_args=default_args,
     description='ecobalyse project management',
-    # schedule_interval=timedelta(hours=1),
+    schedule_interval=timedelta(hours=1),
     catchup=False,
     tags=['ecobalyse', 'datascientest'],
 )
