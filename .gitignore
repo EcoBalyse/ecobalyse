@@ -7,6 +7,7 @@ mongodb_ecobalyse/
 .env
 airflow/dags/__py_cache__
 airflow/logs/*
+etape1_recolte_des_donnees
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
